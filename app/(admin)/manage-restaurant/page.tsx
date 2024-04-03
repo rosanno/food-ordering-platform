@@ -1,5 +1,5 @@
 import { IoRestaurantOutline } from "react-icons/io5";
-import RestaurantForm from "../../_components/restaurant-form";
+import RestaurantForm from "./_components/restaurant-form";
 
 const ManageRestaurantPage = () => {
   return (

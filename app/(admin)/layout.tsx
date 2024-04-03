@@ -1,4 +1,4 @@
-import DashboardNavbar from "./_components/admin-navbar";
+import DashboardNavbar from "@/components/admin-navbar";
 
 export default function DashboardLayout({
   children,
