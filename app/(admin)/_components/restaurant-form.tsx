@@ -2,7 +2,7 @@
 
 const RestaurantForm = () => {
   return (
-    <section className="mt-14">
+    <section className="mt-10">
       <div className="space-y-0.5">
         <h2 className="text-xl font-semibold">
           Restaurant Details
