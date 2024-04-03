@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useUser } from "@clerk/nextjs";
 import { IoIosSettings } from "react-icons/io";
 
 import { cn } from "@/lib/utils";
@@ -10,6 +11,7 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar";
+import { Button } from "./ui/button";
 
 const Menu = [
   {
@@ -28,6 +30,7 @@ const Menu = [
 
 const DashboardNavbar = () => {
   const pathname = usePathname();
+  const { user } = useUser();
 
   return (
     <div className="border-b py-5 mx-1.5">
@@ -53,10 +56,12 @@ const DashboardNavbar = () => {
           ))}
         </nav>
         <div className="ml-auto flex items-center gap-2">
-          <IoIosSettings className="text-[22px] text-gray-500" />
-          <Avatar className="h-[30px] w-[30px]">
+          <Button variant={"ghost"} size={"icon"}>
+            <IoIosSettings className="text-[22px] text-gray-500" />
+          </Button>
+          <Avatar className="h-[35px] w-[35px]">
             <AvatarImage
-              src="https://github.com/shadcn.png"
+              src={user?.imageUrl}
               alt="@shadcn"
             />
             <AvatarFallback>CN</AvatarFallback>
