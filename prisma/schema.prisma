@@ -12,3 +12,38 @@ datasource db {
   provider = "mongodb"
   url      = env("DATABASE_URL")
 }
+
+model restaurant {
+  id                    String     @id @default(auto()) @map("_id") @db.ObjectId
+  customerId            String
+  restaurantName        String
+  city                  String
+  country               String
+  deliveryPrice         Int
+  estimatedDeliveryTime Int
+  imageUrl              String
+  cuisines              Cuisine[]
+  menuItems             MenuItem[]
+
+  createdAt             DateTime   @default(now())
+  updatedAt             DateTime   @updatedAt
+}
+
+model Cuisine {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  cuisine      String
+  restaurant   restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId String?     @db.ObjectId
+
+  createdAt DateTime @default(now())
+}
+
+model MenuItem {
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  name         String
+  price        Int
+  restaurant   restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId String?     @db.ObjectId
+
+  createdAt DateTime @default(now())
+}
