@@ -1,7 +1,27 @@
 import { IoRestaurantOutline } from "react-icons/io5";
-import RestaurantForm from "./_components/restaurant-form";
+import { format } from "date-fns";
 
-const ManageRestaurantPage = () => {
+import prisma from "@/lib/prisma";
+import { DataTable } from "./_components/data-table";
+import { Restaurant, columns } from "./_components/column";
+
+const ManageRestaurantPage = async () => {
+  const restaurants = await prisma.restaurant.findMany({
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  const transformRestaurant: Restaurant[] = restaurants.map(
+    (item) => ({
+      id: item.id,
+      name: item.restaurantName,
+      country: item.country,
+      city: item.city,
+      createdAt: format(item.createdAt, "d MMMM, yyyy"),
+    })
+  );
+
   return (
     <>
       <section className="space-y-10">
@@ -15,7 +35,10 @@ const ManageRestaurantPage = () => {
         </div>
         <div className="border-b" />
       </section>
-      <RestaurantForm />
+      <DataTable
+        columns={columns}
+        data={transformRestaurant}
+      />
     </>
   );
 };
