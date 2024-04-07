@@ -15,13 +15,13 @@ datasource db {
 
 model restaurant {
   id                    String     @id @default(auto()) @map("_id") @db.ObjectId
-  customerId            String
+  ownerId               String
   restaurantName        String
   city                  String
   country               String
   deliveryPrice         Int
   estimatedDeliveryTime Int
-  imageUrl              String
+  imageUrl              String?
   cuisines              Cuisine[]
   menuItems             MenuItem[]
 
