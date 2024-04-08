@@ -4,7 +4,7 @@ import RestaurantForm from "./_components/restaurant-form";
 const CreateRestaurantPage = () => {
   return (
     <>
-      <Header title="Create Restaurant" />
+      <Header title="Add Menu" />
       <RestaurantForm />
     </>
   );
