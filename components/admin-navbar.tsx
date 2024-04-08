@@ -23,7 +23,7 @@ const Menu = [
     label: "Orders",
   },
   {
-    href: "/menu-list",
+    href: "/menu/list",
     label: "Menu List",
   },
 ];
