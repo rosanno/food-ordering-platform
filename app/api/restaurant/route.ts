@@ -3,10 +3,7 @@ import { auth } from "@clerk/nextjs";
 
 import prisma from "@/lib/prisma";
 
-export async function POST(
-  request: NextRequest,
-  response: NextResponse
-) {
+export async function POST(request: NextRequest) {
   const { userId } = auth();
   const {
     restaurantName,
