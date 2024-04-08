@@ -23,8 +23,8 @@ const Menu = [
     label: "Orders",
   },
   {
-    href: "/manage-restaurant",
-    label: "Manage Restaurant",
+    href: "/menu-list",
+    label: "Menu List",
   },
 ];
 

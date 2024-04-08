@@ -24,12 +24,10 @@ const Header = ({
           <Button
             size={"sm"}
             className="text-[13px]"
-            onClick={() =>
-              router.push("/manage-restaurant/create")
-            }
+            onClick={() => router.push("/menu/create")}
           >
             <Plus className="mr-1 h-4 w-4" />
-            <span className="pt-0.5">Add Restaurant</span>
+            <span className="pt-0.5">Add Menu</span>
           </Button>
         )}
       </div>

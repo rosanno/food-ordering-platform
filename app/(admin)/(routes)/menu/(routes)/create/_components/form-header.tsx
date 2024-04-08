@@ -1,13 +1,13 @@
 "use client";
 
-const RestaurantForm = () => {
+const FormHeader = () => {
   return (
     <section className="mt-10">
       <div className="space-y-0.5">
-        <h2 className="text-xl font-semibold">
+        <h2 className="text-lg font-semibold">
           Restaurant Details
         </h2>
-        <h3 className="text-[13px] text-muted-foreground">
+        <h3 className="text-[12px] text-muted-foreground">
           Enter the details about your restaurant
         </h3>
       </div>
@@ -15,4 +15,4 @@ const RestaurantForm = () => {
   );
 };
 
-export default RestaurantForm;
+export default FormHeader;
