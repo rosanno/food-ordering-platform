@@ -3,6 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { DollarSign, Scissors } from "lucide-react";
 
 import FormHeader from "./form-header";
 import {
@@ -13,24 +14,23 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import ImageUpload from "./image-upload";
 
 const formSchema = z.object({
-  restaurantName: z.string().min(1).max(20),
-  city: z.string().min(5).max(20),
-  country: z.string().min(5).max(30),
-  deliveryPrice: z.number().min(1),
-  estimatedDeliveryTime: z.number().min(1),
+  menuName: z.string().min(1).max(20),
+  price: z.string().min(5).max(20),
+  discount: z.string().min(5).max(30),
+  imageUrl: z.string(),
 });
 
 const RestaurantForm = () => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      restaurantName: "",
-      city: "",
-      country: "",
-      deliveryPrice: 0,
-      estimatedDeliveryTime: 0,
+      menuName: "",
+      price: "",
+      discount: "",
+      imageUrl: "",
     },
   });
 
@@ -48,42 +48,107 @@ const RestaurantForm = () => {
         >
           <FormField
             control={form.control}
-            name="restaurantName"
+            name="menuName"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Restaurant Name</FormLabel>
+                <FormLabel>Menu Name</FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    {...field}
+                    className="                      
+                      ring-offset-0
+                      focus-visible:ring-0 
+                      focus-visible:ring-offset-0
+                    "
+                  />
                 </FormControl>
               </FormItem>
             )}
           />
-          <div className="grid grid-cols-12 gap-4">
+          <div className="grid grid-cols-12 gap-5">
             <FormField
               control={form.control}
-              name="city"
+              name="price"
               render={({ field }) => (
                 <FormItem className="col-span-6">
-                  <FormLabel>City</FormLabel>
+                  <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <div className="flex items-center border rounded-md">
+                      <DollarSign
+                        className="h-5 w-5 mx-3"
+                        strokeWidth={1.5}
+                      />
+                      <Input
+                        {...field}
+                        className="
+                          border-t-0
+                          border-b-0
+                          border-r-0
+                          rounded-tl-none
+                          rounded-bl-none
+                          right-0
+                          ring-offset-0 
+                          focus-visible:ring-0 
+                          focus-visible:ring-offset-0
+                        "
+                      />
+                    </div>
                   </FormControl>
                 </FormItem>
               )}
             />
             <FormField
               control={form.control}
-              name="country"
+              name="discount"
               render={({ field }) => (
                 <FormItem className="col-span-6">
-                  <FormLabel>Country</FormLabel>
+                  <FormLabel>Discount</FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <div className="flex items-center border rounded-md">
+                      <Scissors
+                        className="h-5 w-5 mx-3"
+                        strokeWidth={1.5}
+                      />
+                      <Input
+                        {...field}
+                        className="
+                          border-t-0
+                          border-b-0
+                          border-r-0
+                          rounded-tl-none
+                          rounded-bl-none
+                          right-0
+                          ring-offset-0 
+                          focus-visible:ring-0 
+                          focus-visible:ring-offset-0
+                        "
+                      />
+                    </div>
                   </FormControl>
                 </FormItem>
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name="imageUrl"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Upload Menu Image</FormLabel>
+                <FormControl>
+                  <div className="flex justify-start pt-2.5">
+                    <ImageUpload
+                      value={field.value[0]}
+                      onChange={(imageUrl) => {
+                        field.onChange(imageUrl);
+                      }}
+                      onRemove={() => {}}
+                    />
+                  </div>
+                </FormControl>
+              </FormItem>
+            )}
+          />
         </form>
       </Form>
     </>
