@@ -3,7 +3,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { DollarSign, Scissors } from "lucide-react";
+import { DollarSign, Save, Scissors } from "lucide-react";
 
 import FormHeader from "./form-header";
 import {
@@ -12,15 +12,45 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import ImageUpload from "./image-upload";
+import { Button } from "@/components/ui/button";
 
 const formSchema = z.object({
-  menuName: z.string().min(1).max(20),
-  price: z.string().min(5).max(20),
-  discount: z.string().min(5).max(30),
+  menuName: z
+    .string()
+    .min(5, {
+      message: "Menu name must be at least 5 characters.",
+    })
+    .max(20),
+  price: z
+    .string()
+    .min(5, {
+      message: "Price must be at least 5 characters.",
+    })
+    .max(20),
+  discount: z
+    .string()
+    .min(2, {
+      message: "Discount must be at least 2 characters.",
+    })
+    .max(30),
   imageUrl: z.string(),
+  metaTitle: z
+    .string()
+    .min(5, {
+      message: "Meta title must be at least 5 characters.",
+    })
+    .max(30),
+  metaKeyword: z
+    .string()
+    .min(10, {
+      message:
+        "Meta keywords must be at least 10 characters.",
+    })
+    .max(50),
 });
 
 const RestaurantForm = () => {
@@ -31,6 +61,8 @@ const RestaurantForm = () => {
       price: "",
       discount: "",
       imageUrl: "",
+      metaTitle: "",
+      metaKeyword: "",
     },
   });
 
@@ -62,6 +94,7 @@ const RestaurantForm = () => {
                     "
                   />
                 </FormControl>
+                <FormMessage className="text-[13px]" />
               </FormItem>
             )}
           />
@@ -94,6 +127,7 @@ const RestaurantForm = () => {
                       />
                     </div>
                   </FormControl>
+                  <FormMessage className="text-[13px]" />
                 </FormItem>
               )}
             />
@@ -106,7 +140,7 @@ const RestaurantForm = () => {
                   <FormControl>
                     <div className="flex items-center border rounded-md">
                       <Scissors
-                        className="h-5 w-5 mx-3"
+                        className="h-5 w-5 mx-3 -rotate-90"
                         strokeWidth={1.5}
                       />
                       <Input
@@ -125,6 +159,49 @@ const RestaurantForm = () => {
                       />
                     </div>
                   </FormControl>
+                  <FormMessage className="text-[13px]" />
+                </FormItem>
+              )}
+            />
+          </div>
+          <div className="grid grid-cols-12 gap-5">
+            <FormField
+              control={form.control}
+              name="metaTitle"
+              render={({ field }) => (
+                <FormItem className="col-span-6">
+                  <FormLabel>Meta Title</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className="
+                          ring-offset-0 
+                          focus-visible:ring-0 
+                          focus-visible:ring-offset-0
+                        "
+                    />
+                  </FormControl>
+                  <FormMessage className="text-[13px]" />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="metaKeyword"
+              render={({ field }) => (
+                <FormItem className="col-span-6">
+                  <FormLabel>Meta Keywords</FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      className="
+                          ring-offset-0 
+                          focus-visible:ring-0 
+                          focus-visible:ring-offset-0
+                        "
+                    />
+                  </FormControl>
+                  <FormMessage className="text-[13px]" />
                 </FormItem>
               )}
             />
@@ -152,6 +229,18 @@ const RestaurantForm = () => {
                 </FormItem>
               )}
             />
+          </div>
+          <div className="py-5 flex justify-end gap-3">
+            <Button type="submit" size={"default"}>
+              <Save className="h-5 w-5 mr-2" /> Save / Add
+            </Button>
+            <Button
+              type="button"
+              variant={"outline"}
+              size={"default"}
+            >
+              Cancel
+            </Button>
           </div>
         </form>
       </Form>
