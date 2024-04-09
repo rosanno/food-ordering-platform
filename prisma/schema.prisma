@@ -17,7 +17,7 @@ model restaurant {
   id           String  @id @default(auto()) @map("_id") @db.ObjectId
   menuName     String
   price        String
-  discount     String
+  discount     String?
   imageUrl     String?
   metaTitle    String
   metaKeywords String
