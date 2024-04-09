@@ -129,26 +129,30 @@ const RestaurantForm = () => {
               )}
             />
           </div>
-          <FormField
-            control={form.control}
-            name="imageUrl"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Upload Menu Image</FormLabel>
-                <FormControl>
-                  <div className="flex justify-start pt-2.5">
-                    <ImageUpload
-                      value={field.value[0]}
-                      onChange={(imageUrl) => {
-                        field.onChange(imageUrl);
-                      }}
-                      onRemove={() => {}}
-                    />
-                  </div>
-                </FormControl>
-              </FormItem>
-            )}
-          />
+          <div className="pt-5">
+            <FormField
+              control={form.control}
+              name="imageUrl"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-[17px] font-medium">
+                    Upload Image
+                  </FormLabel>
+                  <FormControl>
+                    <div className="flex justify-start pt-2.5">
+                      <ImageUpload
+                        value={field.value[0]}
+                        onChange={(imageUrl) => {
+                          field.onChange(imageUrl);
+                        }}
+                        onRemove={() => {}}
+                      />
+                    </div>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+          </div>
         </form>
       </Form>
     </>

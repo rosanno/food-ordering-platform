@@ -1,5 +1,5 @@
 import Header from "@/components/ui/header";
-import RestaurantForm from "./_components/restaurant-form";
+import RestaurantForm from "./_components/menu-form";
 
 const CreateRestaurantPage = () => {
   return (
