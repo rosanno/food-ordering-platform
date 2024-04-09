@@ -1,6 +1,9 @@
 "use client";
 
+import { Button } from "@/components/ui/button";
 import { UploadButton } from "@/lib/uploadthing";
+import { Trash } from "lucide-react";
+import Image from "next/image";
 
 interface ImageUploadProps {
   onChange: (value: string[]) => void;
@@ -14,7 +17,15 @@ const ImageUpload = ({
   value,
 }: ImageUploadProps) => {
   return (
-    <>
+    <div className="space-y-4">
+      {value && (
+        <Image
+          src={value}
+          alt="menu"
+          width={300}
+          height={300}
+        />
+      )}
       <UploadButton
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
@@ -35,7 +46,10 @@ const ImageUpload = ({
             "flex h-8 flex-col items-center justify-center px-2 text-white",
         }}
       />
-    </>
+      <Button variant={"destructive"} size={"sm"}>
+        <Trash className="h-4 w-4 mr-1" /> Delete
+      </Button>
+    </div>
   );
 };
 
