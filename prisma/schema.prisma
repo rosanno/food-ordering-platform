@@ -14,13 +14,14 @@ datasource db {
 }
 
 model restaurant {
-  id                    String     @id @default(auto()) @map("_id") @db.ObjectId
-  menuName              String
-  price                 String
-  discount              String
-  imageUrl              String?
+  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  menuName     String
+  price        String
+  discount     String
+  imageUrl     String?
+  metaTitle    String
+  metaKeywords String
 
-  createdAt             DateTime   @default(now())
-  updatedAt             DateTime   @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
-
