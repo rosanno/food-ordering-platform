@@ -3,8 +3,13 @@ import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
-  const { menuName, price, discount } =
-    await request.json();
+  const {
+    menuName,
+    price,
+    discount,
+    metaTitle,
+    metaKeywords,
+  } = await request.json();
 
   try {
     const restaurant = await prisma.restaurant.create({
@@ -12,6 +17,8 @@ export async function POST(request: NextRequest) {
         menuName,
         price,
         discount,
+        metaTitle,
+        metaKeywords,
       },
     });
 
