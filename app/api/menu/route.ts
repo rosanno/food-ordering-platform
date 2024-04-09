@@ -22,10 +22,10 @@ export async function POST(request: NextRequest) {
       },
     });
 
-    NextResponse.json({
-      data: restaurant,
-      message: "Restaurant created!",
-    });
+   return NextResponse.json({
+     data: restaurant,
+     message: "Restaurant created!",
+   });
   } catch (error) {
     console.log("[RESTAURANT_POST]", error);
     return new NextResponse("Internal error", {
