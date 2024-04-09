@@ -3,9 +3,9 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import axios from "axios";
 import { DollarSign, Save, Scissors } from "lucide-react";
 
-import FormHeader from "./form-header";
 import {
   Form,
   FormControl,
@@ -15,8 +15,10 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import ImageUpload from "./image-upload";
 import { Button } from "@/components/ui/button";
+import FormHeader from "./form-header";
+import ImageUpload from "./image-upload";
+import { useState } from "react";
 
 const formSchema = z.object({
   menuName: z
@@ -27,16 +29,11 @@ const formSchema = z.object({
     .max(20),
   price: z
     .string()
-    .min(5, {
+    .min(4, {
       message: "Price must be at least 5 characters.",
     })
     .max(20),
-  discount: z
-    .string()
-    .min(2, {
-      message: "Discount must be at least 2 characters.",
-    })
-    .max(30),
+  discount: z.string(),
   imageUrl: z.string(),
   metaTitle: z
     .string()
@@ -44,16 +41,18 @@ const formSchema = z.object({
       message: "Meta title must be at least 5 characters.",
     })
     .max(30),
-  metaKeyword: z
+  metaKeywords: z
     .string()
-    .min(10, {
+    .min(5, {
       message:
-        "Meta keywords must be at least 10 characters.",
+        "Meta keywords must be at least 5 characters.",
     })
     .max(50),
 });
 
 const RestaurantForm = () => {
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -62,12 +61,23 @@ const RestaurantForm = () => {
       discount: "",
       imageUrl: "",
       metaTitle: "",
-      metaKeyword: "",
+      metaKeywords: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (
+    values: z.infer<typeof formSchema>
+  ) => {
+    setLoading(true);
+    try {
+      const res = await axios.post("/api/menu", values);
+
+      console.log(res);
+    } catch (error) {
+      console.log("[MENU_ERROR]", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -187,7 +197,7 @@ const RestaurantForm = () => {
             />
             <FormField
               control={form.control}
-              name="metaKeyword"
+              name="metaKeywords"
               render={({ field }) => (
                 <FormItem className="col-span-6">
                   <FormLabel>Meta Keywords</FormLabel>
@@ -226,12 +236,17 @@ const RestaurantForm = () => {
                       />
                     </div>
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
           </div>
           <div className="py-5 flex justify-end gap-3">
-            <Button type="submit" size={"default"}>
+            <Button
+              type="submit"
+              size={"default"}
+              disabled={loading}
+            >
               <Save className="h-5 w-5 mr-2" /> Save / Add
             </Button>
             <Button
