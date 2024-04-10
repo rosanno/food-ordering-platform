@@ -13,7 +13,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model restaurant {
+model Menu {
   id           String  @id @default(auto()) @map("_id") @db.ObjectId
   menuName     String
   price        String
