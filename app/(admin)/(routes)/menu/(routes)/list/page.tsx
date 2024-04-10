@@ -1,9 +1,10 @@
 import { format } from "date-fns";
 
 import prisma from "@/lib/prisma";
+import Header from "@/components/ui/header";
 import { DataTable } from "./_components/data-table";
 import { Restaurant, columns } from "./_components/column";
-import Header from "@/components/ui/header";
+import MenuItems from "./_components/menu-items";
 
 const ManageRestaurantPage = async () => {
   const menu = await prisma.menu.findMany({
@@ -11,8 +12,6 @@ const ManageRestaurantPage = async () => {
       createdAt: "desc",
     },
   });
-
-  console.log(menu);
 
   // const transformRestaurant: Restaurant[] = restaurants.map(
   //   (item) => ({
@@ -31,6 +30,7 @@ const ManageRestaurantPage = async () => {
         columns={columns}
         data={transformRestaurant}
       /> */}
+      <MenuItems menu={menu} />
     </>
   );
 };
