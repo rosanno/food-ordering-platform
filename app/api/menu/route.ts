@@ -23,11 +23,11 @@ export async function POST(request: NextRequest) {
     });
 
     return NextResponse.json({
-      data: menu,
-      message: "Restaurant created!",
+      menu,
+      message: "Menu has beed created",
     });
   } catch (error) {
-    console.log("[RESTAURANT_POST]", error);
+    console.log("[MENU_POST]", error);
     return new NextResponse("Internal error", {
       status: 500,
     });
