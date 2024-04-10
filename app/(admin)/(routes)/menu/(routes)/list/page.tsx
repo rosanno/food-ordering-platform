@@ -25,7 +25,7 @@ const ManageRestaurantPage = async () => {
 
   return (
     <>
-      <Header title="Menu List" button />
+      <Header title="Menu List" />
       {/* <DataTable
         columns={columns}
         data={transformRestaurant}
