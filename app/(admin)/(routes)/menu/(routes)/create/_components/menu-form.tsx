@@ -228,7 +228,7 @@ const RestaurantForm = () => {
                   <FormControl>
                     <div className="flex justify-start pt-2.5">
                       <ImageUpload
-                        value={field.value[0]}
+                        value={field.value}
                         onChange={(imageUrl) => {
                           field.onChange(imageUrl);
                         }}

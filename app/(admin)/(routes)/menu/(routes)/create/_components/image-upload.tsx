@@ -6,7 +6,7 @@ import { Trash } from "lucide-react";
 import Image from "next/image";
 
 interface ImageUploadProps {
-  onChange: (value: string[]) => void;
+  onChange: (value: string) => void;
   onRemove: (value: string) => void;
   value: string;
 }
@@ -30,7 +30,7 @@ const ImageUpload = ({
         endpoint="imageUploader"
         onClientUploadComplete={(res) => {
           if (res) {
-            const imageUrl = res.map((item) => item.url);
+            const imageUrl = res[0].url;
             onChange(imageUrl);
           }
         }}
