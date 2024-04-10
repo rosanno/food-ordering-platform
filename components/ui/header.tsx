@@ -17,9 +17,7 @@ const Header = ({
   return (
     <header className="space-y-10">
       <div className="flex items-center justify-between">
-        <h1 className="font-semibold text-lg tracking-wide">
-          {title}
-        </h1>
+        <h1 className="text-lg tracking-wide">{title}</h1>
         {button && (
           <Button
             size={"sm"}
