@@ -6,29 +6,31 @@ import { Restaurant, columns } from "./_components/column";
 import Header from "@/components/ui/header";
 
 const ManageRestaurantPage = async () => {
-  const restaurants = await prisma.restaurant.findMany({
+  const menu = await prisma.menu.findMany({
     orderBy: {
       createdAt: "desc",
     },
   });
 
-  const transformRestaurant: Restaurant[] = restaurants.map(
-    (item) => ({
-      id: item.id,
-      name: item.restaurantName,
-      country: item.country,
-      city: item.city,
-      createdAt: format(item.createdAt, "d MMMM, yyyy"),
-    })
-  );
+  console.log(menu);
+
+  // const transformRestaurant: Restaurant[] = restaurants.map(
+  //   (item) => ({
+  //     id: item.id,
+  //     name: item.restaurantName,
+  //     country: item.country,
+  //     city: item.city,
+  //     createdAt: format(item.createdAt, "d MMMM, yyyy"),
+  //   })
+  // );
 
   return (
     <>
       <Header title="Menu List" button />
-      <DataTable
+      {/* <DataTable
         columns={columns}
         data={transformRestaurant}
-      />
+      /> */}
     </>
   );
 };

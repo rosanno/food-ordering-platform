@@ -7,6 +7,7 @@ export async function POST(request: NextRequest) {
     menuName,
     price,
     discount,
+    imageUrl,
     metaTitle,
     metaKeywords,
   } = await request.json();
@@ -17,6 +18,7 @@ export async function POST(request: NextRequest) {
         menuName,
         price,
         discount,
+        imageUrl,
         metaTitle,
         metaKeywords,
       },
