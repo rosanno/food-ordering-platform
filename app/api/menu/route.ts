@@ -12,7 +12,7 @@ export async function POST(request: NextRequest) {
   } = await request.json();
 
   try {
-    const restaurant = await prisma.restaurant.create({
+    const menu = await prisma.menu.create({
       data: {
         menuName,
         price,
@@ -22,10 +22,10 @@ export async function POST(request: NextRequest) {
       },
     });
 
-   return NextResponse.json({
-     data: restaurant,
-     message: "Restaurant created!",
-   });
+    return NextResponse.json({
+      data: menu,
+      message: "Restaurant created!",
+    });
   } catch (error) {
     console.log("[RESTAURANT_POST]", error);
     return new NextResponse("Internal error", {
