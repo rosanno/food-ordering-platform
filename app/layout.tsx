@@ -1,13 +1,13 @@
 import { ClerkProvider } from "@clerk/nextjs";
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Rubik } from "next/font/google";
 
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
 
-const roboto = Roboto({
-  weight: "400",
+const rubik = Rubik({
+  weight: ["300", "400", "500", "600"],
   subsets: ["latin"],
 });
 
@@ -24,7 +24,7 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={roboto.className}>
+        <body className={rubik.className}>
           {children}
           <Toaster />
         </body>
