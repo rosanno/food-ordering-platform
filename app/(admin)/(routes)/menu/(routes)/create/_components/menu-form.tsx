@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import FormHeader from "./form-header";
 import ImageUpload from "./image-upload";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const formSchema = z.object({
   menuName: z
@@ -26,7 +27,7 @@ const formSchema = z.object({
     .min(5, {
       message: "Menu name must be at least 5 characters.",
     })
-    .max(20),
+    .max(50),
   price: z
     .string()
     .min(4, {
@@ -40,7 +41,7 @@ const formSchema = z.object({
     .min(5, {
       message: "Meta title must be at least 5 characters.",
     })
-    .max(30),
+    .max(50),
   metaKeywords: z
     .string()
     .min(5, {
@@ -72,7 +73,15 @@ const RestaurantForm = () => {
     try {
       const res = await axios.post("/api/menu", values);
 
-      console.log(res);
+      if (res.statusText === "OK") {
+        toast(res.data.message, {
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+          duration: 5000,
+        });
+      }
     } catch (error) {
       console.log("[MENU_ERROR]", error);
     } finally {
