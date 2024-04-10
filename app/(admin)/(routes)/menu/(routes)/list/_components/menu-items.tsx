@@ -19,9 +19,10 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
           <div
             key={item.id}
             className="
-             bg-gray-100/25 
              shadow-md
              rounded-xl
+             border
+             border-gray-100
              flex 
              flex-col 
              items-center
@@ -34,13 +35,13 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
               alt={item.menuName}
               height={200}
               width={200}
-              className="lg:h-52 lg:w-52 object-contain align-middle -mt-24"
+              className="lg:h-56 lg:w-56 object-contain align-middle -mt-24"
             />
             <div className="text-center space-y-2">
               <h4 className="mt-10 md:mt-5 truncate">
                 {item.menuName}
               </h4>
-              <p className="text-sm font-normal">
+              <p className="text-sm font-[300]">
                 Food/Noodle
               </p>
             </div>

@@ -21,7 +21,7 @@ const IconButton = ({
     "p-2.5 rounded-full flex justify-center transition duration-300";
   const variantStyles = {
     success:
-      "bg-green-300/25 text-green-600 hover:bg-green-500 hover:text-white",
+      "bg-green-300/25 text-green-600 hover:bg-green-600 hover:text-white",
     primary:
       "bg-blue-300/25 text-blue-600 hover:bg-blue-500 hover:text-white",
     secondary:
@@ -37,7 +37,9 @@ const IconButton = ({
       <button onClick={onClick} className={styles}>
         <Icon className="h-3 w-3" />
       </button>
-      <small>{label}</small>
+      <small className="font-[300] text-[12px]">
+        {label}
+      </small>
     </div>
   );
 };
