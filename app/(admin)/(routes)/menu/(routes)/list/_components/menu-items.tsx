@@ -33,9 +33,15 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
             <Image
               src={item.imageUrl!!}
               alt={item.menuName}
-              height={200}
-              width={200}
-              className="lg:h-56 lg:w-56 object-contain align-middle -mt-24"
+              height={250}
+              width={250}
+              className="
+                lg:h-60 
+                lg:w-60 
+                object-contain 
+                align-middle 
+                -mt-28
+              "
             />
             <div className="text-center space-y-2">
               <h4 className="mt-10 md:mt-5 truncate">
@@ -45,7 +51,19 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 Food/Noodle
               </p>
             </div>
-            <div className="flex items-center justify-between w-full px-4 md:px-6 py-4 md:py-2 mt-3">
+            <div
+              className="
+                flex 
+                items-center 
+                justify-between 
+                w-full 
+                px-4 
+                md:px-6 
+                py-4 
+                md:py-2 
+                mt-3
+              "
+            >
               <IconButton
                 label="View"
                 icon={EyeOff}
