@@ -25,7 +25,7 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
              flex 
              flex-col 
              items-center
-             p-3.5
+             p-4
              mb-28
             "
           >
@@ -34,7 +34,7 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
               alt={item.menuName}
               height={200}
               width={200}
-              className="object-contain align-middle -mt-24"
+              className="lg:h-52 lg:w-52 object-contain align-middle -mt-24"
             />
             <div className="text-center space-y-2">
               <h4 className="mt-10 md:mt-5 truncate">
@@ -44,7 +44,7 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 Food/Noodle
               </p>
             </div>
-            <div className="flex items-center justify-between w-full px-4 md:px-6 py-4 md:py-2 mt-5">
+            <div className="flex items-center justify-between w-full px-4 md:px-6 py-4 md:py-2 mt-3">
               <IconButton
                 label="View"
                 icon={EyeOff}
