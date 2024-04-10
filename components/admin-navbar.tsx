@@ -33,15 +33,15 @@ const DashboardNavbar = () => {
   const { user } = useUser();
 
   return (
-    <header className="border-b py-5 mx-1.5 fixed w-full top-0 bg-white">
-      <div className="px-10 flex items-center gap-10">
+    <header className="border-b py-5 md:mx-1.5 fixed w-full top-0 bg-white">
+      <div className="px-5 md:px-10 flex items-center gap-10">
         <Link
           href={"/"}
           className="font-extrabold md:text-base"
         >
           Good<span className="text-[#FF9E0A]">Food</span>
         </Link>
-        <nav className="space-x-2">
+        <nav className="space-x-2 hidden md:block">
           {Menu.map((item, i) => (
             <Link
               href={item.href}

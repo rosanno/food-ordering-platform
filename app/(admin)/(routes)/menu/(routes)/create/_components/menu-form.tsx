@@ -113,7 +113,7 @@ const RestaurantForm = () => {
               control={form.control}
               name="price"
               render={({ field }) => (
-                <FormItem className="col-span-6">
+                <FormItem className="col-span-12 md:col-span-6">
                   <FormLabel>Price</FormLabel>
                   <FormControl>
                     <div className="flex items-center border rounded-md">
@@ -145,7 +145,7 @@ const RestaurantForm = () => {
               control={form.control}
               name="discount"
               render={({ field }) => (
-                <FormItem className="col-span-6">
+                <FormItem className="col-span-12 md:col-span-6">
                   <FormLabel>Discount</FormLabel>
                   <FormControl>
                     <div className="flex items-center border rounded-md">
@@ -179,7 +179,7 @@ const RestaurantForm = () => {
               control={form.control}
               name="metaTitle"
               render={({ field }) => (
-                <FormItem className="col-span-6">
+                <FormItem className="col-span-12 md:col-span-6">
                   <FormLabel>Meta Title</FormLabel>
                   <FormControl>
                     <Input
@@ -199,7 +199,7 @@ const RestaurantForm = () => {
               control={form.control}
               name="metaKeywords"
               render={({ field }) => (
-                <FormItem className="col-span-6">
+                <FormItem className="col-span-12 md:col-span-6">
                   <FormLabel>Meta Keywords</FormLabel>
                   <FormControl>
                     <Input
