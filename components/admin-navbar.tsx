@@ -33,7 +33,7 @@ const DashboardNavbar = () => {
   const { user } = useUser();
 
   return (
-    <div className="border-b py-5 mx-1.5">
+    <header className="border-b py-5 mx-1.5 fixed w-full top-0 bg-white">
       <div className="px-10 flex items-center gap-10">
         <Link
           href={"/"}
@@ -68,7 +68,7 @@ const DashboardNavbar = () => {
           </Avatar>
         </div>
       </div>
-    </div>
+    </header>
   );
 };
 
