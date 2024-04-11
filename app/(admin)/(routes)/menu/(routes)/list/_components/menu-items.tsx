@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { Menu } from "@prisma/client";
 import {
   EyeOff,
@@ -12,6 +13,8 @@ import {
 import IconButton from "./icon-button";
 
 const MenuItems = ({ menu }: { menu: Menu[] }) => {
+  const router = useRouter();
+
   return (
     <section className="mt-16">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-32">
@@ -68,7 +71,9 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 label="View"
                 icon={EyeOff}
                 variant="success"
-                onClick={() => {}}
+                onClick={() =>
+                  router.push(`/menu/${item.id}`)
+                }
               />
               <IconButton
                 label="Edit"
