@@ -23,7 +23,9 @@ const CommonBreadcrumbs = () => {
         <BreadcrumbSeparator />
         <BreadcrumbItem>
           {index === segments.length - 1 ? (
-            <BreadcrumbPage>{item}</BreadcrumbPage>
+            <BreadcrumbPage className="capitalize">
+              {item}
+            </BreadcrumbPage>
           ) : (
             <BreadcrumbLink
               href={`/${segments
