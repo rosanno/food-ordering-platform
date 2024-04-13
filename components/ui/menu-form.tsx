@@ -3,8 +3,12 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import axios from "axios";
 import { DollarSign, Save, Scissors } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
+import { Menu } from "@prisma/client";
+import { useRouter } from "next/navigation";
+import axios from "axios";
 
 import {
   Form,
@@ -18,8 +22,6 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import FormHeader from "./form-header";
 import ImageUpload from "./image-upload";
-import { useState } from "react";
-import { toast } from "sonner";
 
 const formSchema = z.object({
   menuName: z
@@ -30,7 +32,7 @@ const formSchema = z.object({
     .max(50),
   price: z
     .string()
-    .min(4, {
+    .min(3, {
       message: "Price must be at least 5 characters.",
     })
     .max(20),
@@ -51,19 +53,30 @@ const formSchema = z.object({
     .max(50),
 });
 
-const MenuForm = () => {
+interface MenuFormProps {
+  initialData?: Menu | null;
+}
+
+const MenuForm = ({ initialData }: MenuFormProps) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  const defaultValues = initialData
+    ? {
+        ...initialData,
+      }
+    : {
+        menuName: "",
+        price: "",
+        discount: "",
+        imageUrl: "",
+        metaTitle: "",
+        metaKeywords: "",
+      };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      menuName: "",
-      price: "",
-      discount: "",
-      imageUrl: "",
-      metaTitle: "",
-      metaKeywords: "",
-    },
+    defaultValues,
   });
 
   const onSubmit = async (
@@ -71,17 +84,35 @@ const MenuForm = () => {
   ) => {
     setLoading(true);
     try {
-      const res = await axios.post("/api/menu", values);
+      if (!initialData) {
+        const res = await axios.post("/api/menu", values);
 
-      if (res.statusText === "OK") {
-        toast(res.data.message, {
-          action: {
-            label: "Close",
-            onClick: () => console.log("Close"),
-          },
-          duration: 5000,
-        });
+        if (res.statusText === "OK") {
+          toast(res.data.message, {
+            action: {
+              label: "Close",
+              onClick: () => console.log("Close"),
+            },
+            duration: 5000,
+          });
+        }
+      } else {
+        const res = await axios.patch(
+          `/api/menu/${initialData.id}`,
+          values
+        );
+
+        if (res.statusText === "OK") {
+          toast(res.data.message, {
+            action: {
+              label: "Close",
+              onClick: () => console.log("Close"),
+            },
+            duration: 5000,
+          });
+        }
       }
+      router.push("/menu");
     } catch (error) {
       console.log("[MENU_ERROR]", error);
     } finally {
