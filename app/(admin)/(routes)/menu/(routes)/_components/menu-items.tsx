@@ -79,7 +79,9 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 label="Edit"
                 icon={SquarePen}
                 variant="danger"
-                onClick={() => {}}
+                onClick={() =>
+                  router.push(`/menu/edit/${item.id}`)
+                }
               />
               <IconButton
                 label="Delete"

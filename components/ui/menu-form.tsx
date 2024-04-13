@@ -51,7 +51,7 @@ const formSchema = z.object({
     .max(50),
 });
 
-const RestaurantForm = () => {
+const MenuForm = () => {
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -272,4 +272,4 @@ const RestaurantForm = () => {
   );
 };
 
-export default RestaurantForm;
+export default MenuForm;

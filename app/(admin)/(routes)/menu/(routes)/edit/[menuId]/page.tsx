@@ -1,13 +1,13 @@
 import Header from "@/components/ui/header";
 import MenuForm from "@/components/ui/menu-form";
 
-const CreateRestaurantPage = () => {
+const UpdateMenuPage = () => {
   return (
     <>
-      <Header title="Add Menu" />
+      <Header title="Edit Menu" />
       <MenuForm />
     </>
   );
 };
 
-export default CreateRestaurantPage;
+export default UpdateMenuPage;
