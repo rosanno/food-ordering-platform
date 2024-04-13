@@ -293,6 +293,8 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
               type="button"
               variant={"outline"}
               size={"default"}
+              disabled={loading}
+              onClick={() => router.back()}
             >
               Cancel
             </Button>
