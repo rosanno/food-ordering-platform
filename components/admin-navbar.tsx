@@ -23,8 +23,8 @@ const Menu = [
     label: "Orders",
   },
   {
-    href: "/menu/list",
-    label: "Menu List",
+    href: "/menu",
+    label: "Menu",
   },
   {
     href: "/menu/create",
