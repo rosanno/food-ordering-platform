@@ -1,5 +1,6 @@
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Menu } from "@prisma/client";
@@ -9,11 +10,30 @@ import {
   SquarePen,
   Trash,
 } from "lucide-react";
+import { toast } from "sonner";
 
 import IconButton from "./icon-button";
 
 const MenuItems = ({ menu }: { menu: Menu[] }) => {
   const router = useRouter();
+
+  const handleDelete = async (menuId: string) => {
+    try {
+      const res = await axios.delete(`/api/menu/${menuId}`);
+      if (res.statusText === "OK") {
+        toast(res.data.message, {
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+          duration: 5000,
+        });
+      }
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <section className="mt-16">
@@ -86,7 +106,7 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
               <IconButton
                 label="Delete"
                 icon={Trash}
-                onClick={() => {}}
+                onClick={() => handleDelete(item.id)}
               />
               <IconButton
                 label="Duplicate"
