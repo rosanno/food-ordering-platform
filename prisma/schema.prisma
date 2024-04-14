@@ -25,3 +25,27 @@ model Menu {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+model Order {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  customerId  String
+  orderItems  OrderItem[]
+  status      Status
+  totalAmount Int
+
+  createdAt   DateTime @default(now())
+}
+
+model OrderItem {
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  order   Order  @relation(fields: [orderId], references: [id])
+  orderId String @db.ObjectId
+}
+
+enum Status {
+  place
+  paid
+  inProgress
+  outForDelivery
+  delivered
+}
