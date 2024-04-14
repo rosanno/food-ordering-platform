@@ -113,6 +113,7 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
         }
       }
       router.push("/menu");
+      router.refresh();
     } catch (error) {
       console.log("[MENU_ERROR]", error);
     } finally {
