@@ -41,7 +41,7 @@ const DashboardNavbar = () => {
   const { user } = useUser();
 
   return (
-    <header className="border-b py-5 md:mx-1.5 fixed w-full top-0 bg-white">
+    <header className="border-b py-5 md:mx-1.5 fixed z-10 w-full top-0 bg-white">
       <div className="px-5 md:px-10 flex items-center gap-10">
         <Link
           href={"/"}

@@ -19,6 +19,7 @@ model Menu {
   price        String
   discount     String?
   imageUrl     String?
+  imageKey     String?
   metaTitle    String
   metaKeywords String
   OrderItem    OrderItem[]
