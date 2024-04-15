@@ -123,6 +123,19 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
     }
   };
 
+  const onDeleteImage = async (key: string, field: any) => {
+    try {
+      await axios.delete("/api/uploadthing", {
+        data: {
+          key,
+        },
+      });
+      field.onChange((field.value = ""));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <FormHeader />
@@ -275,7 +288,9 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
                         onChange={(imageUrl) => {
                           field.onChange(imageUrl);
                         }}
-                        onRemove={() => {}}
+                        onRemove={(key) =>
+                          onDeleteImage(key, field)
+                        }
                       />
                     </div>
                   </FormControl>
