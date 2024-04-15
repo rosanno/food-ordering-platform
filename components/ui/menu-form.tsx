@@ -36,7 +36,7 @@ const formSchema = z.object({
       message: "Price must be at least 5 characters.",
     })
     .max(20),
-  discount: z.string(),
+  discount: z.string().optional(),
   imageUrl: z.string(),
   metaTitle: z
     .string()
