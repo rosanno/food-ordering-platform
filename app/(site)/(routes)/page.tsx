@@ -1,5 +1,5 @@
-import Article from "../_components/article";
-import Featured from "../_components/featured";
+import Article from "./_components/article";
+import Featured from "./_components/featured";
 
 export default function Home() {
   return (
