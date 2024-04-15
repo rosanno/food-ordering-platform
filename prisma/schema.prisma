@@ -14,13 +14,14 @@ datasource db {
 }
 
 model Menu {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
   menuName     String
   price        String
   discount     String?
   imageUrl     String?
   metaTitle    String
   metaKeywords String
+  OrderItem    OrderItem[]
 
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
@@ -29,6 +30,7 @@ model Menu {
 model Order {
   id          String      @id @default(auto()) @map("_id") @db.ObjectId
   customerId  String
+  name        String
   orderItems  OrderItem[]
   status      Status
   totalAmount Int
@@ -38,8 +40,10 @@ model Order {
 
 model OrderItem {
   id      String @id @default(auto()) @map("_id") @db.ObjectId
-  order   Order  @relation(fields: [orderId], references: [id])
   orderId String @db.ObjectId
+  menuId  String @db.ObjectId
+  order   Order  @relation(fields: [orderId], references: [id])
+  menu    Menu   @relation(fields: [menuId], references: [id])
 }
 
 enum Status {

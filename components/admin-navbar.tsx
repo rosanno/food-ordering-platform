@@ -23,6 +23,10 @@ const Menu = [
     label: "Orders",
   },
   {
+    href: "/customers",
+    label: "Customers",
+  },
+  {
     href: "/menu",
     label: "Menu",
   },
