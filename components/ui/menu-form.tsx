@@ -64,6 +64,8 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
   const defaultValues = initialData
     ? {
         ...initialData,
+        discount: initialData.discount ?? "",
+        imageUrl: initialData.imageUrl ?? "",
       }
     : {
         menuName: "",
