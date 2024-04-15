@@ -2,11 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import {
-  SignOutButton,
-  UserButton,
-  useUser,
-} from "@clerk/nextjs";
+import { UserButton } from "@clerk/nextjs";
 import { IoIosSettings } from "react-icons/io";
 
 import { cn } from "@/lib/utils";
@@ -37,7 +33,6 @@ const Menu = [
 
 const DashboardNavbar = () => {
   const pathname = usePathname();
-  const { user } = useUser();
 
   return (
     <header className="border-b py-5 md:mx-1.5 fixed z-10 w-full top-0 bg-white">
@@ -66,7 +61,7 @@ const DashboardNavbar = () => {
           <Button variant={"ghost"} size={"icon"}>
             <IoIosSettings className="text-[22px] text-gray-500" />
           </Button>
-          <UserButton />
+          <UserButton afterSignOutUrl="/sign-in" />
         </div>
       </div>
     </header>
