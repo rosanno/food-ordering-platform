@@ -2,25 +2,15 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import {
+  SignOutButton,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 import { IoIosSettings } from "react-icons/io";
 
 import { cn } from "@/lib/utils";
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from "@/components/ui/avatar";
 import { Button } from "./ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "./ui/dropdown-menu";
-import { LogOut } from "lucide-react";
 
 const Menu = [
   {
@@ -76,27 +66,7 @@ const DashboardNavbar = () => {
           <Button variant={"ghost"} size={"icon"}>
             <IoIosSettings className="text-[22px] text-gray-500" />
           </Button>
-          <DropdownMenu>
-            <DropdownMenuTrigger>
-              <Avatar className="h-[35px] w-[35px]">
-                <AvatarImage
-                  src={user?.imageUrl}
-                  alt="@shadcn"
-                />
-                <AvatarFallback>CN</AvatarFallback>
-              </Avatar>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="w-28 mr-10 mt-2">
-              <DropdownMenuItem>
-                <SignOutButton>
-                  <div className="text-[13px] flex items-center">
-                    <LogOut className="h-4 w-4 mr-2" /> Sign
-                    out
-                  </div>
-                </SignOutButton>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <UserButton />
         </div>
       </div>
     </header>
