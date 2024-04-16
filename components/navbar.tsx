@@ -61,7 +61,7 @@ export default function Navbar() {
         {isSignedIn ? (
           <div className="space-x-6">
             {user?.publicMetadata.role ? (
-              <ButtonLink href="/dashboard">
+              <ButtonLink href="/admin/dashboard">
                 Dashboard
               </ButtonLink>
             ) : (

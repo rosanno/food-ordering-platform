@@ -26,7 +26,7 @@ const Menu = [
     label: "Menu",
   },
   {
-    href: "/menu/create",
+    href: "/admin/menu/create",
     label: "Add Menu",
   },
 ];
