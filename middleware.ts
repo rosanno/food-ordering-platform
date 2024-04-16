@@ -12,14 +12,7 @@ export default authMiddleware({
       return redirectToSignIn({ returnBackUrl: req.url });
     }
 
-    if (
-      auth.userId &&
-      auth.sessionClaims?.metadata.role !== "admin" &&
-      req.nextUrl.pathname !== "/"
-    ) {
-      const permission = new URL("/", req.url);
-      return NextResponse.redirect(permission);
-    }
+    return NextResponse.next();
   },
   // Allow signed out users to access the specified routes:
   publicRoutes: ["/", "/menu", "/api/uploadthing"],
