@@ -1,7 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { SignOutButton, useUser } from "@clerk/nextjs";
+import {
+  SignOutButton,
+  UserButton,
+  useUser,
+} from "@clerk/nextjs";
 import ButtonLink from "./ui/button-link";
 
 const MenuList = [
@@ -31,7 +35,7 @@ export default function Navbar() {
       className="
         px-2 
         py-2.5 
-        md:py-3.5
+        md:py-4
         md:px-5
         w-full
         max-w-6xl
@@ -56,17 +60,12 @@ export default function Navbar() {
         </nav>
         {isSignedIn ? (
           <div className="space-x-6">
-            <SignOutButton>
-              <button className="text-[13px] font-semibold">
-                Sign out
-              </button>
-            </SignOutButton>
             {user?.publicMetadata.role ? (
               <ButtonLink href="/dashboard">
                 Dashboard
               </ButtonLink>
             ) : (
-              <p>User</p>
+              <UserButton />
             )}
           </div>
         ) : (
