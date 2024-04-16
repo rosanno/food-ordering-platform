@@ -114,7 +114,7 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
           });
         }
       }
-      router.push("/menu");
+      router.push("/admin/menu");
       router.refresh();
     } catch (error) {
       console.log("[MENU_ERROR]", error);

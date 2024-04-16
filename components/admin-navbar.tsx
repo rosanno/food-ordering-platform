@@ -10,19 +10,19 @@ import { Button } from "./ui/button";
 
 const Menu = [
   {
-    href: "/dashboard",
+    href: "/admin/dashboard",
     label: "Dashboard",
   },
   {
-    href: "/orders",
+    href: "/admin/orders",
     label: "Orders",
   },
   {
-    href: "/customers",
+    href: "/admin/customers",
     label: "Customers",
   },
   {
-    href: "/menu",
+    href: "/admin/menu",
     label: "Menu",
   },
   {

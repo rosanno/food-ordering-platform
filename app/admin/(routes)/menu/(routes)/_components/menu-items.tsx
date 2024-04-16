@@ -92,7 +92,7 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 icon={EyeOff}
                 variant="success"
                 onClick={() =>
-                  router.push(`/menu/${item.id}`)
+                  router.push(`/admin/menu/${item.id}`)
                 }
               />
               <IconButton
@@ -100,7 +100,7 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 icon={SquarePen}
                 variant="danger"
                 onClick={() =>
-                  router.push(`/menu/edit/${item.id}`)
+                  router.push(`/admin/menu/edit/${item.id}`)
                 }
               />
               <IconButton
