@@ -40,6 +40,7 @@ export default function Navbar() {
         fixed
         top-0
         inset-x-0
+        z-50
         bg-white
         shadow-sm
         w-full
