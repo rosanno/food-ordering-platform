@@ -26,7 +26,18 @@ const data = [
 const Step = () => {
   return (
     <section className="mt-32">
-      <div className="flex flex-col items-center justify-center space-y-2">
+      <div
+        className="
+          flex 
+          flex-col 
+          items-center 
+          justify-center 
+          text-center 
+          px-5 
+          sm:px-0 
+          space-y-2
+        "
+      >
         <h4 className="uppercase text-[13px] text-yellow-500">
           step by step
         </h4>

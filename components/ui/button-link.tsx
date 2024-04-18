@@ -20,7 +20,6 @@ const ButtonLink = ({
         px-8 
         md:px-7
         py-2
-        md:py-2.5
       "
     >
       {children}

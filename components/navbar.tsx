@@ -6,6 +6,7 @@ import { UserButton, useUser } from "@clerk/nextjs";
 
 import { cn } from "@/lib/utils";
 import ButtonLink from "./ui/button-link";
+import { Skeleton } from "./ui/skeleton";
 
 const MenuList = [
   {
@@ -28,7 +29,7 @@ const MenuList = [
 
 export default function Navbar() {
   const pathname = usePathname();
-  const { isSignedIn, user } = useUser();
+  const { isSignedIn, isLoaded } = useUser();
 
   return (
     <header
@@ -70,18 +71,20 @@ export default function Navbar() {
               ))}
             </ul>
           </nav>
-          {isSignedIn ? (
-            <div className="space-x-6">
-              {user?.publicMetadata.role ? (
-                <ButtonLink href="/admin/dashboard">
-                  Dashboard
-                </ButtonLink>
+          {isLoaded ? (
+            <>
+              {isSignedIn ? (
+                <>
+                  <UserButton afterSignOutUrl="/" />
+                </>
               ) : (
-                <UserButton />
+                <ButtonLink href="/sign-in">
+                  Sign in
+                </ButtonLink>
               )}
-            </div>
+            </>
           ) : (
-            <ButtonLink href="/sign-in">Sign in</ButtonLink>
+            <Skeleton className="h-8 w-8 rounded-full bg-gray-300/55" />
           )}
         </div>
       </div>

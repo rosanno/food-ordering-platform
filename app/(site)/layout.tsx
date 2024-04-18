@@ -1,10 +1,16 @@
 import Navbar from "@/components/navbar";
+import { checkRole } from "@/utils/roles";
+import { redirect } from "next/navigation";
 
 export default function PublicLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  if (checkRole("admin")) {
+    redirect("/admin/dashboard");
+  }
+
   return (
     <>
       <Navbar />
