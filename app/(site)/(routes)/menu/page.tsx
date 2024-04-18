@@ -5,8 +5,18 @@ const MenuPage = async () => {
   const menu = await prisma.menu.findMany();
 
   return (
-    <section className="mt-56">
-      <div className="flex flex-wrap gap-6">
+    <section className="mt-64">
+      <div
+        className="
+          grid 
+          grid-cols-1 
+          sm:grid-cols-2 
+          md:grid-cols-3
+          lg:grid-cols-4
+          sm:gap-6 
+          md:gap-5
+        "
+      >
         {menu.map((item) => (
           <Item item={item} key={item.id} />
         ))}

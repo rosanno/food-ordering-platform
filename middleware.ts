@@ -15,7 +15,12 @@ export default authMiddleware({
     return NextResponse.next();
   },
   // Allow signed out users to access the specified routes:
-  publicRoutes: ["/", "/menu", "/api/uploadthing"],
+  publicRoutes: [
+    "/",
+    "/menu",
+    "/pricing",
+    "/api/uploadthing",
+  ],
 });
 
 export const config = {

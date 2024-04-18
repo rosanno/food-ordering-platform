@@ -20,33 +20,25 @@ const Item = ({ item }: ItemProps) => {
         bg-gray-100/30
         px-5
         py-2
-        w-full 
+        h-[240px]
+        w-full
         rounded-lg 
         shadow-md 
-        sm:w-[48%] 
-        md:w-[30.8%] 
-        lg:w-[260px]
         transition-all
         duration-300
-        mb-28
+        mb-32
     "
       >
         <div className="flex items-center justify-center">
           <Image
             src={item.imageUrl!!}
             alt={item.menuName}
-            height={300}
-            width={300}
+            height={350}
+            width={350}
             className="
-            -mt-24 
-            w-full 
-            h-full 
-            sm:w-full 
-            sm:h-full 
-            md:w-full 
-            md:h-full
-            lg:w-40
-            lg:h-40
+            -mt-32
+            w-full
+            h-full
             object-contain
           "
           />
