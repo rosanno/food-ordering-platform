@@ -20,7 +20,7 @@ const Item = ({ item }: ItemProps) => {
         bg-gray-100/30
         px-5
         py-2
-        h-[240px]
+        lg:h-[240px]
         w-full
         rounded-lg 
         shadow-md 
