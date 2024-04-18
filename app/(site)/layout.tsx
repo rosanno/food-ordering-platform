@@ -14,7 +14,7 @@ export default function PublicLayout({
   return (
     <>
       <Navbar />
-      <main className="px-2 md:px-5 w-full max-w-6xl mx-auto mt-16">
+      <main className="px-2 md:px-2.5 w-full max-w-6xl mx-auto mt-16">
         {children}
       </main>
     </>
