@@ -46,12 +46,27 @@ const Item = ({ item }: ItemProps) => {
           <h4 className="truncate text-sm capitalize">
             {item.menuName}
           </h4>
-          <p className="text-muted-foreground text-sm">
+          <p
+            className="
+              text-muted-foreground 
+              text-[13px] 
+              font-medium
+            "
+          >
             {formatCurrency(parseInt(item.price), "PHP")}
           </p>
         </div>
       </Link>
-      <div className="py-1.5 mt-2 flex items-center justify-between gap-2.5">
+      <div
+        className="
+          py-1.5 
+          mt-2 
+          flex 
+          items-center 
+          justify-between 
+          gap-2.5
+        "
+      >
         <Button
           size={"sm"}
           variant={"outline"}
@@ -60,7 +75,11 @@ const Item = ({ item }: ItemProps) => {
         >
           Order
         </Button>
-        <Button size={"icon"} variant={"ghost"}>
+        <Button
+          size={"icon"}
+          variant={"outline"}
+          className="rounded-full"
+        >
           <Heart className="h-5 w-5" />
         </Button>
       </div>
