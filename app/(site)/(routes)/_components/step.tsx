@@ -49,7 +49,18 @@ const Step = () => {
           disher you love easily
         </p>
       </div>
-      <div className="flex flex-col md:flex-row justify-center items-center gap-2 mt-16">
+      <div
+        className="
+          flex 
+          flex-col 
+          md:flex-row 
+          justify-center 
+          items-center 
+          gap-6
+          md:gap-2 
+          mt-16
+        "
+      >
         {data.map((_, index) => (
           <div
             key={index}
