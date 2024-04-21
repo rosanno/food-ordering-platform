@@ -1,4 +1,5 @@
 import DashboardNavbar from "@/components/admin-navbar";
+import { ModalProvider } from "@/providers/modal-provider";
 import { checkRole } from "@/utils/roles";
 import { redirect } from "next/navigation";
 
@@ -15,6 +16,7 @@ export default function DashboardLayout({
   return (
     <>
       <DashboardNavbar />
+      <ModalProvider />
       <main className="px-5 pt-20 md:px-14 w-full max-w-7xl mx-auto mt-10">
         {children}
       </main>
