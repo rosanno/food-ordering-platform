@@ -1,16 +1,9 @@
 "use client";
 
-import CommonBreadcrumbs from "./common-breadcrumbs";
-
 const Header = ({ title }: { title: string }) => {
   return (
-    <header className="space-y-10 pb-5">
-      <div className="flex items-center gap-7">
-        <h1 className="text-lg tracking-wide">{title}</h1>
-        <div className="mt-1">
-          <CommonBreadcrumbs />
-        </div>
-      </div>
+    <header className="space-y-10">
+      <h1 className="text-lg font-medium">{title}</h1>
     </header>
   );
 };
