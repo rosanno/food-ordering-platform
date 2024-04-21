@@ -1,14 +1,25 @@
-import Navbar from "@/components/navbar";
-import { checkRole } from "@/utils/roles";
+import { currentUser } from "@clerk/nextjs";
 import { redirect } from "next/navigation";
 
-export default function PublicLayout({
+import prisma from "@/lib/prisma";
+import Navbar from "@/components/navbar";
+import { checkRole } from "@/utils/roles";
+
+export default async function PublicLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  if (checkRole("admin")) {
-    redirect("/admin/dashboard");
+  const user = await currentUser();
+
+  const restaurant = await prisma.restaurant.findFirst({
+    where: {
+      id: user?.id,
+    },
+  });
+
+  if (checkRole("admin") && restaurant) {
+    redirect(`/admin/${restaurant.id}/dashboard`);
   }
 
   return (

@@ -5,6 +5,7 @@ import { Rubik } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
+import { ModalProvider } from "@/providers/modal-provider";
 
 const rubik = Rubik({
   weight: ["300", "400", "500", "600"],
@@ -25,6 +26,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en">
         <body className={rubik.className}>
+          <ModalProvider />
           {children}
           <Toaster />
         </body>
