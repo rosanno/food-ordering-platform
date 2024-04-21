@@ -47,20 +47,14 @@ const RestaurantModal = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(
+      const response = await axios.post(
         "/api/restaurant",
         values
       );
 
-      if (res.statusText === "OK") {
-        toast(res.data.message, {
-          action: {
-            label: "Close",
-            onClick: () => console.log("Close"),
-          },
-          duration: 5000,
-        });
-      }
+      window.location.assign(
+        `/admin/${response.data.id}/dasboard`
+      );
     } catch (error) {
       toast.error("Something went wrong");
     } finally {

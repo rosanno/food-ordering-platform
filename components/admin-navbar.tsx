@@ -1,38 +1,52 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { useParams, usePathname } from "next/navigation";
 import { UserButton } from "@clerk/nextjs";
 import { IoIosSettings } from "react-icons/io";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 
-const Menu = [
-  {
-    href: "/admin/dashboard",
-    label: "Dashboard",
-  },
-  {
-    href: "/admin/orders",
-    label: "Orders",
-  },
-  {
-    href: "/admin/customers",
-    label: "Customers",
-  },
-  {
-    href: "/admin/menu",
-    label: "Menu",
-  },
-  {
-    href: "/admin/menu/create",
-    label: "Add Menu",
-  },
-];
-
 const DashboardNavbar = () => {
   const pathname = usePathname();
+  const params = useParams();
+
+  const routes = [
+    {
+      href: `/admin/${params.restaurantId}/dashboard`,
+      label: "Dashboard",
+      active:
+        pathname ===
+        `/admin/${params.restaurantId}/dashboard`,
+    },
+    {
+      href: `/admin/${params.restaurantId}/orders`,
+      label: "Orders",
+      active:
+        pathname === `/admin/${params.restaurantId}/orders`,
+    },
+    {
+      href: `/admin/${params.restaurantId}/customers`,
+      label: "Customers",
+      active:
+        pathname ===
+        `/admin/${params.restaurantId}/customers`,
+    },
+    {
+      href: `/admin/${params.restaurantId}/menu`,
+      label: "Menu",
+      active:
+        pathname === `/admin/${params.restaurantId}/menu`,
+    },
+    {
+      href: `/admin/${params.restaurantId}/menu/create`,
+      label: "Add Menu",
+      active:
+        pathname ===
+        `/admin/${params.restaurantId}/menu/create`,
+    },
+  ];
 
   return (
     <header className="border-b py-5 md:mx-1.5 fixed z-10 w-full top-0 bg-white">
@@ -44,7 +58,7 @@ const DashboardNavbar = () => {
           Good<span className="text-[#FF9E0A]">Food</span>
         </Link>
         <nav className="space-x-2 hidden md:block">
-          {Menu.map((item, i) => (
+          {routes.map((item, i) => (
             <Link
               href={item.href}
               key={i}
