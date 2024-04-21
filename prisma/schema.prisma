@@ -13,6 +13,19 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Restaurant {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  ownerId   String
+  name      String
+  country   String
+  city      String
+  imageUrl  String
+  menu      Menu[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
 model Menu {
   id           String      @id @default(auto()) @map("_id") @db.ObjectId
   menuName     String
@@ -22,10 +35,12 @@ model Menu {
   imageKey     String?
   metaTitle    String
   metaKeywords String
-  OrderItem    OrderItem[]
+  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurantId String?     @db.ObjectId
+  orderItem    OrderItem[]
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model Order {
@@ -35,8 +50,8 @@ model Order {
   orderItems  OrderItem[]
   status      Status
   totalAmount Int
-
-  createdAt   DateTime @default(now())
+  
+  createdAt   DateTime    @default(now())
 }
 
 model OrderItem {
