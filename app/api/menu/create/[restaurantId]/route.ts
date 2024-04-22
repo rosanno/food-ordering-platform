@@ -5,7 +5,7 @@ import prisma from "@/lib/prisma";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { restaurandId: string } }
+  { params }: { params: { restaurantId: string } }
 ) {
   const {
     menuName,
@@ -28,7 +28,7 @@ export async function POST(
         slug,
         metaTitle,
         metaKeywords,
-        restaurantId: params.restaurandId,
+        restaurantId: params.restaurantId,
       },
     });
 
