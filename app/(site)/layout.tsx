@@ -14,7 +14,7 @@ export default async function PublicLayout({
 
   const restaurant = await prisma.restaurant.findFirst({
     where: {
-      id: user?.id,
+      ownerId: user?.id,
     },
   });
 
