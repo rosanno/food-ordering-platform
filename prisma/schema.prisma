@@ -38,7 +38,7 @@ model Menu {
   metaTitle    String
   metaKeywords String
   restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
-  restaurantId String?     @db.ObjectId
+  restaurantId String      @db.ObjectId
   orderItem    OrderItem[]
 
   createdAt    DateTime    @default(now())
