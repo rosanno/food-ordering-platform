@@ -19,6 +19,7 @@ model Restaurant {
   name      String
   country   String
   city      String
+  slug      String
   imageUrl  String
   menu      Menu[]
 
@@ -33,9 +34,10 @@ model Menu {
   discount     String?
   imageUrl     String?
   imageKey     String?
+  slug         String
   metaTitle    String
   metaKeywords String
-  Restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
+  restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
   restaurantId String?     @db.ObjectId
   orderItem    OrderItem[]
 
