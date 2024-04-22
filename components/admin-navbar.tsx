@@ -17,7 +17,7 @@ const DashboardNavbar = async () => {
 
   return (
     <header className="border-b py-3.5 md:mx-1.5 fixed z-10 w-full top-0 bg-white">
-      <div className="px-5 md:px-20 flex items-center gap-4">
+      <div className="px-5 md:px-10 lg:px-20 flex items-center gap-4">
         <RestaurantSwitcher items={restaunrants} />
         <MainNav />
         <div className="ml-auto flex items-center gap-2">
