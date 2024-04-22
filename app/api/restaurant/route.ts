@@ -1,11 +1,14 @@
-import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
+import slugify from "slugify";
+import { auth } from "@clerk/nextjs";
+import prisma from "@/lib/prisma";
 
 export async function POST(request: NextRequest) {
   const { name, country, city, imageUrl } =
     await request.json();
   const { userId } = auth();
+
+  const slug = slugify(name).toLowerCase();
 
   try {
     const restaurant = await prisma.restaurant.create({
@@ -15,6 +18,7 @@ export async function POST(request: NextRequest) {
         country,
         city,
         imageUrl,
+        slug,
       },
     });
 
