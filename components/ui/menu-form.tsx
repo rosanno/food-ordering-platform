@@ -55,9 +55,13 @@ const formSchema = z.object({
 
 interface MenuFormProps {
   initialData?: Menu | null;
+  restaurantId?: string;
 }
 
-const MenuForm = ({ initialData }: MenuFormProps) => {
+const MenuForm = ({
+  initialData,
+  restaurantId,
+}: MenuFormProps) => {
   const router = useRouter();
   const params = useParams();
 
@@ -89,7 +93,10 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
     setLoading(true);
     try {
       if (!initialData) {
-        const res = await axios.post("/api/menu", values);
+        const res = await axios.post(
+          `/api/menu/create/${restaurantId}`,
+          values
+        );
 
         if (res.statusText === "OK") {
           toast(res.data.message, {
@@ -119,7 +126,7 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
       router.push(`/admin/${params.slug}/menu`);
       router.refresh();
     } catch (error) {
-      console.log("[MENU_ERROR]", error);
+      toast.error("Something went wrong.");
     } finally {
       setLoading(false);
     }

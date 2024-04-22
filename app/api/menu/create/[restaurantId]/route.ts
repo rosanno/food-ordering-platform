@@ -3,7 +3,10 @@ import slugify from "slugify";
 
 import prisma from "@/lib/prisma";
 
-export async function POST(request: NextRequest) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { restaurandId: string } }
+) {
   const {
     menuName,
     price,
@@ -25,6 +28,7 @@ export async function POST(request: NextRequest) {
         slug,
         metaTitle,
         metaKeywords,
+        restaurantId: params.restaurandId,
       },
     });
 
