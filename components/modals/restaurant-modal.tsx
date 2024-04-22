@@ -53,7 +53,7 @@ const RestaurantModal = () => {
       );
 
       window.location.assign(
-        `/admin/${response.data.restaurant.id}/dashboard`
+        `/admin/${response.data.restaurant.slug}/dashboard`
       );
     } catch (error) {
       toast.error("Something went wrong");

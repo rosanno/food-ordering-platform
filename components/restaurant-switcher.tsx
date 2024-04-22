@@ -47,11 +47,11 @@ const RestaurantSwitcher = ({
 
   const formattedItems = items.map((item) => ({
     label: item.name,
-    value: item.id,
+    value: item.slug,
   }));
 
   const currentRestaurant = formattedItems.find(
-    (item) => item.value === params.restaurantId
+    (item) => item.value === params.slug
   );
 
   const [open, setOpen] = useState(false);

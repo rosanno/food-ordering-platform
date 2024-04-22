@@ -10,7 +10,7 @@ export default async function DashboardLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { restaurantId: string };
+  params: { slug: string };
 }) {
   const { userId } = auth();
 
@@ -24,7 +24,7 @@ export default async function DashboardLayout({
 
   const restaurant = await prisma.restaurant.findFirst({
     where: {
-      id: params.restaurantId,
+      slug: params.slug,
     },
   });
 

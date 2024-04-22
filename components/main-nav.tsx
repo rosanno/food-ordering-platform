@@ -11,37 +11,32 @@ const MainNav = () => {
 
   const routes = [
     {
-      href: `/admin/${params.restaurantId}/dashboard`,
+      href: `/admin/${params.slug}/dashboard`,
       label: "Dashboard",
       active:
-        pathname ===
-        `/admin/${params.restaurantId}/dashboard`,
+        pathname === `/admin/${params.slug}/dashboard`,
     },
     {
-      href: `/admin/${params.restaurantId}/orders`,
+      href: `/admin/${params.slug}/orders`,
       label: "Orders",
-      active:
-        pathname === `/admin/${params.restaurantId}/orders`,
+      active: pathname === `/admin/${params.slug}/orders`,
     },
     {
-      href: `/admin/${params.restaurantId}/customers`,
+      href: `/admin/${params.slug}/customers`,
       label: "Customers",
       active:
-        pathname ===
-        `/admin/${params.restaurantId}/customers`,
+        pathname === `/admin/${params.slug}/customers`,
     },
     {
-      href: `/admin/${params.restaurantId}/menu`,
+      href: `/admin/${params.slug}/menu`,
       label: "Menu",
-      active:
-        pathname === `/admin/${params.restaurantId}/menu`,
+      active: pathname === `/admin/${params.slug}/menu`,
     },
     {
-      href: `/admin/${params.restaurantId}/menu/create`,
+      href: `/admin/${params.slug}/menu/create`,
       label: "Add Menu",
       active:
-        pathname ===
-        `/admin/${params.restaurantId}/menu/create`,
+        pathname === `/admin/${params.slug}/menu/create`,
     },
   ];
 

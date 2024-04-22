@@ -19,7 +19,7 @@ export default async function PublicLayout({
   });
 
   if (checkRole("admin") && restaurant) {
-    redirect(`/admin/${restaurant.id}/dashboard`);
+    redirect(`/admin/${restaurant.slug}/dashboard`);
   }
 
   return (

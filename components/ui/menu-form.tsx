@@ -116,7 +116,7 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
           });
         }
       }
-      router.push(`/admin/${params.restaurantId}/menu`);
+      router.push(`/admin/${params.slug}/menu`);
       router.refresh();
     } catch (error) {
       console.log("[MENU_ERROR]", error);
