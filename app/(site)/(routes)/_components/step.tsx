@@ -25,7 +25,7 @@ const data = [
 
 const Step = () => {
   return (
-    <section className="mt-32">
+    <section className="mt-32 lg:mt-60">
       <div
         className="
           flex 

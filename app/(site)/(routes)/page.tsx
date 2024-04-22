@@ -1,5 +1,6 @@
 import Article from "./_components/article";
 import Featured from "./_components/featured";
+import Restaurants from "./_components/restaurants";
 import Step from "./_components/step";
 
 export default function Home() {
@@ -17,6 +18,7 @@ export default function Home() {
         <Featured />
       </article>
       <Step />
+      <Restaurants />
     </>
   );
 }
