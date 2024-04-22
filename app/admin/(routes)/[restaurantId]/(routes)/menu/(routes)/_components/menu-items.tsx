@@ -2,7 +2,7 @@
 
 import axios from "axios";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { Menu } from "@prisma/client";
 import {
   EyeOff,
@@ -16,6 +16,7 @@ import IconButton from "./icon-button";
 
 const MenuItems = ({ menu }: { menu: Menu[] }) => {
   const router = useRouter();
+  const params = useParams();
 
   const handleDelete = async (menuId: string) => {
     try {
@@ -100,7 +101,9 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 icon={SquarePen}
                 variant="danger"
                 onClick={() =>
-                  router.push(`/admin/menu/edit/${item.id}`)
+                  router.push(
+                    `/admin/${params.restaurantId}/menu/edit/${item.id}`
+                  )
                 }
               />
               <IconButton

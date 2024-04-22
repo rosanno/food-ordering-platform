@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import slugify from "slugify";
 
 import prisma from "@/lib/prisma";
 
@@ -12,6 +13,8 @@ export async function POST(request: NextRequest) {
     metaKeywords,
   } = await request.json();
 
+  const slug = slugify(menuName).toLowerCase();
+
   try {
     const menu = await prisma.menu.create({
       data: {
@@ -19,6 +22,7 @@ export async function POST(request: NextRequest) {
         price,
         discount,
         imageUrl,
+        slug,
         metaTitle,
         metaKeywords,
       },

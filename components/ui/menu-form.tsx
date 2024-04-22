@@ -7,7 +7,7 @@ import { DollarSign, Save, Scissors } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { Menu } from "@prisma/client";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import axios from "axios";
 
 import {
@@ -59,6 +59,8 @@ interface MenuFormProps {
 
 const MenuForm = ({ initialData }: MenuFormProps) => {
   const router = useRouter();
+  const params = useParams();
+
   const [loading, setLoading] = useState(false);
 
   const defaultValues = initialData
@@ -114,7 +116,7 @@ const MenuForm = ({ initialData }: MenuFormProps) => {
           });
         }
       }
-      router.push("/admin/menu");
+      router.push(`/admin/${params.restaurantId}/menu`);
       router.refresh();
     } catch (error) {
       console.log("[MENU_ERROR]", error);
