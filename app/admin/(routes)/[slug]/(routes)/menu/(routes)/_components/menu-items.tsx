@@ -102,7 +102,7 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 variant="danger"
                 onClick={() =>
                   router.push(
-                    `/admin/${params.slug}/menu/edit/${item.id}`
+                    `/admin/${params.slug}/menu/edit/${item.slug}`
                   )
                 }
               />

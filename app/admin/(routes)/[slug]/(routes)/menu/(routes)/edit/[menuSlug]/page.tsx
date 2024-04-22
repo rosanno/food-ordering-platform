@@ -5,11 +5,11 @@ import prisma from "@/lib/prisma";
 const UpdateMenuPage = async ({
   params,
 }: {
-  params: { menuId: string };
+  params: { menuSlug: string };
 }) => {
-  const menu = await prisma.menu.findUnique({
+  const menu = await prisma.menu.findFirst({
     where: {
-      id: params.menuId,
+      slug: params.menuSlug,
     },
   });
 
