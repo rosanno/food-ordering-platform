@@ -1,10 +1,9 @@
 import { UserButton, auth } from "@clerk/nextjs";
-import { IoIosSettings } from "react-icons/io";
 
-import { Button } from "@/components/ui/button";
 import RestaurantSwitcher from "@/components/restaurant-switcher";
 import MainNav from "@/components/main-nav";
 import prisma from "@/lib/prisma";
+import SettingsButton from "./settings-button";
 
 const DashboardNavbar = async () => {
   const { userId } = auth();
@@ -21,9 +20,7 @@ const DashboardNavbar = async () => {
         <RestaurantSwitcher items={restaunrants} />
         <MainNav />
         <div className="ml-auto flex items-center gap-2">
-          <Button variant={"ghost"} size={"icon"}>
-            <IoIosSettings className="text-[22px] text-gray-500" />
-          </Button>
+          <SettingsButton />
           <UserButton afterSignOutUrl="/sign-in" />
         </div>
       </div>
