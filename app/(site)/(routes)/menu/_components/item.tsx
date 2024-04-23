@@ -1,12 +1,12 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Heart } from "lucide-react";
 import { Menu } from "@prisma/client";
 
 import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 
 interface ItemProps {
   item: Menu;
@@ -27,7 +27,7 @@ const Item = ({ item }: ItemProps) => {
         mb-32
     "
     >
-      <Link href={`/details/${item.id}`}>
+      <Link href={`/menu/${item.slug}`}>
         <div className="flex items-center justify-center">
           <Image
             src={item.imageUrl!!}

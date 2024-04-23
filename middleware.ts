@@ -18,6 +18,7 @@ export default authMiddleware({
   publicRoutes: [
     "/",
     "/menu",
+    "/menu/:menuSlug",
     "/pricing",
     "/api/uploadthing",
   ],
