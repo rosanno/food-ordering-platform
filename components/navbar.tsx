@@ -82,7 +82,7 @@ export default function Navbar() {
             </nav>
             <div className="flex items-center gap-3.5">
               <Link href="/cart" className="relative">
-                <ShoppingCart className="h-5 w-5 text-yellow-500/85" />
+                <ShoppingCart className="h-[18px] w-[18px] text-yellow-500/85" />
               </Link>
               {isLoaded ? (
                 <>
