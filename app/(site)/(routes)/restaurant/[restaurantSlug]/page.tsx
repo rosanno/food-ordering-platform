@@ -16,7 +16,18 @@ const RestaurantDetailsPage = async ({
     },
   });
 
-  const menu = await prisma.menu.findMany({});
+  const menu = await prisma.menu.findMany({
+    where: {
+      OR: [
+        {
+          menuName: {
+            contains: searchParams?.query?.toString() || "",
+            mode: "insensitive",
+          },
+        },
+      ],
+    },
+  });
 
   return (
     <>
