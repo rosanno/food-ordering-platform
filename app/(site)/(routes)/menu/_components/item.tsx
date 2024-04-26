@@ -4,6 +4,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
 import { Menu } from "@prisma/client";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -13,6 +15,23 @@ interface ItemProps {
 }
 
 const Item = ({ item }: ItemProps) => {
+  const router = useRouter();
+  const { isSignedIn } = useAuth();
+
+  const handleOrder = async () => {
+    if (!isSignedIn) {
+      router.push("/sign-in");
+    } else {
+    }
+  };
+
+  const handleFavorite = async () => {
+    if (!isSignedIn) {
+      router.push("/sign-in");
+    } else {
+    }
+  };
+
   return (
     <div
       className="
@@ -71,7 +90,7 @@ const Item = ({ item }: ItemProps) => {
           size={"sm"}
           variant={"outline"}
           className="w-full flex-1"
-          onClick={(e) => e.preventDefault()}
+          onClick={handleOrder}
         >
           Order
         </Button>
@@ -79,6 +98,7 @@ const Item = ({ item }: ItemProps) => {
           size={"icon"}
           variant={"outline"}
           className="rounded-full"
+          onClick={handleFavorite}
         >
           <Heart className="h-5 w-5" />
         </Button>
