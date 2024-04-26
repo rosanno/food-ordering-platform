@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
-import { Menu } from "lucide-react";
+import { Menu, ShoppingCart } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import ButtonLink from "./ui/button-link";
@@ -80,7 +80,10 @@ export default function Navbar() {
                 ))}
               </ul>
             </nav>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3.5">
+              <Link href="/cart" className="relative">
+                <ShoppingCart className="h-5 w-5 text-yellow-500/85" />
+              </Link>
               {isLoaded ? (
                 <>
                   {isSignedIn ? (
