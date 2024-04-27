@@ -21,7 +21,7 @@ const Footer = () => {
         <div className="flex flex-col md:flex-row justify-between">
           <div>
             <Logo />
-            <div className="space-y-2.5 mt-3">
+            <div className="space-y-2.5 mt-5">
               <p className="text-muted-foreground text-[13px]">
                 7 days a Week (10:00 am - 8:00 pm)
               </p>
@@ -45,7 +45,7 @@ const Footer = () => {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-x-10 mt-10 md:mt-0">
             <div>
-              <h3 className="text-sm font-medium mb-5">
+              <h3 className="text-sm font-medium mb-3.5">
                 Quick Links
               </h3>
               {quickLinks.map((item, _) => (
@@ -58,7 +58,7 @@ const Footer = () => {
               ))}
             </div>
             <div>
-              <h3 className="text-sm font-medium mb-5">
+              <h3 className="text-sm font-medium mb-3.5">
                 Help Center
               </h3>
               {helpCenter.map((item, i) => (
@@ -71,7 +71,7 @@ const Footer = () => {
               ))}
             </div>
             <div className="mt-5 md:mt-0">
-              <h3 className="text-sm font-medium mb-5">
+              <h3 className="text-sm font-medium mb-3.5">
                 Payment Methods
               </h3>
               {paymentMethods.map((item, i) => (
@@ -79,7 +79,7 @@ const Footer = () => {
               ))}
             </div>
             <div className="mt-5 md:mt-0">
-              <h3 className="text-sm font-medium mb-5">
+              <h3 className="text-sm font-medium mb-3.5">
                 Contact Info
               </h3>
               {contactInfo.map((item, i) => (

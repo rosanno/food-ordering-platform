@@ -24,7 +24,7 @@ const FooterLinks = ({
       return (
         <Link
           href={href as string}
-          className="text-[13px] text-muted-foreground block py-1.5"
+          className="text-[13px] text-muted-foreground block py-1"
         >
           {label}
         </Link>
@@ -33,7 +33,7 @@ const FooterLinks = ({
       return (
         <div
           className={cn(
-            "text-[13px] text-muted-foreground py-1.5",
+            "text-[13px] text-muted-foreground py-1",
             Icon && "flex items-center"
           )}
         >
