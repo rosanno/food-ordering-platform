@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import prisma from "@/lib/prisma";
 import Navbar from "@/components/navbar";
 import { checkRole } from "@/utils/roles";
+import Footer from "@/components/footer";
 
 export default async function PublicLayout({
   children,
@@ -28,6 +29,7 @@ export default async function PublicLayout({
       <main className="px-2 md:px-2.5 w-full max-w-6xl mx-auto mt-16">
         {children}
       </main>
+      <Footer />
     </>
   );
 }
