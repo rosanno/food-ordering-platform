@@ -6,7 +6,7 @@ const Restaurants = async () => {
   const restaurants = await prisma.restaurant.findMany();
 
   return (
-    <section className="mt-32 lg:mt-60 lg:px-16">
+    <section className="mt-32 lg:mt-60 lg:px-2">
       <div className="text-center">
         <h4 className="text-2xl font-semibold">
           Nearby Retaurants
