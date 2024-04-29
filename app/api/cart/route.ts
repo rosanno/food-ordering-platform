@@ -1,6 +1,6 @@
-import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs";
 import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@clerk/nextjs";
+import prisma from "@/lib/prisma";
 
 export async function POST(req: NextRequest) {
   try {
@@ -31,7 +31,7 @@ export async function POST(req: NextRequest) {
         },
       });
     } else {
-      const res = await prisma.cartItem.update({
+      await prisma.cartItem.update({
         where: {
           id: existingItem.id,
         },
@@ -39,8 +39,6 @@ export async function POST(req: NextRequest) {
           quantity: existingItem.quantity + data.quantity,
         },
       });
-
-      console.log(res);
     }
 
     return NextResponse.json({

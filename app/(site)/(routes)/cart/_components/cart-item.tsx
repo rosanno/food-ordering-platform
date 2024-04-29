@@ -1,7 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/lib/utils";
 import {
   Cart,
   CartItem as Item,
@@ -10,6 +8,9 @@ import {
 } from "@prisma/client";
 import { Minus, Plus, Trash } from "lucide-react";
 import Image from "next/image";
+import { formatCurrency } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
 
 interface ItemWithMenu extends Item {
   menu: Menu & { restaurant: Restaurant | null };
