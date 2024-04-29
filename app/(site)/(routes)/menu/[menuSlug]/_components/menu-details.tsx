@@ -1,13 +1,17 @@
 "use client";
 
 import Image from "next/image";
+import axios from "axios";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { Heart } from "lucide-react";
+import { useAuth } from "@clerk/nextjs";
 import { Menu, Restaurant } from "@prisma/client";
 import { GoStarFill } from "react-icons/go";
 import { formatCurrency } from "@/lib/utils";
 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
-import { Heart } from "lucide-react";
 
 interface MenuDetailsProps {
   item:
@@ -18,6 +22,30 @@ interface MenuDetailsProps {
 }
 
 const MenuDetails = ({ item }: MenuDetailsProps) => {
+  const [loading, setLoading] = useState<boolean>(false);
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
+
+  const handleOrder = async () => {
+    try {
+      if (!isSignedIn) {
+        router.push("/sign-in");
+      } else {
+        setLoading(true);
+        const data = { menuId: item?.id, quantity: 1 };
+        const response = await axios.post("/api/cart", {
+          data,
+        });
+
+        console.log(response);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <section className="bg-gray-100/45 rounded-md shadow-sm md:p-4">
       <div className="flex md:items-center flex-col md:flex-row lg:gap-10">
@@ -66,6 +94,8 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
             <Button
               variant={"outline"}
               className="w-full md:w-72"
+              onClick={handleOrder}
+              disabled={loading}
             >
               Order now
             </Button>
