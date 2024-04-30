@@ -14,11 +14,7 @@ export async function POST(req: NextRequest) {
       include: { items: true },
     });
 
-    const existingItem = cart?.items.find(
-      (item) => item.menuId === data.menuId
-    );
-
-    if (!existingItem || !cart) {
+    if (!cart) {
       await prisma.cart.create({
         data: {
           customerId: userId as string,
@@ -28,6 +24,24 @@ export async function POST(req: NextRequest) {
               quantity: data.quantity,
             },
           },
+        },
+      });
+
+      return NextResponse.json({
+        message: "Added to cart.",
+      });
+    }
+
+    const existingItem = cart?.items.find(
+      (item) => item.menuId === data.menuId
+    );
+
+    if (!existingItem) {
+      await prisma.cartItem.create({
+        data: {
+          cartId: cart.id,
+          menuId: data.menuId,
+          quantity: data.quantity,
         },
       });
     } else {
