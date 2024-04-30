@@ -16,7 +16,7 @@ import FooterLinks from "./footer-links";
 
 const Footer = () => {
   return (
-    <footer className="mt-32">
+    <footer className="mt-32 border-t pt-10">
       <div className="px-2 md:px-2.5 w-full max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between">
           <div>
