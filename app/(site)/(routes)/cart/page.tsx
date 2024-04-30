@@ -27,7 +27,7 @@ const CartPage = async () => {
   return (
     <div className="mt-32 grid grid-cols-12 gap-5">
       <CartItem cart={cart} />
-      <OrderSummary />
+      <OrderSummary cart={cart} />
     </div>
   );
 };
