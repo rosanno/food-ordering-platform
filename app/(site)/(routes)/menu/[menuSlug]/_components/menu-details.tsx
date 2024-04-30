@@ -8,6 +8,7 @@ import { Heart } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import { Menu, Restaurant } from "@prisma/client";
 import { GoStarFill } from "react-icons/go";
+import { toast } from "sonner";
 import { formatCurrency } from "@/lib/utils";
 
 import { Separator } from "@/components/ui/separator";
@@ -37,10 +38,11 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
           data,
         });
 
-        console.log(response);
+        toast.success(response.data.message);
+        router.refresh();
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong.");
     } finally {
       setLoading(false);
     }
