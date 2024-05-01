@@ -3,13 +3,12 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
+import { useSideNav } from "@/hooks/use-side-nav";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./ui/button";
 
 interface MobileNavProps {
-  isOpen: boolean;
-  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   menuList: MenuList[];
 }
 
@@ -18,11 +17,8 @@ interface MenuList {
   label: string;
 }
 
-const MobileNav = ({
-  isOpen,
-  setIsOpen,
-  menuList,
-}: MobileNavProps) => {
+const MobileNav = ({ menuList }: MobileNavProps) => {
+  const sideNav = useSideNav();
   const pathname = usePathname();
 
   return (
@@ -30,14 +26,16 @@ const MobileNav = ({
       <aside
         className={cn(
           "w-2/3 bg-white shadow-md fixed inset-y-0 right-0 z-50 transition duration-300 p-3",
-          isOpen ? "translate-x-0" : "translate-x-full"
+          sideNav.isOpen
+            ? "translate-x-0"
+            : "translate-x-full"
         )}
       >
         <div>
           <Button
             size={"icon"}
             variant={"outline"}
-            onClick={() => setIsOpen(false)}
+            onClick={() => sideNav.onOpen()}
           >
             <X className="h-5 w-5" />
           </Button>
@@ -53,7 +51,7 @@ const MobileNav = ({
                     pathname === item.path &&
                       "text-yellow-600"
                   )}
-                  onClick={() => setIsOpen(false)}
+                  onClick={() => sideNav.onClose()}
                 >
                   {item.label}
                 </Link>
@@ -64,10 +62,10 @@ const MobileNav = ({
         </div>
       </aside>
       <div
-        onClick={() => setIsOpen(false)}
+        onClick={() => sideNav.onClose()}
         className={cn(
           "fixed w-full h-full top-0 bg-black/40 backdrop-blur-md z-40 transition duration-300",
-          isOpen ? "block" : "hidden"
+          sideNav.isOpen ? "block" : "hidden"
         )}
       />
     </>

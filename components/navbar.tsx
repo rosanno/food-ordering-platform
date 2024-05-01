@@ -1,40 +1,28 @@
-"use client";
-
 import Link from "next/link";
-import { useState } from "react";
-import { usePathname } from "next/navigation";
-import { UserButton, useUser } from "@clerk/nextjs";
-import { Menu, ShoppingCart } from "lucide-react";
-import { cn } from "@/lib/utils";
+import { auth } from "@clerk/nextjs";
+import { ShoppingCart } from "lucide-react";
+import { MenuList } from "@/constants";
 
-import ButtonLink from "./ui/button-link";
 import MobileNav from "./mobile-nav";
-import { Skeleton } from "./ui/skeleton";
-import { Button } from "./ui/button";
+import MainNavigation from "./main-navigation";
+import Avatar from "./avatar";
+import prisma from "@/lib/prisma";
+import HamburgerButton from "./hamburger-button";
 
-const MenuList = [
-  {
-    path: "/",
-    label: "Home",
-  },
-  {
-    path: "/menu",
-    label: "Menu",
-  },
-  {
-    path: "/booking",
-    label: "Booking",
-  },
-  {
-    path: "/pricing",
-    label: "Pricing",
-  },
-];
+export default async function Navbar() {
+  const { userId } = auth();
 
-export default function Navbar() {
-  const pathname = usePathname();
-  const { isSignedIn, isLoaded } = useUser();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const user = await prisma.cart.findFirst({
+    where: {
+      customerId: userId as string,
+    },
+  });
+
+  const cartItem = await prisma.cartItem.findMany({
+    where: {
+      cartId: user?.id,
+    },
+  });
 
   return (
     <>
@@ -62,61 +50,37 @@ export default function Navbar() {
               Good
               <span className="text-[#FF9E0A]">Food</span>
             </Link>
-            <nav className="hidden sm:block">
-              <ul className="flex items-center space-x-10">
-                {MenuList.map((list, i) => (
-                  <li
-                    key={i}
-                    className={cn(
-                      "text-[13px] hover:text-yellow-600 transition-colors duration-300",
-                      pathname === list.path &&
-                        "text-yellow-600"
-                    )}
-                  >
-                    <Link href={list.path}>
-                      {list.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+            <MainNavigation />
             <div className="flex items-center gap-3.5">
-              <Link href="/cart" className="relative">
-                <ShoppingCart className="h-[18px] w-[18px] text-yellow-500/85" />
+              <Link href="/cart">
+                <div className="relative">
+                  <span
+                    className="
+                      absolute 
+                      -top-2.5 
+                      -right-2 
+                      text-center 
+                      text-[12px] 
+                      bg-yellow-500 
+                      rounded-full 
+                      w-4 
+                      h-4
+                    "
+                  >
+                    {cartItem.length}
+                  </span>
+                  <ShoppingCart className="h-[18px] w-[18px] text-yellow-500/85" />
+                </div>
               </Link>
-              {isLoaded ? (
-                <>
-                  {isSignedIn ? (
-                    <>
-                      <UserButton afterSignOutUrl="/" />
-                    </>
-                  ) : (
-                    <ButtonLink href="/sign-in">
-                      Sign in
-                    </ButtonLink>
-                  )}
-                </>
-              ) : (
-                <Skeleton className="h-8 w-8 rounded-full bg-gray-300/55" />
-              )}
+              <Avatar />
               <div className="block sm:hidden">
-                <Button
-                  size={"icon"}
-                  variant={"outline"}
-                  onClick={() => setIsOpen(true)}
-                >
-                  <Menu className="h-4 w-4" />
-                </Button>
+                <HamburgerButton />
               </div>
             </div>
           </div>
         </div>
       </header>
-      <MobileNav
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        menuList={MenuList}
-      />
+      <MobileNav menuList={MenuList} />
     </>
   );
 }
