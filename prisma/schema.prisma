@@ -41,7 +41,7 @@ model Menu {
   restaurantId String      @db.ObjectId
   orderItem    OrderItem[]
   cartItem     CartItem[]
-  Favorite     Favorite[]
+  favorite     Favorite[]
 
   createdAt    DateTime   @default(now())
   updatedAt    DateTime   @updatedAt
