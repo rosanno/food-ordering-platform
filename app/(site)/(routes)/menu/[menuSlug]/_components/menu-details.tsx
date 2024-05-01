@@ -29,14 +29,37 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
 
   const handleOrder = async () => {
     try {
+      setLoading(true);
       if (!isSignedIn) {
         router.push("/sign-in");
       } else {
-        setLoading(true);
         const data = { menuId: item?.id, quantity: 1 };
         const response = await axios.post("/api/cart", {
           data,
         });
+
+        toast.success(response.data.message);
+        router.refresh();
+      }
+    } catch (error) {
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFavorite = async () => {
+    try {
+      setLoading(true);
+      if (!isSignedIn) {
+        router.push("/sign-in");
+      } else {
+        const response = await axios.post(
+          `/api/favorites`,
+          {
+            menuId: item?.id,
+          }
+        );
 
         toast.success(response.data.message);
         router.refresh();
@@ -101,7 +124,12 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
             >
               Order now
             </Button>
-            <Button size={"icon"} variant={"outline"}>
+            <Button
+              size={"icon"}
+              variant={"outline"}
+              disabled={loading}
+              onClick={handleFavorite}
+            >
               <Heart className="h-4 w-4" />
             </Button>
           </div>
