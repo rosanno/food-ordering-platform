@@ -14,12 +14,16 @@ interface ItemWithMenu extends CartItem {
 
 interface CustomerItemProps {
   item: ItemWithMenu;
+  loading: boolean;
   updateQuantity: (menuId: string, qty: number) => void;
+  deleteCartItem: (menuId: string) => void;
 }
 
 const CustomerItem = ({
   item,
+  loading,
   updateQuantity,
+  deleteCartItem,
 }: CustomerItemProps) => {
   const [quantity, setQuantity] = useState(item.quantity);
 
@@ -71,7 +75,7 @@ const CustomerItem = ({
           >
             <button
               onClick={() => updateQty()}
-              disabled={quantity <= 1}
+              disabled={quantity <= 1 || loading}
               className="bg-gray-100 py-1.5 px-1 rounded-tl-md rounded-bl-md overflow-hidden"
             >
               <Minus className="h-3.5 w-3.5 text-[#EBB535]" />
@@ -84,6 +88,7 @@ const CustomerItem = ({
             />
             <button
               onClick={() => updateQty(true)}
+              disabled={loading}
               className="bg-gray-100 py-1.5 px-1 rounded-tr-md rounded-br-md overflow-hidden"
             >
               <Plus className="h-3.5 w-3.5 text-[#EBB535]" />
@@ -108,6 +113,8 @@ const CustomerItem = ({
           className="mt-auto"
           size={"sm"}
           variant={"ghost"}
+          disabled={loading}
+          onClick={() => deleteCartItem(item.menuId)}
         >
           <span className="text-[12px] text-red-500">
             Delete

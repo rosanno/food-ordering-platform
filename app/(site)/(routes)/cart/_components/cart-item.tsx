@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import { useState } from "react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import {
@@ -26,12 +27,14 @@ interface CartItemProps {
 
 const CartItem = ({ cart }: CartItemProps) => {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   const updateQuantity = async (
     menuId: string,
     quantity: number
   ) => {
     try {
+      setLoading(true);
       await axios.patch(`/api/cart/${menuId}`, {
         quantity,
       });
@@ -39,6 +42,23 @@ const CartItem = ({ cart }: CartItemProps) => {
     } catch (error) {
       console.log(error);
       toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const deleteCartItem = async (menuId: string) => {
+    try {
+      setLoading(true);
+      await axios.delete(`/api/cart/${menuId}`);
+
+      toast.success("Item deleted");
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -52,7 +72,9 @@ const CartItem = ({ cart }: CartItemProps) => {
           <CustomerItem
             key={item.id}
             item={item}
+            loading={loading}
             updateQuantity={updateQuantity}
+            deleteCartItem={deleteCartItem}
           />
         ))}
       </div>
