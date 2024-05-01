@@ -94,7 +94,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="bg-[#FF9E0A] py-3.5 mt-10 md:mt-16">
-        <div className="flex items-center justify-between px-2 md:px-2.5 w-full max-w-5xl mx-auto">
+        <div className="flex items-center justify-between px-2 w-full max-w-6xl mx-auto">
           <p className="text-[13px] text-gray-100">
             &copy; 2024 GoodFood All rights reserved.
           </p>
