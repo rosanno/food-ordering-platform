@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
+import prisma from "@/lib/prisma";
 import { ShoppingCart } from "lucide-react";
 import { MenuList } from "@/constants";
 
 import MobileNav from "./mobile-nav";
 import MainNavigation from "./main-navigation";
 import Avatar from "./avatar";
-import prisma from "@/lib/prisma";
 import HamburgerButton from "./hamburger-button";
 
 export default async function Navbar() {
