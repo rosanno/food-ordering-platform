@@ -12,17 +12,21 @@ import HamburgerButton from "./hamburger-button";
 export default async function Navbar() {
   const { userId } = auth();
 
-  const user = await prisma.cart.findFirst({
-    where: {
-      customerId: userId as string,
-    },
-  });
+  let cartItem = [];
 
-  const cartItem = await prisma.cartItem.findMany({
-    where: {
-      cartId: user?.id,
-    },
-  });
+  if (userId) {
+    const user = await prisma.cart.findFirst({
+      where: {
+        customerId: userId as string,
+      },
+    });
+
+    cartItem = await prisma.cartItem.findMany({
+      where: {
+        cartId: user?.id,
+      },
+    });
+  }
 
   return (
     <>
@@ -54,8 +58,9 @@ export default async function Navbar() {
             <div className="flex items-center gap-3.5">
               <Link href="/cart">
                 <div className="relative">
-                  <span
-                    className="
+                  {userId && (
+                    <span
+                      className="
                       absolute 
                       -top-2.5 
                       -right-2 
@@ -66,9 +71,10 @@ export default async function Navbar() {
                       w-4 
                       h-4
                     "
-                  >
-                    {cartItem.length}
-                  </span>
+                    >
+                      {cartItem.length}
+                    </span>
+                  )}
                   <ShoppingCart className="h-[18px] w-[18px] text-yellow-500/85" />
                 </div>
               </Link>
