@@ -1,16 +1,16 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
+import { useState } from "react";
 import { usePathname } from "next/navigation";
 import { UserButton, useUser } from "@clerk/nextjs";
 import { Menu, ShoppingCart } from "lucide-react";
-
 import { cn } from "@/lib/utils";
+
 import ButtonLink from "./ui/button-link";
+import MobileNav from "./mobile-nav";
 import { Skeleton } from "./ui/skeleton";
 import { Button } from "./ui/button";
-import MobileNav from "./mobile-nav";
 
 const MenuList = [
   {
