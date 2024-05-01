@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/prisma";
-import { ShoppingCart } from "lucide-react";
+import { Heart, ShoppingCart } from "lucide-react";
 import { MenuList } from "@/constants";
 
 import MobileNav from "./mobile-nav";
@@ -56,6 +56,9 @@ export default async function Navbar() {
             </Link>
             <MainNavigation />
             <div className="flex items-center gap-3.5">
+              <Link href="/favorites">
+                <Heart className="h-[18px] w-[18px] text-yellow-500/85" />
+              </Link>
               <Link href="/cart">
                 <div className="relative">
                   {userId && (
