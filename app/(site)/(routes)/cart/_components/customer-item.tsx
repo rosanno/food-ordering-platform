@@ -14,10 +14,30 @@ interface ItemWithMenu extends CartItem {
 
 interface CustomerItemProps {
   item: ItemWithMenu;
+  updateQuantity: (menuId: string, qty: number) => void;
 }
 
-const CustomerItem = ({ item }: CustomerItemProps) => {
+const CustomerItem = ({
+  item,
+  updateQuantity,
+}: CustomerItemProps) => {
   const [quantity, setQuantity] = useState(item.quantity);
+
+  const updateQty = (increase?: boolean) => {
+    if (increase) {
+      setQuantity((prevQty) => {
+        const newQty = prevQty + 1;
+        updateQuantity(item.menuId, newQty);
+        return newQty;
+      });
+    } else {
+      setQuantity((prevQty) => {
+        const newQty = prevQty - 1;
+        updateQuantity(item.menuId, newQty);
+        return newQty;
+      });
+    }
+  };
 
   return (
     <div className="border rounded-md px-3.5 py-3 flex justify-between">
@@ -44,17 +64,15 @@ const CustomerItem = ({ item }: CustomerItemProps) => {
               items-center 
               border 
               border-[#FF9E0A] 
-              w-max px-2 
-              py-0.5 
+              w-max  
               rounded-md 
               mt-3
           "
           >
             <button
-              onClick={() =>
-                setQuantity((prevQty) => prevQty - 1)
-              }
+              onClick={() => updateQty()}
               disabled={quantity <= 1}
+              className="bg-gray-100 py-1.5 px-1 rounded-tl-md rounded-bl-md overflow-hidden"
             >
               <Minus className="h-3.5 w-3.5 text-[#EBB535]" />
             </button>
@@ -65,9 +83,8 @@ const CustomerItem = ({ item }: CustomerItemProps) => {
               className="text-center w-8 outline-none text-sm"
             />
             <button
-              onClick={() =>
-                setQuantity((prevQty) => prevQty + 1)
-              }
+              onClick={() => updateQty(true)}
+              className="bg-gray-100 py-1.5 px-1 rounded-tr-md rounded-br-md overflow-hidden"
             >
               <Plus className="h-3.5 w-3.5 text-[#EBB535]" />
             </button>
