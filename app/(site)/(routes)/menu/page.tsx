@@ -19,7 +19,7 @@ const MenuPage = async () => {
           lg:grid-cols-4
           gap-10
           sm:gap-6 
-          md:gap-5
+          md:gap-7
         "
       >
         {menu.map((item) => (
