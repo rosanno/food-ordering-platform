@@ -6,10 +6,10 @@ import { Heart } from "lucide-react";
 import { Favorite, Menu } from "@prisma/client";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-
-import { formatCurrency } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
 import { IoIosHeart } from "react-icons/io";
+import { formatCurrency } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
 
 interface ItemProps {
   item:
@@ -111,7 +111,7 @@ const Item = ({ item }: ItemProps) => {
             className="rounded-full"
             onClick={handleFavorite}
           >
-            <Heart className="h-5 w-5" />
+            <Heart className="h-5 w-5 text-yellow-500" />
           </Button>
         ) : (
           <Button
