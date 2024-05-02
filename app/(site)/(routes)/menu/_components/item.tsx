@@ -3,20 +3,29 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
-import { Menu } from "@prisma/client";
+import { Favorite, Menu } from "@prisma/client";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 
 import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { IoIosHeart } from "react-icons/io";
 
 interface ItemProps {
-  item: Menu;
+  item:
+    | (Menu & {
+        favorite: Favorite[];
+      })
+    | null;
 }
 
 const Item = ({ item }: ItemProps) => {
   const router = useRouter();
   const { isSignedIn } = useAuth();
+
+  const isFavorite = item?.favorite.findIndex(
+    (fav) => fav.menuId === item.id
+  );
 
   const handleOrder = async () => {
     if (!isSignedIn) {
@@ -46,11 +55,11 @@ const Item = ({ item }: ItemProps) => {
         mb-32
     "
     >
-      <Link href={`/menu/${item.slug}`}>
+      <Link href={`/menu/${item?.slug}`}>
         <div className="flex items-center justify-center">
           <Image
-            src={item.imageUrl!!}
-            alt={item.menuName}
+            src={item?.imageUrl as string}
+            alt={item?.menuName as string}
             height={350}
             width={350}
             className="
@@ -63,7 +72,7 @@ const Item = ({ item }: ItemProps) => {
         </div>
         <div className="space-y-3 mt-4">
           <h4 className="truncate text-sm capitalize">
-            {item.menuName}
+            {item?.menuName}
           </h4>
           <p
             className="
@@ -72,7 +81,8 @@ const Item = ({ item }: ItemProps) => {
               font-medium
             "
           >
-            {formatCurrency(parseInt(item.price), "PHP")}
+            {item &&
+              formatCurrency(parseInt(item.price), "PHP")}
           </p>
         </div>
       </Link>
@@ -94,14 +104,25 @@ const Item = ({ item }: ItemProps) => {
         >
           Order
         </Button>
-        <Button
-          size={"icon"}
-          variant={"outline"}
-          className="rounded-full"
-          onClick={handleFavorite}
-        >
-          <Heart className="h-5 w-5" />
-        </Button>
+        {isFavorite ? (
+          <Button
+            size={"icon"}
+            variant={"outline"}
+            className="rounded-full"
+            onClick={handleFavorite}
+          >
+            <Heart className="h-5 w-5" />
+          </Button>
+        ) : (
+          <Button
+            size={"icon"}
+            variant={"outline"}
+            className="rounded-full"
+            onClick={handleFavorite}
+          >
+            <IoIosHeart className="text-yellow-500 text-xl" />
+          </Button>
+        )}
       </div>
     </div>
   );
