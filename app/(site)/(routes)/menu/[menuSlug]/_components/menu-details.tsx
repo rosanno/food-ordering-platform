@@ -11,6 +11,7 @@ import { GoStarFill } from "react-icons/go";
 import { IoIosHeart } from "react-icons/io";
 import { toast } from "sonner";
 import { formatCurrency } from "@/lib/utils";
+import useFavoriteHandler from "@/hooks/use-favorite-handler";
 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
@@ -27,7 +28,13 @@ interface MenuDetailsProps {
 const MenuDetails = ({ item }: MenuDetailsProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { isSignedIn } = useAuth();
+
   const router = useRouter();
+  const handleFavorite = useFavoriteHandler(
+    item,
+    isSignedIn,
+    setLoading
+  );
 
   const isFavorite = item?.favorite.findIndex(
     (fav) => fav.menuId === item.id
@@ -43,29 +50,6 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
         const response = await axios.post("/api/cart", {
           data,
         });
-
-        toast.success(response.data.message);
-        router.refresh();
-      }
-    } catch (error) {
-      toast.error("Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const handleFavorite = async () => {
-    try {
-      setLoading(true);
-      if (!isSignedIn) {
-        router.push("/sign-in");
-      } else {
-        const response = await axios.post(
-          `/api/favorites`,
-          {
-            menuId: item?.id,
-          }
-        );
 
         toast.success(response.data.message);
         router.refresh();
