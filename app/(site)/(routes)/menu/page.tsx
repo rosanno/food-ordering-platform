@@ -1,12 +1,9 @@
 import prisma from "@/lib/prisma";
+
 import Item from "./_components/item";
 
 const MenuPage = async () => {
-  const menu = await prisma.menu.findMany({
-    include: {
-      favorite: true,
-    },
-  });
+  const menu = await prisma.menu.findMany({});
 
   return (
     <section className="mt-64">

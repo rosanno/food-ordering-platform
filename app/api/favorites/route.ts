@@ -13,16 +13,10 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    await prisma.favorite.create({
-      data: {
-        customerId: userId,
-        menuId,
-      },
+    return NextResponse.json({
+      message: "Added to favorite",
     });
 
-    return NextResponse.json({
-      message: "Added to favorites",
-    });
   } catch (error) {
     console.log("[FAVORITES_POST]", error);
     return new NextResponse("Internal error", {

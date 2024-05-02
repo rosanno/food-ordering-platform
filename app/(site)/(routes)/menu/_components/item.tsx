@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
-import { Favorite, Menu } from "@prisma/client";
+import {  Menu } from "@prisma/client";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { IoIosHeart } from "react-icons/io";
@@ -12,20 +12,12 @@ import { formatCurrency } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 
 interface ItemProps {
-  item:
-    | (Menu & {
-        favorite: Favorite[];
-      })
-    | null;
+  item: Menu | null;
 }
 
 const Item = ({ item }: ItemProps) => {
   const router = useRouter();
   const { isSignedIn } = useAuth();
-
-  const isFavorite = item?.favorite.findIndex(
-    (fav) => fav.menuId === item.id
-  );
 
   const handleOrder = async () => {
     if (!isSignedIn) {
@@ -104,25 +96,14 @@ const Item = ({ item }: ItemProps) => {
         >
           Order
         </Button>
-        {isFavorite ? (
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            className="rounded-full"
-            onClick={handleFavorite}
-          >
-            <Heart className="h-5 w-5 text-yellow-500" />
-          </Button>
-        ) : (
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            className="rounded-full"
-            onClick={handleFavorite}
-          >
-            <IoIosHeart className="text-yellow-500 text-xl" />
-          </Button>
-        )}
+        <Button
+          size={"icon"}
+          variant={"outline"}
+          className="rounded-full"
+          onClick={handleFavorite}
+        >
+          <Heart className="h-5 w-5 text-yellow-500" />
+        </Button>
       </div>
     </div>
   );
