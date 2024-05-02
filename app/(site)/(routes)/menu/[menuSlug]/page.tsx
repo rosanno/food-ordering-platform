@@ -1,4 +1,6 @@
+import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/prisma";
+
 import MenuDetails from "./_components/menu-details";
 
 const MenuDetailsPage = async ({
@@ -6,14 +8,17 @@ const MenuDetailsPage = async ({
 }: {
   params: { menuSlug: string };
 }) => {
+  const { userId } = auth();
+
   const menu = await prisma.menu.findFirst({
     where: {
       slug: params.menuSlug,
     },
     include: {
-      restaurant: {
-        select: {
-          name: true,
+      restaurant: true,
+      favorite: {
+        where: {
+          customerId: userId as string,
         },
       },
     },

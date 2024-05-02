@@ -1,5 +1,5 @@
-import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs";
+import prisma from "@/lib/prisma";
 
 const FavoritePage = async () => {
   const { userId } = auth();

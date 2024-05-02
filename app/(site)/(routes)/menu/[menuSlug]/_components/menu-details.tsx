@@ -6,8 +6,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Heart } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
-import { Menu, Restaurant } from "@prisma/client";
+import { Favorite, Menu, Restaurant } from "@prisma/client";
 import { GoStarFill } from "react-icons/go";
+import { IoIosHeart } from "react-icons/io";
 import { toast } from "sonner";
 import { formatCurrency } from "@/lib/utils";
 
@@ -18,6 +19,7 @@ interface MenuDetailsProps {
   item:
     | (Menu & {
         restaurant: Restaurant | any;
+        favorite: Favorite[];
       })
     | null;
 }
@@ -26,6 +28,10 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
   const [loading, setLoading] = useState<boolean>(false);
   const { isSignedIn } = useAuth();
   const router = useRouter();
+
+  const isFavorite = item?.favorite.findIndex(
+    (fav) => fav.menuId === item.id
+  );
 
   const handleOrder = async () => {
     try {
@@ -124,14 +130,25 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
             >
               Order now
             </Button>
-            <Button
-              size={"icon"}
-              variant={"outline"}
-              disabled={loading}
-              onClick={handleFavorite}
-            >
-              <Heart className="h-4 w-4" />
-            </Button>
+            {isFavorite ? (
+              <Button
+                size={"icon"}
+                variant={"outline"}
+                disabled={loading}
+                onClick={handleFavorite}
+              >
+                <Heart className="h-4 w-4" />
+              </Button>
+            ) : (
+              <Button
+                size={"icon"}
+                variant={"outline"}
+                disabled={loading}
+                onClick={() => {}}
+              >
+                <IoIosHeart className="text-yellow-500 text-xl" />
+              </Button>
+            )}
           </div>
         </div>
       </div>
