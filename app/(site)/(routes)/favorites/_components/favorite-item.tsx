@@ -29,7 +29,7 @@ const FavoriteItem = ({
   favoriteItem,
 }: FavoriteItemProps) => {
   return (
-    <div className="flex bg-gray-100/50 p-2.5 relative">
+    <div className="flex bg-gray-100/50 p-2.5">
       <Link
         href={`/menu/${favoriteItem?.menu.slug}`}
         className="block w-full"
