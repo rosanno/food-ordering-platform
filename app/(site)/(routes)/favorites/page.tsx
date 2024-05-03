@@ -9,7 +9,11 @@ const FavoritePage = async () => {
       customerId: userId as string,
     },
     include: {
-      menu: true,
+      favoriteItem: {
+        include: {
+          menu: true,
+        },
+      },
     },
   });
 
