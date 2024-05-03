@@ -12,6 +12,7 @@ export async function PATCH(
     imageUrl,
     metaTitle,
     metaKeywords,
+    description,
   } = await request.json();
 
   try {
@@ -26,6 +27,7 @@ export async function PATCH(
         imageUrl,
         metaTitle,
         metaKeywords,
+        description,
       },
     });
 
