@@ -37,7 +37,7 @@ const IconButton = ({
       <button onClick={onClick} className={styles}>
         <Icon className="h-3 w-3" />
       </button>
-      <small className="font-[300] text-[12px]">
+      <small className="font-[300] text-[11px]">
         {label}
       </small>
     </div>
