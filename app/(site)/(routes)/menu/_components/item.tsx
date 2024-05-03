@@ -76,6 +76,8 @@ const Item = ({ item }: ItemProps) => {
             -mt-32
             w-full
             h-full
+            md:w-48
+            md:h-48
             object-contain
           "
           />
