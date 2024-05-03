@@ -75,7 +75,7 @@ const FavoriteItem = ({
           <Trash2 className="h-4 w-4 text-red-500" />
         </Button>
         <Button variant={"outline"} size={"icon"}>
-          <ShoppingCart className="h-4 w-4" />
+          <ShoppingCart className="h-4 w-4 text-[#FFB500]" />
         </Button>
       </div>
     </div>
