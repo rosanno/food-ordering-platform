@@ -14,7 +14,7 @@ datasource db {
 }
 
 model Restaurant {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
   ownerId   String
   name      String
   country   String
@@ -22,13 +22,13 @@ model Restaurant {
   slug      String
   imageUrl  String
   menu      Menu[]
-
+  
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Menu {
-  id           String      @id @default(auto()) @map("_id") @db.ObjectId
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
   menuName     String
   price        String
   discount     String?
@@ -37,13 +37,14 @@ model Menu {
   slug         String
   metaTitle    String
   metaKeywords String
-  restaurant   Restaurant? @relation(fields: [restaurantId], references: [id])
-  restaurantId String      @db.ObjectId
+  restaurant   Restaurant?    @relation(fields: [restaurantId], references: [id])
+  restaurantId String         @db.ObjectId
   orderItem    OrderItem[]
   cartItem     CartItem[]
-  
-  createdAt    DateTime    @default(now())
-  updatedAt    DateTime    @updatedAt
+  favoriteItem FavoriteItem[]
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
 }
 
 model Order {
@@ -53,6 +54,7 @@ model Order {
   orderItems  OrderItem[]
   status      Status
   totalAmount Int
+
   createdAt   DateTime    @default(now())
 }
 
@@ -80,6 +82,23 @@ model CartItem {
   menu     Menu   @relation(fields: [menuId], references: [id])
   menuId   String @db.ObjectId
   quantity Int    @default(1)
+}
+
+model Favorite {
+  id           String         @id @default(auto()) @map("_id") @db.ObjectId
+  customerId   String
+  favoriteItem FavoriteItem[]
+
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model FavoriteItem {
+  id         String    @id @default(auto()) @map("_id") @db.ObjectId
+  favorite   Favorite  @relation(fields: [favoriteId], references: [id])
+  favoriteId String    @db.ObjectId
+  menu       Menu      @relation(fields: [menuId], references: [id])
+  menuId     String    @db.ObjectId
 }
 
 enum Status {
