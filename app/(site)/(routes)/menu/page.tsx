@@ -3,7 +3,15 @@ import prisma from "@/lib/prisma";
 import Item from "./_components/item";
 
 const MenuPage = async () => {
-  const menu = await prisma.menu.findMany({});
+  const menu = await prisma.menu.findMany({
+    include: {
+      favoriteItem: {
+        include: {
+          favorite: true,
+        },
+      },
+    },
+  });
 
   return (
     <section className="mt-64">

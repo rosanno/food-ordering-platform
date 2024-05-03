@@ -3,21 +3,39 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
-import {  Menu } from "@prisma/client";
+import {
+  Favorite,
+  FavoriteItem,
+  Menu,
+} from "@prisma/client";
+import { IoMdHeart } from "react-icons/io";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
-import { IoIosHeart } from "react-icons/io";
 import { formatCurrency } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 
+interface MenuWithFavoriteItem extends FavoriteItem {
+  favorite: Favorite | null;
+}
+
 interface ItemProps {
-  item: Menu | null;
+  item:
+    | (Menu & {
+        favoriteItem: MenuWithFavoriteItem[];
+      })
+    | null;
 }
 
 const Item = ({ item }: ItemProps) => {
   const router = useRouter();
-  const { isSignedIn } = useAuth();
+  const { isSignedIn, userId } = useAuth();
+
+  const isFavoriteIndex = item?.favoriteItem.findIndex(
+    (favItem) =>
+      favItem.favorite?.customerId === userId &&
+      favItem.menuId === item.id
+  );
 
   const handleOrder = async () => {
     if (!isSignedIn) {
@@ -102,7 +120,11 @@ const Item = ({ item }: ItemProps) => {
           className="rounded-full"
           onClick={handleFavorite}
         >
-          <Heart className="h-5 w-5 text-yellow-500" />
+          {isFavoriteIndex ? (
+            <Heart className="h-4 w-4" />
+          ) : (
+            <IoMdHeart className="text-yellow-500 text-xl" />
+          )}
         </Button>
       </div>
     </div>
