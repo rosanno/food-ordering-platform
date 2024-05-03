@@ -109,11 +109,7 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
             </h3>
             <Separator className="my-3" />
             <p className="text-muted-foreground text-[13px] leading-6">
-              Indulge in the perfect harmony of flavors with
-              our Pasta Recipe Noodle Cooking Sauce. Dive
-              into a tantalizing blend of aromatic herbs,
-              rich tomatoes, and savory spices, all simmered
-              to perfection.
+              {item?.description}
             </p>
           </div>
           <div className="flex items-center gap-1.5 pt-6">
