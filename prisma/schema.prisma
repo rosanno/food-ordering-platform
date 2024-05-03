@@ -35,6 +35,7 @@ model Menu {
   imageUrl     String?
   imageKey     String?
   slug         String
+  description  String?
   metaTitle    String
   metaKeywords String
   restaurant   Restaurant?    @relation(fields: [restaurantId], references: [id])
