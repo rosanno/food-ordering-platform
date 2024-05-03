@@ -37,57 +37,56 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
   };
 
   return (
-    <section className="mt-16">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-7 mt-32">
+    <section className="mt-36">
+      <div
+        className="
+         grid 
+         grid-cols-1 
+         sm:grid-cols-2 
+         md:grid-cols-3
+         lg:grid-cols-4
+         gap-10
+         sm:gap-6 
+         md:gap-6
+        "
+      >
         {menu.map((item) => (
           <div
             key={item.id}
             className="
-             shadow-md
-             rounded-xl
-             border
-             border-gray-100
-             flex 
-             flex-col 
-             items-center
-             p-4
-             mb-28
-            "
+            bg-gray-100/30
+            px-5
+            py-2
+            w-full
+            rounded-lg 
+            shadow-md 
+            transition-all
+            duration-300
+            mb-32
+        "
           >
-            <Image
-              src={item.imageUrl!!}
-              alt={item.menuName}
-              height={250}
-              width={250}
-              className="
-                lg:h-60 
-                lg:w-60 
-                object-contain 
-                align-middle 
-                -mt-28
-              "
-            />
-            <div className="text-center space-y-2">
-              <h4 className="mt-10 md:mt-5 truncate">
-                {item.menuName}
-              </h4>
-              <p className="text-sm font-[300]">
-                Food/Noodle
-              </p>
+            <div className="flex items-center justify-center">
+              <Image
+                src={item?.imageUrl as string}
+                alt={item?.menuName as string}
+                height={350}
+                width={350}
+                className="
+                 -mt-24
+                 w-52
+                 h-52
+                 md:w-40
+                 md:h-40
+                 object-contain
+                "
+              />
             </div>
-            <div
-              className="
-                flex 
-                items-center 
-                justify-between 
-                w-full 
-                px-4 
-                md:px-6 
-                py-4 
-                md:py-2 
-                mt-3
-              "
-            >
+            <div className="space-y-1.5 mt-4">
+              <h4 className="truncate text-sm capitalize">
+                {item?.menuName}
+              </h4>
+            </div>
+            <div className="flex gap-6 mt-3.5">
               <IconButton
                 label="View"
                 icon={EyeOff}
@@ -110,12 +109,6 @@ const MenuItems = ({ menu }: { menu: Menu[] }) => {
                 label="Delete"
                 icon={Trash}
                 onClick={() => handleDelete(item.id)}
-              />
-              <IconButton
-                label="Duplicate"
-                icon={Plus}
-                variant="secondary"
-                onClick={() => {}}
               />
             </div>
           </div>
