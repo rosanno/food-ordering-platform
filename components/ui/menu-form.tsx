@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import FormHeader from "./form-header";
 import ImageUpload from "./image-upload";
+import { Textarea } from "./textarea";
 
 const formSchema = z.object({
   menuName: z
@@ -51,6 +52,13 @@ const formSchema = z.object({
         "Meta keywords must be at least 5 characters.",
     })
     .max(50),
+  description: z
+    .string()
+    .min(40, {
+      message:
+        "Meta keywords must be at least 5 characters.",
+    })
+    .max(670),
 });
 
 interface MenuFormProps {
@@ -72,6 +80,7 @@ const MenuForm = ({
         ...initialData,
         discount: initialData.discount ?? "",
         imageUrl: initialData.imageUrl ?? "",
+        description: initialData.description ?? "",
       }
     : {
         menuName: "",
@@ -80,6 +89,7 @@ const MenuForm = ({
         imageUrl: "",
         metaTitle: "",
         metaKeywords: "",
+        description: "",
       };
 
   const form = useForm<z.infer<typeof formSchema>>({
@@ -141,7 +151,7 @@ const MenuForm = ({
       });
       field.onChange((field.value = ""));
     } catch (error) {
-      console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -308,6 +318,28 @@ const MenuForm = ({
               )}
             />
           </div>
+          <FormField
+            control={form.control}
+            name="description"
+            render={({ field }) => (
+              <FormItem className="pt-8">
+                <FormLabel>Description</FormLabel>
+                <FormControl>
+                  <Textarea
+                    {...field}
+                    placeholder="Menu description..."
+                    className="                      
+                      ring-offset-0
+                      focus-visible:ring-0 
+                      focus-visible:ring-offset-0
+                    "
+                    rows={10}
+                  />
+                </FormControl>
+                <FormMessage className="text-[13px]" />
+              </FormItem>
+            )}
+          />
           <div className="py-5 flex justify-end gap-3">
             <Button
               type="submit"
