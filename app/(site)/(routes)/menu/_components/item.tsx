@@ -12,8 +12,11 @@ import { IoMdHeart } from "react-icons/io";
 import { useAuth } from "@clerk/nextjs";
 import { useRouter } from "next/navigation";
 import { formatCurrency } from "@/lib/utils";
+import useHandleOrder from "@/hooks/use-handler-order";
+import useFavoriteHandler from "@/hooks/use-favorite-handler";
 
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
 interface MenuWithFavoriteItem extends FavoriteItem {
   favorite: Favorite | null;
@@ -28,28 +31,29 @@ interface ItemProps {
 }
 
 const Item = ({ item }: ItemProps) => {
-  const router = useRouter();
   const { isSignedIn, userId } = useAuth();
+  const [loading, setLoading] = useState(false);
+
+  const quantity = 1;
+
+  const handleOrder = useHandleOrder(
+    isSignedIn,
+    setLoading,
+    item?.id as string,
+    quantity
+  );
+
+  const handleFavorite = useFavoriteHandler(
+    item,
+    isSignedIn,
+    setLoading
+  );
 
   const isFavoriteIndex = item?.favoriteItem.findIndex(
     (favItem) =>
       favItem.favorite?.customerId === userId &&
       favItem.menuId === item.id
   );
-
-  const handleOrder = async () => {
-    if (!isSignedIn) {
-      router.push("/sign-in");
-    } else {
-    }
-  };
-
-  const handleFavorite = async () => {
-    if (!isSignedIn) {
-      router.push("/sign-in");
-    } else {
-    }
-  };
 
   return (
     <div
@@ -112,6 +116,7 @@ const Item = ({ item }: ItemProps) => {
           size={"sm"}
           variant={"outline"}
           className="w-full flex-1"
+          disabled={loading}
           onClick={handleOrder}
         >
           Order
@@ -120,6 +125,7 @@ const Item = ({ item }: ItemProps) => {
           size={"icon"}
           variant={"outline"}
           className="rounded-full"
+          disabled={loading}
           onClick={handleFavorite}
         >
           {isFavoriteIndex ? (
