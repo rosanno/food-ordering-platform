@@ -20,6 +20,7 @@ import useFavoriteHandler from "@/hooks/use-favorite-handler";
 
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import useHandleOrder from "@/hooks/use-handler-order";
 
 interface MenuWithFavoriteItem extends FavoriteItem {
   favorite: Favorite | null;
@@ -39,6 +40,15 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
   const { isSignedIn, userId } = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
 
+  const quantity = 1;
+
+  const handleOrder = useHandleOrder(
+    isSignedIn,
+    setLoading,
+    item?.id as string,
+    quantity
+  );
+
   const handleFavorite = useFavoriteHandler(
     item,
     isSignedIn,
@@ -50,27 +60,6 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
       favItem.favorite?.customerId === userId &&
       favItem.menuId === item.id
   );
-
-  const handleOrder = async () => {
-    try {
-      setLoading(true);
-      if (!isSignedIn) {
-        router.push("/sign-in");
-      } else {
-        const data = { menuId: item?.id, quantity: 1 };
-        const response = await axios.post("/api/cart", {
-          data,
-        });
-
-        toast.success(response.data.message);
-        router.refresh();
-      }
-    } catch (error) {
-      toast.error("Something went wrong.");
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <section className="bg-gray-100/45 rounded-md shadow-sm md:p-4">
