@@ -13,7 +13,6 @@ import {
   Restaurant,
 } from "@prisma/client";
 import { GoStarFill } from "react-icons/go";
-import { toast } from "sonner";
 import { formatCurrency } from "@/lib/utils";
 import { IoMdHeart } from "react-icons/io";
 import useFavoriteHandler from "@/hooks/use-favorite-handler";
