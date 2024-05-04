@@ -28,19 +28,9 @@ const CustomerItem = ({
   const [quantity, setQuantity] = useState(item.quantity);
 
   const updateQty = (increase?: boolean) => {
-    if (increase) {
-      setQuantity((prevQty) => {
-        const newQty = prevQty + 1;
-        updateQuantity(item.menuId, newQty);
-        return newQty;
-      });
-    } else {
-      setQuantity((prevQty) => {
-        const newQty = prevQty - 1;
-        updateQuantity(item.menuId, newQty);
-        return newQty;
-      });
-    }
+    const newQty = increase ? quantity + 1 : quantity - 1;
+    updateQuantity(item.menuId, newQty);
+    setQuantity(newQty);
   };
 
   return (
@@ -82,7 +72,7 @@ const CustomerItem = ({
             </button>
             <input
               type="text"
-              defaultValue={quantity || ""}
+              value={quantity || ""}
               disabled
               className="text-center w-8 outline-none text-sm"
             />
