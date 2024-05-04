@@ -1,9 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import axios from "axios";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import { Heart } from "lucide-react";
 import { useAuth } from "@clerk/nextjs";
 import {
@@ -35,7 +33,6 @@ interface MenuDetailsProps {
 }
 
 const MenuDetails = ({ item }: MenuDetailsProps) => {
-  const router = useRouter();
   const { isSignedIn, userId } = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
 
