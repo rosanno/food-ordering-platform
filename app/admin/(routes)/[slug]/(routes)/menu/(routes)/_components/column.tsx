@@ -1,7 +1,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
+import { ArrowUpDown } from "lucide-react";
 
 import CellAction from "./cell-actions";
+import { Button } from "@/components/ui/button";
 
 export type Menu = {
   id: string;
@@ -33,7 +35,21 @@ export const columns: ColumnDef<Menu>[] = [
   },
   {
     accessorKey: "menuName",
-    header: "Menu",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() =>
+            column.toggleSorting(
+              column.getIsSorted() === "asc"
+            )
+          }
+        >
+          Menu
+          <ArrowUpDown className="ml-2 h-3 w-3" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return (
         <p className="text-sm">
