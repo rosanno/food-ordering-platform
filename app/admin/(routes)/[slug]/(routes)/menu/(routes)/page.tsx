@@ -1,6 +1,9 @@
+import { format } from "date-fns";
 import prisma from "@/lib/prisma";
+
 import Header from "@/components/ui/header";
-import MenuItems from "./_components/menu-items";
+import Client from "./_components/client";
+import { Menu } from "./_components/column";
 
 const ManageRestaurantPage = async ({
   params,
@@ -17,15 +20,26 @@ const ManageRestaurantPage = async ({
     where: {
       restaurantId: restaurant?.id,
     },
+    include: { restaurant: true },
     orderBy: {
       createdAt: "desc",
     },
   });
 
+  const transformMenu: Menu[] = menu.map((item) => ({
+    id: item.id,
+    menuName: item.menuName,
+    image: item.imageUrl as string,
+    restaurant: item.restaurant?.name as string,
+    slug: item.slug,
+    createdAt: format(item.createdAt, "d MMMM, yyyy"),
+    updatedAt: format(item.updatedAt, "d MMMM, yyyy"),
+  }));
+
   return (
     <>
       <Header title="Menu List" />
-      <MenuItems menu={menu} />
+      <Client data={transformMenu} />
     </>
   );
 };
