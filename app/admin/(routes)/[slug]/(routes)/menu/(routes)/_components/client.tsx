@@ -10,7 +10,11 @@ interface ClientProps {
 const Client = ({ data }: ClientProps) => {
   return (
     <section className="mt-10">
-      <DataTable columns={columns} data={data} />
+      <DataTable
+        columns={columns}
+        data={data}
+        searchKey="menuName"
+      />
     </section>
   );
 };
