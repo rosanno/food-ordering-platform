@@ -1,8 +1,8 @@
 import { UserButton, auth } from "@clerk/nextjs";
+import prisma from "@/lib/prisma";
 
 import RestaurantSwitcher from "@/components/restaurant-switcher";
 import MainNav from "@/components/main-nav";
-import prisma from "@/lib/prisma";
 import SettingsButton from "./settings-button";
 
 const DashboardNavbar = async () => {
