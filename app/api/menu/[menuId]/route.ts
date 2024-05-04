@@ -1,5 +1,6 @@
-import prisma from "@/lib/prisma";
+import { UTApi } from "uploadthing/server";
 import { NextRequest, NextResponse } from "next/server";
+import prisma from "@/lib/prisma";
 
 export async function PATCH(
   request: NextRequest,
@@ -52,17 +53,29 @@ export async function DELETE(
   }
 ) {
   try {
+    const utapi = new UTApi();
+
     if (!params.menuId) {
       return new NextResponse("Invalid menu id", {
         status: 400,
       });
     }
 
-    await prisma.menu.delete({
+    const menu = await prisma.menu.findFirst({
       where: {
         id: params.menuId,
       },
     });
+
+    if (menu) {
+      await utapi.deleteFiles(menu.imageKey as string);
+
+      await prisma.menu.delete({
+        where: {
+          id: params.menuId,
+        },
+      });
+    }
 
     return NextResponse.json({
       message: "Menu deleted",
