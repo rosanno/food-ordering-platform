@@ -47,7 +47,8 @@ const MainNav = () => {
           href={item.href}
           key={i}
           className={cn(
-            "text-[12px] text-gray-500 font-normal hover:bg-gray-100 rounded-3xl px-3 py-[6px]"
+            "text-[12px] text-gray-500 font-normal hover:bg-gray-100 rounded-3xl px-3 py-[6px]",
+            item.active && "bg-gray-100"
           )}
         >
           {item.label}
