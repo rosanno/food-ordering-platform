@@ -15,10 +15,10 @@ const CreateRestaurantPage = async ({
   });
 
   return (
-    <>
+    <div className="lg:px-10">
       <Header title="Add Menu" />
       <MenuForm restaurantId={restaurant?.id} />
-    </>
+    </div>
   );
 };
 
