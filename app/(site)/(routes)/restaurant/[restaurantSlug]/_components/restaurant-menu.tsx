@@ -9,13 +9,10 @@ import Search from "./search";
 import { GoStarFill } from "react-icons/go";
 
 interface RestaurantMenuProps {
-  menu: Menu[] | null;
+  menu: Menu[] | null | undefined;
 }
 
 const RestaurantMenu = ({ menu }: RestaurantMenuProps) => {
-
-  console.log(menu?.length!! > 0 ? "true" : "false");
-
   return (
     <section className="pt-72 md:pt-96 relative z-20">
       <Search placeholder="Search restaurant menu" />

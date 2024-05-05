@@ -19,25 +19,27 @@ const RestaurantDetailsPage = async ({
     where: {
       slug: params.restaurantSlug,
     },
-  });
-
-  const menu = await prisma.menu.findMany({
-    where: {
-      OR: [
-        {
-          menuName: {
-            contains: searchParams?.query?.toString() || "",
-            mode: "insensitive",
-          },
+    include: {
+      menu: {
+        where: {
+          OR: [
+            {
+              menuName: {
+                contains:
+                  searchParams?.query?.toString() || "",
+                mode: "insensitive",
+              },
+            },
+          ],
         },
-      ],
+      },
     },
   });
 
   return (
     <>
       <RestaurantDetails restaurant={restaurant} />
-      <RestaurantMenu menu={menu} />
+      <RestaurantMenu menu={restaurant?.menu} />
     </>
   );
 };
