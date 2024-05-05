@@ -1,7 +1,12 @@
+import { Metadata } from "next";
 import prisma from "@/lib/prisma";
 
 import RestaurantDetails from "./_components/restaurant-details";
 import RestaurantMenu from "./_components/restaurant-menu";
+
+export const metadata: Metadata = {
+  title: "Restaurant Menu",
+};
 
 const RestaurantDetailsPage = async ({
   params,

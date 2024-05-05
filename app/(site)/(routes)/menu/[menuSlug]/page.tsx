@@ -1,6 +1,11 @@
 import prisma from "@/lib/prisma";
 
 import MenuDetails from "./_components/menu-details";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Menu Details",
+};
 
 const MenuDetailsPage = async ({
   params,
@@ -22,7 +27,7 @@ const MenuDetailsPage = async ({
   });
 
   return (
-    <div className="mt-32 md:mt-32">
+    <div className="mt-32 md:mt-20">
       <MenuDetails item={menu} />
     </div>
   );

@@ -1,6 +1,11 @@
+import { Metadata } from "next";
 import prisma from "@/lib/prisma";
 
 import Item from "./_components/item";
+
+export const metadata: Metadata = {
+  title: "Menu List",
+};
 
 const MenuPage = async () => {
   const menu = await prisma.menu.findMany({

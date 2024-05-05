@@ -1,8 +1,13 @@
+import { Metadata } from "next";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/prisma";
 
 import FavoriteItem from "./_components/favorite-item";
 import { Separator } from "@/components/ui/separator";
+
+export const metadata: Metadata = {
+  title: "Wish List",
+};
 
 const FavoritePage = async () => {
   const { userId } = auth();
