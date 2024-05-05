@@ -12,7 +12,6 @@ const Article = () => {
         md:px-6
       "
     >
-      <div></div>
       <p className="text-[13px] sm:text-sm sm:leading-6">
         Overall, &quot;Create Delicious Dishes&quot; is an
         essential resource for anyone looking to start a
