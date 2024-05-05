@@ -6,6 +6,7 @@ import { Menu } from "@prisma/client";
 import { formatCurrency } from "@/lib/utils";
 
 import Search from "./search";
+import { GoStarFill } from "react-icons/go";
 
 interface RestaurantMenuProps {
   menu: Menu[] | null;
@@ -33,12 +34,21 @@ const RestaurantMenu = ({ menu }: RestaurantMenuProps) => {
                     className="h-12 w-12"
                   />
                 </div>
-                <p className="text-[13px]">
-                  {item.menuName}
-                </p>
+                <div className="space-y-1">
+                  <p className="text-[13px]">
+                    {item.menuName}
+                  </p>
+                  <p className="flex items-center text-[12px] text-muted-foreground">
+                    <GoStarFill className="text-[#FFA71E] mr-1.5" />
+                    (4.8)
+                    <span className="ml-2.5">
+                      2.3 Review
+                    </span>
+                  </p>
+                </div>
               </div>
               <div>
-                <h4 className="text-sm text-yellow-600 font-medium">
+                <h4 className="text-sm text-[#FF9E0A] font-medium">
                   {formatCurrency(
                     parseInt(item.price),
                     "PHP"
