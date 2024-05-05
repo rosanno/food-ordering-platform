@@ -6,7 +6,11 @@ import { Order, columns } from "./_components/column";
 import { DataTable } from "./_components/data-table";
 
 const OrdersPage = async () => {
-  const orders = await prisma.order.findMany();
+  const orders = await prisma.order.findMany({
+    include: {
+      orderItems: true,
+    },
+  });
 
   const transformOrder: Order[] = orders.map((item) => ({
     id: item.id,
