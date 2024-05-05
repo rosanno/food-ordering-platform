@@ -2,6 +2,8 @@ import { Metadata } from "next";
 import prisma from "@/lib/prisma";
 
 import Item from "./_components/item";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 export const metadata: Metadata = {
   title: "Menu List",
@@ -19,9 +21,10 @@ const MenuPage = async () => {
   });
 
   return (
-    <section className="mt-48">
-      <div
-        className="
+    <Suspense fallback={<Loading />}>
+      <section className="mt-48">
+        <div
+          className="
           grid 
           grid-cols-1 
           sm:grid-cols-2 
@@ -31,12 +34,13 @@ const MenuPage = async () => {
           sm:gap-6 
           md:gap-7
         "
-      >
-        {menu.map((item) => (
-          <Item item={item} key={item.id} />
-        ))}
-      </div>
-    </section>
+        >
+          {menu.map((item) => (
+            <Item item={item} key={item.id} />
+          ))}
+        </div>
+      </section>
+    </Suspense>
   );
 };
 
