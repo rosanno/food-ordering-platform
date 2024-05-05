@@ -14,11 +14,16 @@ const MainNavigation = () => {
           <li
             key={i}
             className={cn(
-              "text-[13px] hover:text-yellow-600 transition-colors duration-300",
-              pathname === list.path && "text-yellow-600"
+              "text-[13px] transition-colors duration-300",
+              pathname === list.path && "text-[#FFA71E]"
             )}
           >
-            <Link href={list.path}>{list.label}</Link>
+            <Link
+              href={list.path}
+              className="hover:text-[#FFA71E]"
+            >
+              {list.label}
+            </Link>
           </li>
         ))}
       </ul>

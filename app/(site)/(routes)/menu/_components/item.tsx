@@ -135,7 +135,7 @@ const Item = ({ item }: ItemProps) => {
           {isFavoriteIndex ? (
             <Heart className="h-4 w-4" />
           ) : (
-            <IoMdHeart className="text-yellow-500 text-xl" />
+            <IoMdHeart className="text-[#FFA71E] text-xl" />
           )}
         </Button>
       </div>
