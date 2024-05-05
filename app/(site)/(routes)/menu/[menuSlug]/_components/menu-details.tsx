@@ -80,12 +80,12 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
             {[1, 2, 3, 4, 5].map((_) => (
               <GoStarFill
                 key={_}
-                className="text-yellow-400 text-sm"
+                className="text-[#FFA71E] text-sm"
               />
             ))}
           </div>
           <div className="pt-5">
-            <h3 className="text-2xl">
+            <h3 className="text-2xl text-[#FFA71E] font-medium">
               {item?.price !== undefined &&
                 formatCurrency(
                   parseInt(item?.price),
@@ -115,7 +115,7 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
               {isFavoriteIndex ? (
                 <Heart className="h-4 w-4" />
               ) : (
-                <IoMdHeart className="text-yellow-500 text-xl" />
+                <IoMdHeart className="text-[#FFA71E] text-xl" />
               )}
             </Button>
           </div>
