@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Heart } from "lucide-react";
+import { GoStarFill } from "react-icons/go";
 import {
   Favorite,
   FavoriteItem,
@@ -10,7 +11,6 @@ import {
 } from "@prisma/client";
 import { IoMdHeart } from "react-icons/io";
 import { useAuth } from "@clerk/nextjs";
-import { useRouter } from "next/navigation";
 import { formatCurrency } from "@/lib/utils";
 import useHandleOrder from "@/hooks/use-handler-order";
 import useFavoriteHandler from "@/hooks/use-favorite-handler";
@@ -90,10 +90,15 @@ const Item = ({ item }: ItemProps) => {
           <h4 className="truncate text-sm capitalize">
             {item?.menuName}
           </h4>
+          <p className="flex items-center text-[12px] text-muted-foreground">
+            <GoStarFill className="text-[#FFA71E] mr-1.5" />
+            (4.8)
+            <span className="ml-2.5">2.3 Review</span>
+          </p>
           <p
             className="
-              text-muted-foreground 
-              text-[13px] 
+            text-[#FF9E0A]
+              text-[13px]
               font-medium
             "
           >
@@ -104,11 +109,11 @@ const Item = ({ item }: ItemProps) => {
       </Link>
       <div
         className="
-          py-1.5 
-          mt-2 
+          py-1.5
+          mt-2
           flex 
-          items-center 
-          justify-between 
+          items-center
+          justify-between
           gap-2.5
         "
       >
@@ -119,12 +124,11 @@ const Item = ({ item }: ItemProps) => {
           disabled={loading}
           onClick={handleOrder}
         >
-          Order
+          Order Now
         </Button>
         <Button
           size={"icon"}
           variant={"outline"}
-          className="rounded-full"
           disabled={loading}
           onClick={handleFavorite}
         >
