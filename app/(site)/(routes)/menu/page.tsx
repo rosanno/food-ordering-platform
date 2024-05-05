@@ -14,7 +14,7 @@ const MenuPage = async () => {
   });
 
   return (
-    <section className="mt-64">
+    <section className="mt-48">
       <div
         className="
           grid 
