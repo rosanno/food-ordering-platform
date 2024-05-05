@@ -14,6 +14,7 @@ export async function POST(
     imageUrl,
     metaTitle,
     metaKeywords,
+    description,
   } = await request.json();
 
   const slug = slugify(menuName).toLowerCase();
@@ -28,6 +29,7 @@ export async function POST(
         slug,
         metaTitle,
         metaKeywords,
+        description,
         restaurantId: params.restaurantId,
       },
     });
