@@ -33,7 +33,7 @@ const Search = ({
   });
 
   return (
-    <div className="flex items-center border rounded-sm">
+    <div className="flex items-center border rounded-sm cursor-pointer">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
