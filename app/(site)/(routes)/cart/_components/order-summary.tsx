@@ -78,7 +78,7 @@ const OrderSummary = ({ cart }: OrderSummaryProps) => {
           </div>
           <div className="mt-7 pb-1 space-y-3">
             <Button className="w-full">
-              Checkout
+              Continue Order
               <ChevronRight className="h-4 w-4 ml-2" />
             </Button>
             <Button
