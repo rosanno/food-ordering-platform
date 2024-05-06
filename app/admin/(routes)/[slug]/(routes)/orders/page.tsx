@@ -14,10 +14,8 @@ const OrdersPage = async () => {
 
   const transformOrder: Order[] = orders.map((item) => ({
     id: item.id,
-    customer: item.name,
     orderItems: item.orderItems,
     status: item.status,
-    totalAmount: item.totalAmount,
     createdAt: format(item.createdAt, "d MMMM, yyyy"),
   }));
 

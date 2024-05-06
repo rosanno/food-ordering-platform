@@ -6,7 +6,6 @@ import { ColumnDef } from "@tanstack/react-table";
 // You can use a Zod schema here if you want.
 export type Order = {
   id: string;
-  customer: string;
   orderItems: any;
   status:
     | "place"
@@ -14,7 +13,6 @@ export type Order = {
     | "inProgress"
     | "outForDelivery"
     | "delivered";
-  totalAmount: number;
   createdAt: string;
 };
 
