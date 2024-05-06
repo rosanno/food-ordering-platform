@@ -22,7 +22,8 @@ model Restaurant {
   slug      String
   imageUrl  String
   menu      Menu[]
-  
+  order     Order[]
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
@@ -40,7 +41,7 @@ model Menu {
   metaKeywords String
   restaurant   Restaurant?    @relation(fields: [restaurantId], references: [id])
   restaurantId String         @db.ObjectId
-  orderItem    OrderItem[]
+  orderItems   OrderItem[]
   cartItem     CartItem[]
   favoriteItem FavoriteItem[]
 
@@ -49,14 +50,17 @@ model Menu {
 }
 
 model Order {
-  id          String      @id @default(auto()) @map("_id") @db.ObjectId
-  customerId  String
-  name        String
-  orderItems  OrderItem[]
-  status      Status
-  totalAmount Int
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  customerId   String
+  address      String     @default("")
+  phone        String     @default("")
+  restaurantId String     @db.ObjectId
+  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  orderItems   OrderItem[]
+  status       Status
 
-  createdAt   DateTime    @default(now())
+  createdAt    DateTime    @default(now())
+  updatedAt    DateTime    @updatedAt
 }
 
 model OrderItem {
@@ -95,11 +99,11 @@ model Favorite {
 }
 
 model FavoriteItem {
-  id         String    @id @default(auto()) @map("_id") @db.ObjectId
-  favorite   Favorite  @relation(fields: [favoriteId], references: [id])
-  favoriteId String    @db.ObjectId
-  menu       Menu      @relation(fields: [menuId], references: [id])
-  menuId     String    @db.ObjectId
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  favorite   Favorite @relation(fields: [favoriteId], references: [id])
+  favoriteId String   @db.ObjectId
+  menu       Menu     @relation(fields: [menuId], references: [id])
+  menuId     String   @db.ObjectId
 }
 
 enum Status {

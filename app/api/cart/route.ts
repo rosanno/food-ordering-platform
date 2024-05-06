@@ -65,3 +65,16 @@ export async function POST(req: NextRequest) {
     });
   }
 }
+
+export async function DELETE(request: NextRequest) {
+  try {
+    await prisma.cartItem.deleteMany();
+
+    return NextResponse.json(null, { status: 200 });
+  } catch (error) {
+    console.log("[CART_POST]", error);
+    return new NextResponse("Internal error", {
+      status: 500,
+    });
+  }
+}

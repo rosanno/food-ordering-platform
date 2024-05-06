@@ -1,9 +1,16 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import axios from "axios";
+import { useEffect } from "react";
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { ChevronRight } from "lucide-react";
-import { formatCurrency } from "@/lib/utils";
+import { toast } from "sonner";
+
 import { Cart, CartItem, Menu } from "@prisma/client";
+import { formatCurrency } from "@/lib/utils";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -21,11 +28,48 @@ interface OrderSummaryProps {
 }
 
 const OrderSummary = ({ cart }: OrderSummaryProps) => {
+  const searchParams = useSearchParams();
   const router = useRouter();
+
+  const clearCart = async () => {
+    try {
+      axios.delete("/api/cart");
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
+
+  useEffect(() => {
+    if (searchParams.get("success")) {
+      toast.success("Payment completed");
+      clearCart();
+    }
+
+    if (searchParams.get("canceled")) {
+      toast.error("Something went wrong");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [searchParams]);
 
   const total = cart?.items.reduce((acc, item) => {
     return acc + parseInt(item.menu.price) * item.quantity;
   }, 0);
+
+  const onCheckout = async () => {
+    try {
+      const response = await axios.post(
+        `/api/spice-grove-bistro/checkout`,
+        {
+          menuIds: cart?.items.map((item) => item.menuId),
+        }
+      );
+
+      window.location = response.data.url;
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
+  };
 
   return (
     <section className="col-span-12 md:col-span-4">
@@ -84,6 +128,7 @@ const OrderSummary = ({ cart }: OrderSummaryProps) => {
                 hover:bg-[#FFA71E] 
                 hover:bg-opacity-70
               "
+              onClick={onCheckout}
             >
               Continue Order
               <ChevronRight className="h-4 w-4 ml-2" />

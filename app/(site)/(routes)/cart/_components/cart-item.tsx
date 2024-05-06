@@ -12,6 +12,7 @@ import {
 } from "@prisma/client";
 
 import CustomerItem from "./customer-item";
+import Image from "next/image";
 
 interface ItemWithMenu extends Item {
   menu: Menu & { restaurant: Restaurant | null };
@@ -68,15 +69,31 @@ const CartItem = ({ cart }: CartItemProps) => {
         Cart ({cart?.items.length})
       </h3>
       <div className="space-y-5 mt-2.5">
-        {cart?.items.map((item) => (
-          <CustomerItem
-            key={item.id}
-            item={item}
-            loading={loading}
-            updateQuantity={updateQuantity}
-            deleteCartItem={deleteCartItem}
-          />
-        ))}
+        {cart?.items?.length! > 0 ? (
+          <>
+            {cart?.items.map((item) => (
+              <CustomerItem
+                key={item.id}
+                item={item}
+                loading={loading}
+                updateQuantity={updateQuantity}
+                deleteCartItem={deleteCartItem}
+              />
+            ))}
+          </>
+        ) : (
+          <div className="h-[50vh] flex flex-col items-center justify-center">
+            <Image
+              src="/assets/empty.svg"
+              alt="cart-icon"
+              height={180}
+              width={180}
+            />
+            <p className="mt-2.5 text-muted-foreground font-bold">
+              Cart is empty
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

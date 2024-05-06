@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import { auth } from "@clerk/nextjs";
+
 import prisma from "@/lib/prisma";
 
 import CartItem from "./_components/cart-item";
