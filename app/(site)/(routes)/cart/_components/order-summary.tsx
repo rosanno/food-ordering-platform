@@ -77,7 +77,14 @@ const OrderSummary = ({ cart }: OrderSummaryProps) => {
             </div>
           </div>
           <div className="mt-7 pb-1 space-y-3">
-            <Button className="w-full">
+            <Button
+              className="
+                w-full 
+                bg-[#FFA71E] 
+                hover:bg-[#FFA71E] 
+                hover:bg-opacity-70
+              "
+            >
               Continue Order
               <ChevronRight className="h-4 w-4 ml-2" />
             </Button>
