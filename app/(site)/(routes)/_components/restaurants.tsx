@@ -12,7 +12,7 @@ const Restaurants = async () => {
           Nearby Retaurants
         </h4>
       </div>
-      <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-5">
+      <div className="grid md:grid-cols-3 lg:grid-cols-3 gap-4 md:gap-5">
         {restaurants.map((item) => (
           <Resto key={item.id} restaurant={item} />
         ))}
