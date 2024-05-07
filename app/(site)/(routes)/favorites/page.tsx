@@ -34,9 +34,20 @@ const FavoritePage = async () => {
       <h1 className="font-medium">My Wish List</h1>
       <Separator className="my-2.5" />
       <div className="space-y-3.5 mt-6">
-        {favorites?.favoriteItem.map((item) => (
-          <FavoriteItem key={item.id} favoriteItem={item} />
-        ))}
+        {favorites?.favoriteItem.length! > 0 ? (
+          <>
+            {favorites?.favoriteItem.map((item) => (
+              <FavoriteItem
+                key={item.id}
+                favoriteItem={item}
+              />
+            ))}
+          </>
+        ) : (
+          <p className="text-muted-foreground text-sm">
+            No item in wish list
+          </p>
+        )}
       </div>
     </section>
   );
