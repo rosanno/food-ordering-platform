@@ -33,7 +33,7 @@ const Search = ({
   });
 
   return (
-    <div className="flex items-center border rounded-sm cursor-pointer">
+    <div className="flex items-center border rounded-sm">
       <label htmlFor="search" className="sr-only">
         Search
       </label>
@@ -41,7 +41,7 @@ const Search = ({
         type="text"
         placeholder={placeholder}
         className={cn(
-          "w-full outline-none border-r py-1 md:py-1.5 px-3 text-sm placeholder:text-sm",
+          "w-full outline-none py-1 md:py-1.5 px-3 text-sm placeholder:text-sm",
           className
         )}
         onChange={(e) => {
@@ -49,7 +49,6 @@ const Search = ({
         }}
         defaultValue={searchParams.get("query")?.toString()}
       />
-      <RiSearch2Line className="text-lg text-gray-400/60 mx-3" />
     </div>
   );
 };
