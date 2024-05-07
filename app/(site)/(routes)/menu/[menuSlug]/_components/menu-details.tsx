@@ -46,7 +46,7 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
   );
 
   const handleFavorite = useFavoriteHandler(
-    item,
+    item?.id!,
     isSignedIn,
     setLoading
   );

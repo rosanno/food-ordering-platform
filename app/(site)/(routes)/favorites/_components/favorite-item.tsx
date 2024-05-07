@@ -1,12 +1,7 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { formatCurrency } from "@/lib/utils";
-import {
-  FavoriteItem as FavItem,
-  Menu,
-  Restaurant,
-} from "@prisma/client";
+import { useAuth } from "@clerk/nextjs";
+import { useState } from "react";
 import {
   ShoppingCart,
   StarIcon,
@@ -14,6 +9,17 @@ import {
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+
+import {
+  FavoriteItem as FavItem,
+  Menu,
+  Restaurant,
+} from "@prisma/client";
+import useFavoriteHandler from "@/hooks/use-favorite-handler";
+import useHandleOrder from "@/hooks/use-handler-order";
+import { formatCurrency } from "@/lib/utils";
+
+import { Button } from "@/components/ui/button";
 
 interface FavoriteItemProps {
   favoriteItem:
@@ -28,6 +34,24 @@ interface FavoriteItemProps {
 const FavoriteItem = ({
   favoriteItem,
 }: FavoriteItemProps) => {
+  const { isSignedIn, userId } = useAuth();
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const quantity = 1;
+
+  const handleOrder = useHandleOrder(
+    isSignedIn,
+    setLoading,
+    favoriteItem?.menuId as string,
+    quantity
+  );
+
+  const handleFavorite = useFavoriteHandler(
+    favoriteItem?.menuId!,
+    isSignedIn,
+    setLoading
+  );
+
   return (
     <div className="flex bg-gray-100/50 p-2.5">
       <Link
@@ -71,10 +95,20 @@ const FavoriteItem = ({
         </div>
       </Link>
       <div className="ml-auto flex flex-col justify-between">
-        <Button variant={"ghost"} size={"icon"}>
+        <Button
+          variant={"ghost"}
+          size={"icon"}
+          onClick={handleFavorite}
+          disabled={loading}
+        >
           <Trash2 className="h-4 w-4 text-red-500" />
         </Button>
-        <Button variant={"outline"} size={"icon"}>
+        <Button
+          variant={"outline"}
+          size={"icon"}
+          onClick={handleOrder}
+          disabled={loading}
+        >
           <ShoppingCart className="h-4 w-4 text-[#FFB500]" />
         </Button>
       </div>

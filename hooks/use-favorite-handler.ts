@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 const useFavoriteHandler = (
-  item: any,
+  menuId: string,
   isSignedIn: boolean | undefined,
   setLoading: React.Dispatch<React.SetStateAction<boolean>>
 ) => {
@@ -18,7 +18,7 @@ const useFavoriteHandler = (
         const response = await axios.post(
           `/api/favorites`,
           {
-            menuId: item?.id,
+            menuId: menuId,
           }
         );
 

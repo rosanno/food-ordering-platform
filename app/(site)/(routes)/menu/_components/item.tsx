@@ -44,7 +44,7 @@ const Item = ({ item }: ItemProps) => {
   );
 
   const handleFavorite = useFavoriteHandler(
-    item,
+    item?.id!,
     isSignedIn,
     setLoading
   );
