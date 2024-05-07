@@ -21,7 +21,7 @@ export default authMiddleware({
     "/menu/:menuSlug",
     "/restaurant/:restaurantSlug",
     "/booking",
-    "/pricing",
+    "/about-us",
     "/api/uploadthing",
   ],
 });

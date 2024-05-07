@@ -1,4 +1,4 @@
-const PricingPage = () => {
+const AboutUsPage = () => {
   return (
     <section className="mt-10">
       <h1 className="text-2xl font-bold">
@@ -8,4 +8,4 @@ const PricingPage = () => {
   );
 };
 
-export default PricingPage;
+export default AboutUsPage;

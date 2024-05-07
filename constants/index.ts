@@ -12,7 +12,7 @@ export const MenuList = [
     label: "Booking",
   },
   {
-    path: "/pricing",
-    label: "Pricing",
+    path: "/about-us",
+    label: "About Us",
   },
 ];
