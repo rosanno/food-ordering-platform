@@ -8,8 +8,8 @@ export const MenuList = [
     label: "Menu",
   },
   {
-    path: "/booking",
-    label: "Booking",
+    path: "/contact",
+    label: "Contact Us",
   },
   {
     path: "/about-us",
