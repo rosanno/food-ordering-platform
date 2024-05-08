@@ -113,7 +113,7 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
               onClick={handleFavorite}
             >
               {isFavoriteIndex ? (
-                <Heart className="h-4 w-4" />
+                <Heart className="h-4 w-4 text-[#FFA71E]" />
               ) : (
                 <IoMdHeart className="text-[#FFA71E] text-xl" />
               )}

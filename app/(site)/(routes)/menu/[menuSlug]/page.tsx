@@ -31,6 +31,13 @@ const MenuDetailsPage = async ({
     where: {
       NOT: { id: menu?.id },
     },
+    include: {
+      favoriteItem: {
+        include: {
+          favorite: true,
+        },
+      },
+    },
     take: 5,
   });
 
