@@ -8,12 +8,12 @@ export const MenuList = [
     label: "Menu",
   },
   {
-    path: "/contact",
-    label: "Contact Us",
-  },
-  {
     path: "/about-us",
     label: "About Us",
+  },
+  {
+    path: "/contact",
+    label: "Contact Us",
   },
 ];
 
