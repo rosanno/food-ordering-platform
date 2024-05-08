@@ -2,6 +2,7 @@ import prisma from "@/lib/prisma";
 
 import MenuDetails from "./_components/menu-details";
 import { Metadata } from "next";
+import RelatedMenu from "./_components/related-menu";
 
 export const metadata: Metadata = {
   title: "Menu Details",
@@ -26,9 +27,17 @@ const MenuDetailsPage = async ({
     },
   });
 
+  const relatedMenu = await prisma.menu.findMany({
+    where: {
+      NOT: { id: menu?.id },
+    },
+    take: 5,
+  });
+
   return (
-    <div className="mt-32 md:mt-20">
+    <div className="mt-10 md:mt-16">
       <MenuDetails item={menu} />
+      <RelatedMenu menu={relatedMenu} />
     </div>
   );
 };
