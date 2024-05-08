@@ -23,7 +23,7 @@ const Footer = () => {
             <Logo />
             <div className="space-y-2.5 mt-5">
               <p className="text-muted-foreground text-[13px]">
-                7 days a Week (10:00 am - 8:00 pm)
+                7 days a Week (9:00 am - 6:00 pm)
               </p>
               <div className="flex items-center gap-1.5">
                 <Image
