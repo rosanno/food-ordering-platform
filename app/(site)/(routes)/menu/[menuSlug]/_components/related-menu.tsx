@@ -28,6 +28,7 @@ const RelatedMenu = ({ menu }: RelatedMenuProps) => {
                 alt={item.menuName}
                 height={95}
                 width={95}
+                className="object-contain h-28"
               />
             </div>
             <div className="p-2.5">
