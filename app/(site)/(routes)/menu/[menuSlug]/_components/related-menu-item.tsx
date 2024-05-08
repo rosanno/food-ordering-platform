@@ -19,19 +19,14 @@ import { Button } from "@/components/ui/button";
 import useFavoriteHandler from "@/hooks/use-favorite-handler";
 import { IoMdHeart } from "react-icons/io";
 
-interface MenuWithFavoriteItem extends FavoriteItem {
-  favorite: Favorite | null;
+
+interface RelatedMenuItemProps {
+  item: Menu | any;
 }
 
-interface RelatedMenuItem {
-  item:
-    | (Menu & {
-        favoriteItem: MenuWithFavoriteItem[];
-      })
-    | null;
-}
-
-const RelatedMenuItem = ({ item }: RelatedMenuItem) => {
+const RelatedMenuItem = ({
+  item,
+}: RelatedMenuItemProps) => {
   const { isSignedIn, userId } = useAuth();
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -51,7 +46,7 @@ const RelatedMenuItem = ({ item }: RelatedMenuItem) => {
   );
 
   const isFavoriteIndex = item?.favoriteItem.findIndex(
-    (favItem) =>
+    (favItem: any) =>
       favItem.favorite?.customerId === userId &&
       favItem.menuId === item.id
   );

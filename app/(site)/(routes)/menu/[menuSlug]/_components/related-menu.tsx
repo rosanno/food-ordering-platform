@@ -13,7 +13,7 @@ const RelatedMenu = ({ menu }: RelatedMenuProps) => {
     <section className="mt-10">
       <h3 className="text-xl font-medium">Related Menu</h3>
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-5 mt-7">
-        {menu.map((item) => (
+        {menu?.map((item) => (
           <RelatedMenuItem key={item.id} item={item} />
         ))}
       </div>
