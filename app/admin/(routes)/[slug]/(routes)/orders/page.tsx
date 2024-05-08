@@ -2,27 +2,32 @@ import { format } from "date-fns";
 import prisma from "@/lib/prisma";
 
 import Header from "@/components/ui/header";
-import { Order, columns } from "./_components/column";
-import { DataTable } from "./_components/data-table";
+import { Order } from "./_components/column";
+import Client from "./_components/client";
 
 const OrdersPage = async () => {
-  const orders = await prisma.order.findMany({
+  const orders = await prisma.orderItem.findMany({
     include: {
-      orderItems: true,
+      order: true,
+      menu: true,
     },
   });
 
+  // const totalAmount = orders.reduce((acc, item) => {
+  //   return acc + parseInt(item.menu.price) * item.quantity;
+  // }, 0);
+
   const transformOrder: Order[] = orders.map((item) => ({
     id: item.id,
-    orderItems: item.orderItems,
-    status: item.status,
-    createdAt: format(item.createdAt, "d MMMM, yyyy"),
+    menu: item.menu.menuName,
+    status: item.order.status,
+    createdAt: format(item.order.createdAt, "d MMMM, yyyy"),
   }));
 
   return (
     <>
       <Header title="Order List" />
-      <DataTable columns={columns} data={transformOrder} />
+      <Client data={transformOrder} />
     </>
   );
 };

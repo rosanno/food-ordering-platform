@@ -1,0 +1,85 @@
+"use client";
+
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { MoreHorizontal, Trash } from "lucide-react";
+import { toast } from "sonner";
+import axios from "axios";
+
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Button } from "@/components/ui/button";
+import AlertModal from "@/components/modals/alert-modal";
+import { Order } from "./column";
+
+interface CellActionProps {
+  data: Order;
+}
+
+const CellActions = ({ data }: CellActionProps) => {
+  const router = useRouter();
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
+
+  const handleDelete = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios.delete(
+        `/api/order/${data.id}`
+      );
+
+      if (response.statusText === "OK") {
+        toast(response.data.message, {
+          action: {
+            label: "Close",
+            onClick: () => console.log("Close"),
+          },
+          duration: 5000,
+        });
+      }
+      router.refresh();
+    } catch (error) {
+      toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
+      setIsOpen(false);
+    }
+  };
+
+  return (
+    <>
+      <AlertModal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        onConfirm={handleDelete}
+        loading={loading}
+      />
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant={"ghost"} size={"icon"}>
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuLabel className="text-[13px]">
+            Actions
+          </DropdownMenuLabel>
+          <DropdownMenuItem onClick={() => setIsOpen(true)}>
+            <Trash className="mr-2 h-3 w-3" />
+            <span className="text-[12px]">Delete</span>
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  );
+};
+
+export default CellActions;

@@ -1,12 +1,13 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
+import CellActions from "./cell-actions";
 
 // This type is used to define the shape of our data.
 // You can use a Zod schema here if you want.
 export type Order = {
   id: string;
-  orderItems: any;
+  menu: string;
   status:
     | "place"
     | "paid"
@@ -18,12 +19,8 @@ export type Order = {
 
 export const columns: ColumnDef<Order>[] = [
   {
-    accessorKey: "customer",
-    header: "Customer",
-  },
-  {
-    accessorKey: "orderItems",
-    header: "Orders",
+    accessorKey: "menu",
+    header: "Menu",
   },
   {
     accessorKey: "status",
@@ -36,5 +33,9 @@ export const columns: ColumnDef<Order>[] = [
   {
     accessorKey: "createdAt",
     header: "Created_At",
+  },
+  {
+    id: "actions",
+    cell: ({ row }) => <CellActions data={row.original} />,
   },
 ];
