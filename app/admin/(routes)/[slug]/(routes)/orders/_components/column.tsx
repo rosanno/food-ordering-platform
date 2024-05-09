@@ -8,6 +8,7 @@ import CellActions from "./cell-actions";
 export type Order = {
   id: string;
   menu: string;
+  customer: string;
   status:
     | "place"
     | "paid"
@@ -23,12 +24,12 @@ export const columns: ColumnDef<Order>[] = [
     header: "Menu",
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "customer",
+    header: "Customer",
   },
   {
-    accessorKey: "totalAmount",
-    header: "Total Amount",
+    accessorKey: "status",
+    header: "Status",
   },
   {
     accessorKey: "createdAt",

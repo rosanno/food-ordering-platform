@@ -1,9 +1,10 @@
 import Stripe from "stripe";
 import { NextRequest, NextResponse } from "next/server";
+import { currentUser } from "@clerk/nextjs/server";
+import { auth } from "@clerk/nextjs";
 
 import { stripe } from "@/lib/stripe";
 import prisma from "@/lib/prisma";
-import { auth } from "@clerk/nextjs";
 
 export async function POST(
   request: NextRequest,
@@ -12,6 +13,7 @@ export async function POST(
   try {
     const { menuIds } = await request.json();
     const { userId } = auth();
+    const user = await currentUser();
 
     if (!menuIds || menuIds.length === 0) {
       return new NextResponse("Menu ids are required", {
@@ -49,10 +51,13 @@ export async function POST(
       });
     });
 
+    const name = user?.firstName + " " + user?.lastName;
+
     const order = await prisma.order.create({
       data: {
         restaurantId: restaurant?.id as string,
         customerId: userId as string,
+        customer: name,
         status: "place",
         orderItems: {
           create: menuIds.map((menuId: string) => ({

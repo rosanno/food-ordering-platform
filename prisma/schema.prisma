@@ -52,6 +52,7 @@ model Menu {
 model Order {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
   customerId   String
+  customer     String
   address      String     @default("")
   phone        String     @default("")
   restaurantId String     @db.ObjectId
@@ -64,11 +65,11 @@ model Order {
 }
 
 model OrderItem {
-  id      String @id @default(auto()) @map("_id") @db.ObjectId
-  orderId String @db.ObjectId
-  menuId  String @db.ObjectId
-  order   Order  @relation(fields: [orderId], references: [id])
-  menu    Menu   @relation(fields: [menuId], references: [id])
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  orderId  String @db.ObjectId
+  menuId   String @db.ObjectId
+  order    Order  @relation(fields: [orderId], references: [id])
+  menu     Menu   @relation(fields: [menuId], references: [id])
 }
 
 model Cart {

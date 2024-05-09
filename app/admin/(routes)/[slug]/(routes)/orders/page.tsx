@@ -19,6 +19,7 @@ const OrdersPage = async () => {
 
   const transformOrder: Order[] = orders.map((item) => ({
     id: item.id,
+    customer: item.order.customer,
     menu: item.menu.menuName,
     status: item.order.status,
     createdAt: format(item.order.createdAt, "d MMMM, yyyy"),
