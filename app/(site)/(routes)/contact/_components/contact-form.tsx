@@ -52,14 +52,14 @@ const ContactForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-3 md:space-y-0 flex flex-col md:flex-row gap-8"
+          className="space-y-7"
         >
-          <div className="space-y-7 flex-1">
+          <div className="flex flex-col md:flex-row gap-3">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex-1">
                   <FormControl>
                     <Input
                       placeholder="Enter your name"
@@ -74,7 +74,7 @@ const ContactForm = () => {
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
+                <FormItem className="flex-1">
                   <FormControl>
                     <Input
                       placeholder="Enter your email address"
@@ -85,42 +85,42 @@ const ContactForm = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="subject"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Input
-                      placeholder="Enter subject"
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-[13px]" />
-                </FormItem>
-              )}
-            />
           </div>
-          <div className="flex-1">
-            <FormField
-              control={form.control}
-              name="message"
-              render={({ field }) => (
-                <FormItem>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Enter Message"
-                      rows={8}
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormMessage className="text-[13px]" />
-                </FormItem>
-              )}
-            />
-            <Button
-              type="submit"
-              className="
+          <FormField
+            control={form.control}
+            name="subject"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Input
+                    placeholder="Enter subject"
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-[13px]" />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
+            name="message"
+            render={({ field }) => (
+              <FormItem>
+                <FormControl>
+                  <Textarea
+                    placeholder="Enter Message"
+                    rows={8}
+                    {...field}
+                  />
+                </FormControl>
+                <FormMessage className="text-[13px]" />
+              </FormItem>
+            )}
+          />
+          <Button
+            type="submit"
+            className="
                 uppercase 
                 justify-end 
                 float-end 
@@ -129,10 +129,9 @@ const ContactForm = () => {
                 hover:bg-[#FFA71E] 
                 hover:bg-opacity-80
             "
-            >
-              send message
-            </Button>
-          </div>
+          >
+            send message
+          </Button>
         </form>
       </Form>
     </div>
