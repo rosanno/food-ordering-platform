@@ -21,6 +21,7 @@ const OrdersPage = async () => {
     id: item.id,
     customer: item.order.customer,
     menu: item.menu.menuName,
+    image: item.menu.imageUrl!,
     status: item.order.status,
     createdAt: format(item.order.createdAt, "d MMMM, yyyy"),
   }));
