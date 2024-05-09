@@ -41,9 +41,17 @@ const RestaurantSwitcher = ({
   className,
   items = [],
 }: RestaurantSwitcherProps) => {
+  const MAX_LENGTH = 20;
+
   const restauRantModal = useRestaurantModal();
   const params = useParams();
   const router = useRouter();
+
+  const sliceName = (name: string) => {
+    return name.length > MAX_LENGTH
+      ? `${name.slice(0, MAX_LENGTH)}...`
+      : name;
+  };
 
   const formattedItems = items.map((item) => ({
     label: item.name,
@@ -79,7 +87,7 @@ const RestaurantSwitcher = ({
           )}
         >
           <StoreIcon className="mr-2 h-4 w-4" />
-          {currentRestaurant?.label}
+          {sliceName(currentRestaurant?.label!)}
           <ChevronsUpDown className="ml-auto h-4 w-4 shrink-0 opacity-50" />
         </Button>
       </PopoverTrigger>
