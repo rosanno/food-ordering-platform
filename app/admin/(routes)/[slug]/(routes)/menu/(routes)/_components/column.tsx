@@ -17,23 +17,6 @@ export type Menu = {
 
 export const columns: ColumnDef<Menu>[] = [
   {
-    accessorKey: "image",
-    header: "",
-    cell: ({ row }) => {
-      return (
-        <div className="bg-gray-100/70 w-fit p-2.5 rounded-md">
-          <Image
-            src={row.getValue("image")}
-            alt={row.getValue("menuName")}
-            height={70}
-            width={70}
-            className="h-12 w-12 object-contain"
-          />
-        </div>
-      );
-    },
-  },
-  {
     accessorKey: "menuName",
     header: ({ column }) => {
       return (
@@ -52,9 +35,17 @@ export const columns: ColumnDef<Menu>[] = [
     },
     cell: ({ row }) => {
       return (
-        <p className="text-sm">
-          {row.getValue("menuName")}
-        </p>
+        <div className="flex items-center gap-2">
+          <div className="bg-gray-100 rounded-md p-2">
+            <Image
+              src={row.original.image}
+              alt="menu image"
+              height={40}
+              width={40}
+            />
+          </div>
+          <p>{row.original.menuName}</p>
+        </div>
       );
     },
   },
