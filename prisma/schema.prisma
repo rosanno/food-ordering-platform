@@ -52,7 +52,7 @@ model Menu {
 model Order {
   id           String     @id @default(auto()) @map("_id") @db.ObjectId
   customerId   String
-  customer     String
+  customer     String     @default("")
   address      String     @default("")
   phone        String     @default("")
   restaurantId String     @db.ObjectId
