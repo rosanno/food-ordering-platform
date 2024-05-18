@@ -13,6 +13,7 @@ export default async function Navbar() {
   const { userId } = auth();
 
   let cartItem = [];
+  let favoriteItem;
 
   if (userId) {
     const user = await prisma.cart.findFirst({
@@ -24,6 +25,15 @@ export default async function Navbar() {
     cartItem = await prisma.cartItem.findMany({
       where: {
         cartId: user?.id,
+      },
+    });
+
+    favoriteItem = await prisma.favorite.findFirst({
+      where: {
+        customerId: userId as string,
+      },
+      include: {
+        favoriteItem: true,
       },
     });
   }
@@ -57,26 +67,57 @@ export default async function Navbar() {
             <MainNavigation />
             <div className="flex items-center gap-3.5">
               <Link href="/favorites">
-                <Heart className="h-[18px] w-[18px] text-yellow-500/85" />
+                <div className="relative">
+                  {userId && (
+                    <>
+                      {favoriteItem?.favoriteItem.length! >
+                        0 && (
+                        <span
+                          className="
+                             absolute 
+                             -top-2.5 
+                             -right-2 
+                             text-center 
+                             text-[12px] 
+                             bg-yellow-500 
+                             rounded-full 
+                             w-4 
+                             h-4
+                         "
+                        >
+                          {
+                            favoriteItem?.favoriteItem
+                              .length
+                          }
+                        </span>
+                      )}
+                    </>
+                  )}
+                  <Heart className="h-[18px] w-[18px] text-yellow-500/85" />
+                </div>
               </Link>
               <Link href="/cart">
                 <div className="relative">
                   {userId && (
-                    <span
-                      className="
-                      absolute 
-                      -top-2.5 
-                      -right-2 
-                      text-center 
-                      text-[12px] 
-                      bg-yellow-500 
-                      rounded-full 
-                      w-4 
-                      h-4
-                    "
-                    >
-                      {cartItem.length}
-                    </span>
+                    <>
+                      {cartItem.length > 0 && (
+                        <span
+                          className="
+                           absolute 
+                           -top-2.5 
+                           -right-2 
+                           text-center 
+                           text-[12px] 
+                           bg-yellow-500 
+                           rounded-full 
+                           w-4 
+                           h-4
+                        "
+                        >
+                          {cartItem.length}
+                        </span>
+                      )}
+                    </>
                   )}
                   <ShoppingCart className="h-[18px] w-[18px] text-yellow-500/85" />
                 </div>
