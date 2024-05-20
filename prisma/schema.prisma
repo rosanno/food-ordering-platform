@@ -23,6 +23,7 @@ model Restaurant {
   imageUrl  String
   menu      Menu[]
   order     Order[]
+  blogs     Blog[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -105,6 +106,19 @@ model FavoriteItem {
   favoriteId String   @db.ObjectId
   menu       Menu     @relation(fields: [menuId], references: [id])
   menuId     String   @db.ObjectId
+}
+
+model Blog {
+  id           String       @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  content      String
+  cover        String
+  slug         String
+  author       Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId String       @db.ObjectId
+
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
 }
 
 enum Status {
