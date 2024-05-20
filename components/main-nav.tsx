@@ -22,15 +22,15 @@ const MainNav = () => {
       active: pathname === `/admin/${params.slug}/orders`,
     },
     {
-      href: `/admin/${params.slug}/customers`,
-      label: "Customers",
-      active:
-        pathname === `/admin/${params.slug}/customers`,
-    },
-    {
       href: `/admin/${params.slug}/menu`,
       label: "Menu",
       active: pathname === `/admin/${params.slug}/menu`,
+    },
+    {
+      href: `/admin/${params.slug}/blog/create`,
+      label: "Create Blog",
+      active:
+        pathname === `/admin/${params.slug}/blog/create`,
     },
     {
       href: `/admin/${params.slug}/menu/create`,
