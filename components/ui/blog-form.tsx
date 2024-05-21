@@ -127,7 +127,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
               <FormItem>
                 <FormLabel>Published Date</FormLabel>
                 <FormControl>
-                  <DatePicker />
+                  <DatePicker field={field} />
                 </FormControl>
               </FormItem>
             )}
