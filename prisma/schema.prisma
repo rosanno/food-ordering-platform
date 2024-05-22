@@ -51,13 +51,13 @@ model Menu {
 }
 
 model Order {
-  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  id           String      @id @default(auto()) @map("_id") @db.ObjectId
   customerId   String
-  customer     String     @default("")
-  address      String     @default("")
-  phone        String     @default("")
-  restaurantId String     @db.ObjectId
-  restaurant   Restaurant @relation(fields: [restaurantId], references: [id])
+  customer     String      @default("")
+  address      String      @default("")
+  phone        String      @default("")
+  restaurantId String      @db.ObjectId
+  restaurant   Restaurant  @relation(fields: [restaurantId], references: [id])
   orderItems   OrderItem[]
   status       Status
 
@@ -66,11 +66,11 @@ model Order {
 }
 
 model OrderItem {
-  id       String @id @default(auto()) @map("_id") @db.ObjectId
-  orderId  String @db.ObjectId
-  menuId   String @db.ObjectId
-  order    Order  @relation(fields: [orderId], references: [id])
-  menu     Menu   @relation(fields: [menuId], references: [id])
+  id      String @id @default(auto()) @map("_id") @db.ObjectId
+  orderId String @db.ObjectId
+  menuId  String @db.ObjectId
+  order   Order  @relation(fields: [orderId], references: [id])
+  menu    Menu   @relation(fields: [menuId], references: [id])
 }
 
 model Cart {
@@ -109,16 +109,34 @@ model FavoriteItem {
 }
 
 model Blog {
-  id           String       @id @default(auto()) @map("_id") @db.ObjectId
-  title        String
-  content      String
-  cover        String
-  slug         String
-  author       Restaurant   @relation(fields: [restaurantId], references: [id])
-  restaurantId String       @db.ObjectId
+  id             String       @id @default(auto()) @map("_id") @db.ObjectId
+  title          String
+  content        String
+  cover          String
+  slug           String
+  isPublish      Boolean
+  categories     CategoriesOnBlogs[]
+  author         Restaurant   @relation(fields: [restaurantId], references: [id])
+  restaurantId   String       @db.ObjectId
 
-  createdAt    DateTime     @default(now())
-  updatedAt    DateTime     @updatedAt
+  createdAt      DateTime     @default(now())
+  updatedAt      DateTime     @updatedAt
+}
+
+model BlogCategory {
+  id        String                  @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  blogs     CategoriesOnBlogs[]
+}
+
+model CategoriesOnBlogs {
+  id                    String           @id @default(auto()) @map("_id") @db.ObjectId
+  blog                  Blog?            @relation(fields: [blogId], references: [id])
+  blogId                String?          @db.ObjectId
+  blogCategory          BlogCategory     @relation(fields: [blogCategoryId], references: [id])
+  blogCategoryId        String           @db.ObjectId
+
+  createdAt             DateTime         @default(now())
 }
 
 enum Status {
