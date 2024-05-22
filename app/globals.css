@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.ck-editor__editable {
+  min-height: 300px;
+}
+
 .loader {
   position: relative;
 }
