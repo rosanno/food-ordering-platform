@@ -1,6 +1,8 @@
+import prisma from "@/lib/prisma";
+
+import Card from "@/components/ui/card";
 import Header from "@/components/ui/header";
 import MenuForm from "@/components/ui/menu-form";
-import prisma from "@/lib/prisma";
 
 const UpdateMenuPage = async ({
   params,
@@ -14,10 +16,10 @@ const UpdateMenuPage = async ({
   });
 
   return (
-    <>
+    <Card>
       <Header title="Edit Menu" />
       <MenuForm initialData={menu} />
-    </>
+    </Card>
   );
 };
 

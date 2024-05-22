@@ -35,9 +35,11 @@ export default async function DashboardLayout({
   return (
     <>
       <DashboardNavbar />
-      <main className="px-5 md:px-12 lg:px-20 pt-20 mt-10">
-        {children}
-      </main>
+      <div className="bg-[#EFF2F3] flex-1">
+        <main className="px-5 md:px-12 lg:px-20 pt-20 mt-10">
+          {children}
+        </main>
+      </div>
     </>
   );
 }

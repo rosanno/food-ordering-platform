@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 import Header from "@/components/ui/header";
 import Client from "./_components/client";
 import { Menu } from "./_components/column";
+import Card from "@/components/ui/card";
 
 const ManageRestaurantPage = async ({
   params,
@@ -38,8 +39,10 @@ const ManageRestaurantPage = async ({
 
   return (
     <>
-      <Header title="Menu List" />
-      <Client data={transformMenu} />
+      <Card>
+        <Header title="Menu List" />
+        <Client data={transformMenu} />
+      </Card>
     </>
   );
 };
