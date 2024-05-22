@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
@@ -28,6 +29,8 @@ const CategoryModal = () => {
   const categoryModal = useCategoryModal();
   const router = useRouter();
 
+  const [loading, setLoading] = useState<boolean>(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,13 +42,16 @@ const CategoryModal = () => {
     values: z.infer<typeof formSchema>
   ) => {
     try {
+      setLoading(true);
       await axios.post("/api/blog-category", values);
 
       toast.success("category created");
-      categoryModal.onClose;
+      categoryModal.onClose();
       router.refresh();
     } catch (error) {
       toast.error("Something went wrong");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -79,6 +85,7 @@ const CategoryModal = () => {
               size={"sm"}
               variant={"destructive"}
               onClick={categoryModal.onClose}
+              disabled={loading}
             >
               Cancel
             </Button>
@@ -86,6 +93,7 @@ const CategoryModal = () => {
               type="submit"
               size={"sm"}
               variant={"outline"}
+              disabled={loading}
             >
               Save
             </Button>
