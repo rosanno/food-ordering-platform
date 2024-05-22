@@ -172,7 +172,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
                             />
                           </FormControl>
                           <FormLabel className="text-sm font-normal">
-                            {item.category}
+                            {item.name}
                           </FormLabel>
                         </FormItem>
                       );
