@@ -2,7 +2,6 @@
 
 import * as z from "zod";
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { toast } from "sonner";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,8 +14,8 @@ import axios from "axios";
 import { BlogCategory } from "@prisma/client";
 import { UploadDropzone } from "@/lib/uploadthing";
 
-const Editor = dynamic(
-  () => import("@/components/editor"),
+const CustomEditor = dynamic(
+  () => import("@/components/custom-editor"),
   {
     ssr: false,
   }
@@ -28,9 +27,11 @@ import {
   FormField,
   FormItem,
   FormLabel,
+  FormMessage,
 } from "./form";
 import { Input } from "./input";
 import { Checkbox } from "./checkbox";
+import { Button } from "./button";
 import DatePicker from "@/components/date-picker";
 import AddCategory from "@/components/add-category";
 import BlogImagePriview from "@/components/blog-image-priview";
@@ -40,12 +41,31 @@ interface BlogFormProps {
 }
 
 const formSchema = z.object({
-  title: z.string().min(5).max(100),
-  content: z.string().min(220).max(1000),
+  title: z
+    .string()
+    .min(5, {
+      message: "Title must contain at least 5 character(s)",
+    })
+    .max(100),
+  content: z
+    .string()
+    .min(100, {
+      message:
+        "Message must contain at least 100 character(s)",
+    })
+    .max(1000),
   cover: z.string(),
-  metaTitle: z.string().min(20).max(100),
-  metaDescription: z.string().min(20).max(200),
-  publishedDate: z.string(),
+  metaTitle: z.string().min(5, {
+    message:
+      "Meta title must contain at least 5 character(s)",
+  }),
+  metaDescription: z.string().min(20, {
+    message:
+      "Meta description must contain at least 20 character(s)",
+  }),
+  publishedDate: z.date({
+    required_error: "Publish date is required.",
+  }),
   categories: z
     .array(z.string())
     .refine((value) => value.some((item) => item)),
@@ -63,7 +83,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
       cover: "",
       metaTitle: "",
       metaDescription: "",
-      publishedDate: "",
+      publishedDate: undefined,
       categories: [""],
     },
   });
@@ -93,7 +113,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex gap-5"
+        className="flex gap-5 mt-8"
       >
         <div className="space-y-4 flex-1">
           <FormField
@@ -108,6 +128,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
                     {...field}
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -117,8 +138,9 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
             render={({ field }) => (
               <FormItem>
                 <FormControl>
-                  <Editor field={field} />
+                  <CustomEditor field={field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -131,6 +153,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -143,11 +166,19 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
                 <FormControl>
                   <Input {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
         </div>
         <div className="w-[310px] space-y-4">
+          <Button
+            type="submit"
+            size="sm"
+            className="w-full"
+          >
+            Publish
+          </Button>
           <div className="border py-3 px-4 rounded-md">
             <FormField
               control={form.control}
@@ -158,6 +189,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
                   <FormControl>
                     <DatePicker field={field} />
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
@@ -250,6 +282,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
                       )}
                     </>
                   </FormControl>
+                  <FormMessage />
                 </FormItem>
               )}
             />
