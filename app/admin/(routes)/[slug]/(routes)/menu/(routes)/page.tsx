@@ -1,10 +1,15 @@
 import { format } from "date-fns";
 import prisma from "@/lib/prisma";
 
-import Header from "@/components/ui/header";
 import Client from "./_components/client";
 import { Menu } from "./_components/column";
-import Card from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const ManageRestaurantPage = async ({
   params,
@@ -40,8 +45,15 @@ const ManageRestaurantPage = async ({
   return (
     <>
       <Card>
-        <Header title="Menu List" />
-        <Client data={transformMenu} />
+        <CardHeader>
+          <CardTitle>Menu List</CardTitle>
+          <CardDescription>
+            Manage your restaurant menu&apos;s
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <Client data={transformMenu} />
+        </CardContent>
       </Card>
     </>
   );

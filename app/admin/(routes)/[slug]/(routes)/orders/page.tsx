@@ -1,10 +1,14 @@
 import { format } from "date-fns";
 import prisma from "@/lib/prisma";
 
-import Header from "@/components/ui/header";
 import { Order } from "./_components/column";
 import Client from "./_components/client";
-import Card from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const OrdersPage = async ({
   params,
@@ -46,8 +50,12 @@ const OrdersPage = async ({
 
   return (
     <Card>
-      <Header title="Order List" />
-      <Client data={transformOrder} />
+      <CardHeader>
+        <CardTitle>Orders</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <Client data={transformOrder} />
+      </CardContent>
     </Card>
   );
 };

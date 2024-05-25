@@ -1,8 +1,12 @@
 import prisma from "@/lib/prisma";
 
 import BlogForm from "@/components/ui/blog-form";
-import Card from "@/components/ui/card";
-import Header from "@/components/ui/header";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const CreateBlogPage = async ({
   params,
@@ -20,12 +24,16 @@ const CreateBlogPage = async ({
   });
 
   return (
-    <Card className="pt-4 pb-7">
-      <Header title="Add New Blog" />
-      <BlogForm
-        blogCategories={blogCategories}
-        restaurantId={restaurant?.id}
-      />
+    <Card>
+      <CardHeader>
+        <CardTitle>Create new blog</CardTitle>
+      </CardHeader>
+      <CardContent>
+        <BlogForm
+          blogCategories={blogCategories}
+          restaurantId={restaurant?.id}
+        />
+      </CardContent>
     </Card>
   );
 };

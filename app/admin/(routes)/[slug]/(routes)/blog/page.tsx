@@ -2,7 +2,14 @@ import { format } from "date-fns";
 
 import prisma from "@/lib/prisma";
 
-import Card from "@/components/ui/card";
+
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Blog } from "./_components/column";
 import Client from "./_components/client";
 
@@ -30,7 +37,13 @@ const BlogPage = async () => {
 
   return (
     <Card>
-      <Client data={transformBlog} />
+      <CardHeader>
+        <CardTitle>Blogs</CardTitle>
+        <CardDescription>Manage your blogs</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Client data={transformBlog} />
+      </CardContent>
     </Card>
   );
 };

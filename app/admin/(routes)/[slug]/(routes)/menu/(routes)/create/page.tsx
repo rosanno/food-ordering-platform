@@ -1,8 +1,12 @@
 import prisma from "@/lib/prisma";
 
-import Header from "@/components/ui/header";
 import MenuForm from "@/components/ui/menu-form";
-import Card from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const CreateRestaurantPage = async ({
   params,
@@ -17,10 +21,12 @@ const CreateRestaurantPage = async ({
 
   return (
     <Card>
-      <div className="lg:px-5 py-2">
-        <Header title="Add Menu" />
+      <CardHeader>
+        <CardTitle>Create new menu</CardTitle>
+      </CardHeader>
+      <CardContent>
         <MenuForm restaurantId={restaurant?.id} />
-      </div>
+      </CardContent>
     </Card>
   );
 };
