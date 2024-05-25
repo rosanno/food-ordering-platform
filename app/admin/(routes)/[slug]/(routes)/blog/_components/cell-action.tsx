@@ -49,7 +49,9 @@ const CellAction = ({ data }: CellActionProps) => {
           </DropdownMenuLabel>
           <DropdownMenuItem
             onClick={() =>
-              router.push(`/blog/${decodedUrl}}`)
+              router.push(
+                `/admin/${params.slug}/blog/${decodedUrl}`
+              )
             }
           >
             <Eye className="mr-2 h-3 w-3" />
