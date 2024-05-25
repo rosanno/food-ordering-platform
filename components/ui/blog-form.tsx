@@ -2,6 +2,7 @@
 
 import * as z from "zod";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -73,6 +74,8 @@ const BlogForm = ({
   blogCategories,
   restaurantId,
 }: BlogFormProps) => {
+  const router = useRouter();
+
   const [key, setKey] = useState("");
   const [imageName, setImageName] = useState("");
 
@@ -93,8 +96,12 @@ const BlogForm = ({
     values: z.infer<typeof formSchema>
   ) => {
     try {
-      await axios.post(`/api/blog/${restaurantId}`, values);
+      const response = await axios.post(
+        `/api/blog/${restaurantId}`,
+        values
+      );
 
+      // router.push(`/blog/${response.data.blogSlug}`);
       toast.success("Blog post created");
     } catch (error) {
       toast.error("Something went wrong");

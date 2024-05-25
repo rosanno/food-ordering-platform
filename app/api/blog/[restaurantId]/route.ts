@@ -40,7 +40,7 @@ export async function POST(
       },
     });
 
-    return NextResponse.json({ status: 200 });
+    return NextResponse.json({ blog }, { status: 200 });
   } catch (error) {
     console.log("[BLOG_POST]", error);
     return new NextResponse("Internal error", {
