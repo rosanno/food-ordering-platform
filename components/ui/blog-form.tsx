@@ -38,6 +38,7 @@ import BlogImagePriview from "@/components/blog-image-priview";
 
 interface BlogFormProps {
   blogCategories?: BlogCategory[];
+  restaurantId?: string;
 }
 
 const formSchema = z.object({
@@ -47,13 +48,10 @@ const formSchema = z.object({
       message: "Title must contain at least 5 character(s)",
     })
     .max(100),
-  content: z
-    .string()
-    .min(100, {
-      message:
-        "Message must contain at least 100 character(s)",
-    })
-    .max(1000),
+  content: z.string().min(100, {
+    message:
+      "Message must contain at least 100 character(s)",
+  }),
   cover: z.string(),
   metaTitle: z.string().min(5, {
     message:
@@ -71,7 +69,10 @@ const formSchema = z.object({
     .refine((value) => value.some((item) => item)),
 });
 
-const BlogForm = ({ blogCategories }: BlogFormProps) => {
+const BlogForm = ({
+  blogCategories,
+  restaurantId,
+}: BlogFormProps) => {
   const [key, setKey] = useState("");
   const [imageName, setImageName] = useState("");
 
@@ -83,15 +84,21 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
       cover: "",
       metaTitle: "",
       metaDescription: "",
-      publishedDate: undefined,
-      categories: [""],
+      publishedDate: new Date(),
+      categories: [],
     },
   });
 
   const onSubmit = async (
     values: z.infer<typeof formSchema>
   ) => {
-    console.log(values);
+    try {
+      await axios.post(`/api/blog/${restaurantId}`, values);
+
+      toast.success("Blog post created");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
 
   const onDeleteImage = async (
@@ -177,7 +184,7 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
             size="sm"
             className="w-full"
           >
-            Publish
+            Create post
           </Button>
           <div className="border py-3 px-4 rounded-md">
             <FormField
@@ -198,53 +205,42 @@ const BlogForm = ({ blogCategories }: BlogFormProps) => {
             <FormField
               control={form.control}
               name="categories"
-              render={() => (
+              render={({ field }) => (
                 <FormItem>
                   <div className="flex items-center gap-1.5 pb-3.5 mb-4 px-4 border-b">
                     <FormLabel>Categories</FormLabel>
                     <AddCategory />
                   </div>
                   {blogCategories?.map((item) => (
-                    <FormField
+                    <FormItem
                       key={item.id}
-                      control={form.control}
-                      name="categories"
-                      render={({ field }) => {
-                        return (
-                          <FormItem
-                            key={item.id}
-                            className="px-4"
-                          >
-                            <FormControl>
-                              <Checkbox
-                                checked={field.value?.includes(
-                                  item.id
-                                )}
-                                onCheckedChange={(
-                                  checked
-                                ) => {
-                                  return checked
-                                    ? field.onChange([
-                                        ...field.value,
-                                        item.id,
-                                      ])
-                                    : field.onChange(
-                                        field.value?.filter(
-                                          (value) =>
-                                            value !==
-                                            item.id
-                                        )
-                                      );
-                                }}
-                              />
-                            </FormControl>
-                            <FormLabel className="text-[13px] font-normal ml-2.5">
-                              {item.name}
-                            </FormLabel>
-                          </FormItem>
-                        );
-                      }}
-                    />
+                      className="px-4"
+                    >
+                      <FormControl>
+                        <Checkbox
+                          checked={
+                            field.value?.includes(
+                              item.id
+                            ) || false
+                          }
+                          onCheckedChange={(checked) => {
+                            const newValue = checked
+                              ? [
+                                  ...(field.value || []),
+                                  item.id,
+                                ]
+                              : field.value?.filter(
+                                  (value) =>
+                                    value !== item.id
+                                );
+                            field.onChange(newValue);
+                          }}
+                        />
+                      </FormControl>
+                      <FormLabel className="text-[13px] font-normal ml-2.5">
+                        {item.name}
+                      </FormLabel>
+                    </FormItem>
                   ))}
                 </FormItem>
               )}
