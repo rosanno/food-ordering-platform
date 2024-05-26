@@ -2,12 +2,20 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import CellAction from "./cell-action";
+import {
+  BlogCategory,
+  CategoriesOnBlogs,
+} from "@prisma/client";
 
 export type Blog = {
   id: string;
   title: string;
   author: string;
-  categories: string;
+  categories:
+    | (CategoriesOnBlogs & {
+        blogCategory: BlogCategory;
+      })[]
+    | null;
   blogSlug: string;
   status: boolean;
   date: string;
@@ -25,6 +33,13 @@ export const columns: ColumnDef<Blog>[] = [
   {
     accessorKey: "categories",
     header: "Category",
+    cell: ({ row }) => {
+      const category = row.original.categories?.map(
+        (item) => item.blogCategory.name
+      );
+
+      return <p>{category}</p>;
+    },
   },
   {
     accessorKey: "status",
