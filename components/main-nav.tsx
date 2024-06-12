@@ -27,10 +27,9 @@ const MainNav = () => {
       active: pathname === `/admin/${params.slug}/menu`,
     },
     {
-      href: `/admin/${params.slug}/blog/create`,
-      label: "Create Blog",
-      active:
-        pathname === `/admin/${params.slug}/blog/create`,
+      href: `/admin/${params.slug}/blog`,
+      label: "Blogs",
+      active: pathname === `/admin/${params.slug}/blog`,
     },
     {
       href: `/admin/${params.slug}/menu/create`,
