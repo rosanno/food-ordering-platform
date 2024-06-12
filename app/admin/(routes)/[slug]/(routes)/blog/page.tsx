@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 import { Blog } from "./_components/column";
 import Client from "./_components/client";
 
@@ -38,11 +39,18 @@ const BlogPage = async () => {
   return (
     <Card>
       <CardHeader className="p-0">
-        <div className="pb-2 pt-8 px-6">
-          <CardTitle className="pb-1">Blogs</CardTitle>
-          <CardDescription>
-            Manage your created blogs
-          </CardDescription>
+        <div className="pb-2 pt-8 px-6 flex justify-between items-center">
+          <div>
+            <CardTitle className="pb-1">Blogs</CardTitle>
+            <CardDescription>
+              Manage your created blogs
+            </CardDescription>
+          </div>
+          <div>
+            <Button size="sm" className="w-52 rounded-full">
+              Create Post
+            </Button>
+          </div>
         </div>
         <Separator />
       </CardHeader>
