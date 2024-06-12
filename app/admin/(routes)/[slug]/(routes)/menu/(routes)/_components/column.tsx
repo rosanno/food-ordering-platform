@@ -38,7 +38,7 @@ export const columns: ColumnDef<Menu>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
-          <div className="bg-gray-100 rounded-md p-2">
+          <div className="bg-gray-100 p-1.5">
             <Image
               src={row.original.image}
               alt="menu image"

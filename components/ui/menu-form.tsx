@@ -349,7 +349,8 @@ const MenuForm = ({
               size={"default"}
               disabled={loading}
             >
-              <Save className="h-5 w-5 mr-2" /> Save / Add
+              <Save className="h-5 w-5 mr-2" />{" "}
+              {initialData ? "Update" : "Save / Add"}
             </Button>
             <Button
               type="button"
