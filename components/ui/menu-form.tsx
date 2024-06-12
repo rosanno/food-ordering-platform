@@ -157,7 +157,10 @@ const MenuForm = ({
 
   return (
     <>
-      <FormHeader />
+      <FormHeader
+        label="Menu Detail"
+        description="Enter the details about your menu"
+      />
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
