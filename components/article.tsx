@@ -12,7 +12,7 @@ const Article = () => {
         md:px-6
       "
     >
-      <p className="text-[13px] sm:text-sm sm:leading-6">
+      <p className="text-sm sm:leading-6 text-muted-foreground">
         Overall, &quot;Create Delicious Dishes&quot; is an
         essential resource for anyone looking to start a
         food business or take their culinary skills to next
