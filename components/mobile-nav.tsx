@@ -6,7 +6,8 @@ import { X } from "lucide-react";
 import { useSideNav } from "@/hooks/use-side-nav";
 
 import { cn } from "@/lib/utils";
-import { Button } from "./ui/button";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent } from "@/components/ui/sheet";
 
 interface MobileNavProps {
   menuList: MenuList[];
@@ -22,28 +23,15 @@ const MobileNav = ({ menuList }: MobileNavProps) => {
   const pathname = usePathname();
 
   return (
-    <>
-      <aside
-        className={cn(
-          "w-2/3 bg-white shadow-md fixed inset-y-0 right-0 z-50 transition duration-300 p-3",
-          sideNav.isOpen
-            ? "translate-x-0"
-            : "translate-x-full"
-        )}
-      >
-        <div>
-          <Button
-            size={"icon"}
-            variant={"outline"}
-            onClick={() => sideNav.onOpen()}
-          >
-            <X className="h-5 w-5" />
-          </Button>
-        </div>
-        <div className="mt-20 px-8">
+    <Sheet
+      open={sideNav.isOpen}
+      onOpenChange={sideNav.onClose}
+    >
+      <SheetContent>
+        <div className="mt-20">
           <ul className="space-y-5">
             {menuList.map((item, index) => (
-              <li key={index} className="text-[16px]">
+              <li key={index} className="text-sm">
                 <Link
                   href={item.path}
                   className={cn(
@@ -55,20 +43,13 @@ const MobileNav = ({ menuList }: MobileNavProps) => {
                 >
                   {item.label}
                 </Link>
-                <div className="border-b border-gray-200/50 pt-5" />
+                <div className="border-b border-gray-200/50 pt-3" />
               </li>
             ))}
           </ul>
         </div>
-      </aside>
-      <div
-        onClick={() => sideNav.onClose()}
-        className={cn(
-          "fixed w-full h-full top-0 bg-black/40 backdrop-blur-md z-40 transition duration-300",
-          sideNav.isOpen ? "block" : "hidden"
-        )}
-      />
-    </>
+      </SheetContent>
+    </Sheet>
   );
 };
 
