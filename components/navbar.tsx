@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
 import prisma from "@/lib/prisma";
-import { Heart, ShoppingCart } from "lucide-react";
+import { Heart, ShoppingBasket } from "lucide-react";
 import { MenuList } from "@/constants";
 
 import MobileNav from "./mobile-nav";
@@ -65,7 +65,7 @@ export default async function Navbar() {
               <span className="text-[#FF9E0A]">Food</span>
             </Link>
             <MainNavigation />
-            <div className="flex items-center gap-3.5">
+            <div className="flex items-center gap-x-3">
               <Link href="/favorites">
                 <div className="relative">
                   {userId && (
@@ -93,7 +93,7 @@ export default async function Navbar() {
                       )}
                     </>
                   )}
-                  <Heart className="h-[18px] w-[18px] text-yellow-500/85" />
+                  <Heart className="size-5 text-yellow-500/85" />
                 </div>
               </Link>
               <Link href="/cart">
@@ -119,7 +119,7 @@ export default async function Navbar() {
                       )}
                     </>
                   )}
-                  <ShoppingCart className="h-[18px] w-[18px] text-yellow-500/85" />
+                  <ShoppingBasket className="size-5 text-yellow-500/85" />
                 </div>
               </Link>
               <Avatar />
