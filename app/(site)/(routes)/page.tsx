@@ -12,6 +12,8 @@ export default function Home() {
          md:grid-cols-12
          md:gap-12
          items-center
+         mt-10
+         md:mt-0
         "
       >
         <Article />
