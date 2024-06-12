@@ -60,13 +60,13 @@ const MenuDetails = ({ item }: MenuDetailsProps) => {
   return (
     <section className="bg-gray-100/45 rounded-md shadow-sm md:p-4">
       <div className="flex md:items-center flex-col md:flex-row lg:gap-10">
-        <div className="border border-gray-100/75 rounded-md p-8">
+        <div className="w-full h-full">
           <Image
             src={item?.imageUrl as string}
             alt={item?.menuName as string}
             height={500}
             width={500}
-            className="w-full md:w-[520px]"
+            className="w-full h-full object-cover"
           />
         </div>
         <div className="space-y-1">

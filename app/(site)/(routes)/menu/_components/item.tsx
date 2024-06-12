@@ -56,40 +56,21 @@ const Item = ({ item }: ItemProps) => {
   );
 
   return (
-    <div
-      className="
-        bg-gray-100/30
-        px-5
-        py-2
-        w-full
-        rounded-lg 
-        shadow-md 
-        transition-all
-        duration-300
-        mb-32
-    "
-    >
+    <div className="border border-gray-100/90 cursor-pointer relative">
       <Link href={`/menu/${item?.slug}`}>
-        <div className="flex items-center justify-center">
+        <div className="w-full h-36 sm:h-60 md:h-44">
           <Image
             src={item?.imageUrl as string}
             alt={item?.menuName as string}
-            height={350}
-            width={350}
-            className="
-            -mt-32
-            w-full
-            h-full
-            md:w-48
-            md:h-48
-            object-contain
-          "
+            height={400}
+            width={400}
+            className="object-cover h-full w-full"
           />
         </div>
-        <div className="space-y-3 mt-4">
-          <h4 className="truncate text-sm capitalize">
+        <div className="pb-2.5 pt-3 px-3">
+          <h2 className="truncate text-[0.9rem] font-medium mb-2">
             {item?.menuName}
-          </h4>
+          </h2>
           <p className="flex items-center text-[12px] text-muted-foreground">
             <GoStarFill className="text-[#FFA71E] mr-1.5" />
             (4.8)
@@ -98,8 +79,9 @@ const Item = ({ item }: ItemProps) => {
           <p
             className="
             text-[#FF9E0A]
-              text-[13px]
-              font-medium
+              text-lg
+              sm:text-xl
+              mt-2.5
             "
           >
             {item &&
@@ -108,35 +90,25 @@ const Item = ({ item }: ItemProps) => {
         </div>
       </Link>
       <div
-        className="
-          py-1.5
-          mt-2
-          flex 
-          items-center
-          justify-between
-          gap-2.5
-        "
+        onClick={handleFavorite}
+        role="button"
+        className="absolute z-20 top-2 right-2.5 border rounded-full p-1.5 bg-white/75"
       >
+        {isFavoriteIndex ? (
+          <Heart className="size-3.5 text-black" />
+        ) : (
+          <IoMdHeart className="text-[#FFA71E] text-xl" />
+        )}
+      </div>
+      <div className="pt-4 pb-3 px-3">
         <Button
-          size={"sm"}
-          variant={"outline"}
-          className="w-full flex-1"
+          size="sm"
+          variant="warning"
+          className="h-8 w-full flex-1"
           disabled={loading}
           onClick={handleOrder}
         >
-          Order Now
-        </Button>
-        <Button
-          size={"icon"}
-          variant={"outline"}
-          disabled={loading}
-          onClick={handleFavorite}
-        >
-          {isFavoriteIndex ? (
-            <Heart className="h-4 w-4 text-[#FFA71E]" />
-          ) : (
-            <IoMdHeart className="text-[#FFA71E] text-xl" />
-          )}
+          Add to basket
         </Button>
       </div>
     </div>

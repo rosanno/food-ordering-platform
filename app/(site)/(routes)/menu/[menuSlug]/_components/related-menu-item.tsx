@@ -54,13 +54,13 @@ const RelatedMenuItem = ({
   return (
     <div className="rounded-md shadow relative">
       <Link href={`/menu/${item?.slug}`}>
-        <div className="flex justify-center px-2 py-4 bg-gray-200/25">
+        <div className="h-36 bg-gray-200/25">
           <Image
             src={item?.imageUrl!}
             alt={item?.menuName!}
-            height={95}
-            width={95}
-            className="object-contain h-28"
+            height={400}
+            width={400}
+            className="object-cover h-full w-full"
           />
         </div>
         <div className="p-2.5">
@@ -91,19 +91,17 @@ const RelatedMenuItem = ({
           <ShoppingCart className="h-4 w-4 text-[#FFA71E]" />
         </Button>
       </div>
-      <Button
-        size={"icon"}
-        variant={"outline"}
-        className="absolute z-40 top-2 right-2 rounded-full"
+      <div
+        role="button"
         onClick={handleFavorite}
-        disabled={loading}
+        className="absolute z-20 top-2 right-2.5 border rounded-full p-1.5 bg-white/75"
       >
         {isFavoriteIndex ? (
-          <Heart className="h-4 w-4 text-[#FFA71E]" />
+          <Heart className="size-4 text-black" />
         ) : (
           <IoMdHeart className="text-[#FFA71E] text-xl" />
         )}
-      </Button>
+      </div>
     </div>
   );
 };
