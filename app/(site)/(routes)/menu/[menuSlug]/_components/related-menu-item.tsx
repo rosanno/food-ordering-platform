@@ -6,19 +6,15 @@ import { useAuth } from "@clerk/nextjs";
 import { useState } from "react";
 import { GoStarFill } from "react-icons/go";
 import { Heart, ShoppingCart } from "lucide-react";
+import { IoMdHeart } from "react-icons/io";
+import { CiShoppingBasket } from "react-icons/ci";
 
 import { formatCurrency } from "@/lib/utils";
-import {
-  Favorite,
-  FavoriteItem,
-  Menu,
-} from "@prisma/client";
+import { Menu } from "@prisma/client";
 import useHandleOrder from "@/hooks/use-handler-order";
 
 import { Button } from "@/components/ui/button";
 import useFavoriteHandler from "@/hooks/use-favorite-handler";
-import { IoMdHeart } from "react-icons/io";
-
 
 interface RelatedMenuItemProps {
   item: Menu | any;
@@ -88,7 +84,7 @@ const RelatedMenuItem = ({
           onClick={handleOrder}
           disabled={loading}
         >
-          <ShoppingCart className="h-4 w-4 text-[#FFA71E]" />
+          <CiShoppingBasket className="text-xl text-[#FFA71E]" />
         </Button>
       </div>
       <div
