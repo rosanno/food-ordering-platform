@@ -1,13 +1,15 @@
 import Link from "next/link";
 import { auth } from "@clerk/nextjs";
+import { Heart } from "lucide-react";
+import { CiShoppingBasket } from "react-icons/ci";
+
 import prisma from "@/lib/prisma";
-import { Heart, ShoppingBasket } from "lucide-react";
 import { MenuList } from "@/constants";
 
-import MobileNav from "./mobile-nav";
-import MainNavigation from "./main-navigation";
-import Avatar from "./avatar";
-import HamburgerButton from "./hamburger-button";
+import MobileNav from "@/components/mobile-nav";
+import MainNavigation from "@/components/main-navigation";
+import Avatar from "@/components/avatar";
+import HamburgerButton from "@/components/hamburger-button";
 
 export default async function Navbar() {
   const { userId } = auth();
@@ -119,7 +121,7 @@ export default async function Navbar() {
                       )}
                     </>
                   )}
-                  <ShoppingBasket className="size-5 text-yellow-500/85" />
+                  <CiShoppingBasket className="text-2xl text-yellow-500/85" />
                 </div>
               </Link>
               <Avatar />
