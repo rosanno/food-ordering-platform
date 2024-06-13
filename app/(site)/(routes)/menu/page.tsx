@@ -4,13 +4,28 @@ import prisma from "@/lib/prisma";
 import Item from "./_components/item";
 import { Suspense } from "react";
 import Loading from "./loading";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Menu List",
 };
 
-const MenuPage = async () => {
+const MenuPage = async ({
+  searchParams,
+}: {
+  searchParams?: { query?: string };
+}) => {
   const menu = await prisma.menu.findMany({
+    where: {
+      OR: [
+        {
+          menuName: {
+            contains: searchParams?.query?.toString() || "",
+            mode: "insensitive",
+          },
+        },
+      ],
+    },
     include: {
       favoriteItem: {
         include: {
@@ -23,6 +38,24 @@ const MenuPage = async () => {
   return (
     <Suspense fallback={<Loading />}>
       <section className="mt-20">
+        {searchParams?.query && (
+          <h1 className="text-2xl font-medium mb-6">
+            Search Results for:{" "}
+            <span className="font-normal">
+              {searchParams?.query}
+            </span>
+          </h1>
+        )}
+        {menu.length === 0 && (
+          <div className="flex justify-center">
+            <Image
+              src="/assets/no-results.jpg"
+              height={400}
+              width={400}
+              alt="no results"
+            />
+          </div>
+        )}
         <div
           className="
           grid

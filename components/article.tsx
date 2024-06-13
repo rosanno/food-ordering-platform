@@ -1,9 +1,29 @@
 "use client";
 
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { useDebouncedCallback } from "use-debounce";
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
-import { animate, motion } from "framer-motion";
 
 const Article = () => {
+  const [query, setQuery] = useState<string>("");
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+
+  const handleSearch = useDebouncedCallback(() => {
+    const params = new URLSearchParams(searchParams);
+
+    query
+      ? params.set("query", query)
+      : params.delete("query");
+    router.push(`/menu?${params.toString()}`);
+  });
+
   return (
     <section
       className="
@@ -55,8 +75,15 @@ const Article = () => {
              text-[13px] 
              focus:outline-none
             "
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(event) => {
+            if (event.key === "Enter") {
+              handleSearch();
+            }
+          }}
         />
         <div
+          role="button"
           className="
              cursor-pointer
              bg-black 
@@ -64,6 +91,7 @@ const Article = () => {
              p-2.5
              lg:p-4
             "
+          onClick={handleSearch}
         >
           <HiOutlineMagnifyingGlass
             className="

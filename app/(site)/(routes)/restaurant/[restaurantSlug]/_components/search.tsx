@@ -6,7 +6,6 @@ import {
   useRouter,
 } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { RiSearch2Line } from "react-icons/ri";
 import { cn } from "@/lib/utils";
 
 interface SearchProps {
