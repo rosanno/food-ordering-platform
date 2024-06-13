@@ -1,13 +1,21 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 import { TbCircleArrowUpRightFilled } from "react-icons/tb";
 import { HiCheckBadge } from "react-icons/hi2";
 import { MdOutlineStar } from "react-icons/md";
 
 const Featured = () => {
   return (
-    <section
+    <motion.section
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{
+        duration: 0.5,
+        delay: 1,
+        ease: "easeIn",
+      }}
       className="
         mt-10 
         col-span-8 
@@ -151,7 +159,7 @@ const Featured = () => {
           ))}
         </div>
       </div>
-    </section>
+    </motion.section>
   );
 };
 

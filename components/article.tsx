@@ -1,6 +1,7 @@
 "use client";
 
 import { HiOutlineMagnifyingGlass } from "react-icons/hi2";
+import { animate, motion } from "framer-motion";
 
 const Article = () => {
   return (
@@ -12,13 +13,28 @@ const Article = () => {
         md:px-6
       "
     >
-      <p className="text-sm sm:leading-6 text-muted-foreground">
+      <motion.p
+        initial={{ opacity: 0, x: -20 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{
+          duration: 0.5,
+          ease: "easeIn",
+        }}
+        className="text-sm sm:leading-6 text-muted-foreground"
+      >
         Overall, &quot;Create Delicious Dishes&quot; is an
         essential resource for anyone looking to start a
         food business or take their culinary skills to next
         level.
-      </p>
-      <div
+      </motion.p>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{
+          duration: 0.5,
+          delay: 0.5,
+          ease: "easeIn",
+        }}
         className="
          flex 
          items-center 
@@ -56,7 +72,7 @@ const Article = () => {
             "
           />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

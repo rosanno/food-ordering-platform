@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const data = [
   {
@@ -23,6 +24,22 @@ const data = [
   },
 ];
 
+const staggerContainer = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.6,
+      delay: 0.9,
+    },
+  },
+};
+
+const staggerItem = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0 },
+};
+
 const Step = () => {
   return (
     <section className="mt-32 lg:mt-60">
@@ -38,18 +55,48 @@ const Step = () => {
           space-y-2
         "
       >
-        <h4 className="uppercase text-[13px] text-yellow-500">
+        <motion.h4
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.6,
+            delay: 0.3,
+            ease: "easeInOut",
+          }}
+          className="uppercase text-[13px] text-yellow-500"
+        >
           step by step
-        </h4>
-        <h4 className="text-2xl font-semibold">
+        </motion.h4>
+        <motion.h4
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.8,
+            delay: 0.5,
+            ease: "easeInOut",
+          }}
+          className="text-2xl font-semibold"
+        >
           How It Works
-        </h4>
-        <p className="text-[13px] text-muted-foreground tracking-wide">
+        </motion.h4>
+        <motion.p
+          initial={{ opacity: 0, y: 10 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 0.6,
+            delay: 0.8,
+            ease: "easeInOut",
+          }}
+          className="text-[13px] text-muted-foreground tracking-wide"
+        >
           Explore following these steps will help you find a
           disher you love easily
-        </p>
+        </motion.p>
       </div>
-      <div
+      <motion.div
         className="
           flex 
           flex-col 
@@ -60,11 +107,20 @@ const Step = () => {
           md:gap-2 
           mt-16
         "
+        variants={staggerContainer}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
       >
         {data.map((_, index) => (
-          <div
+          <motion.div
             key={index}
             className="flex flex-col items-center justify-center text-center px-16"
+            variants={staggerItem}
+            transition={{
+              duration: 0.7,
+              ease: "linear",
+            }}
           >
             <div className="h-32 w-32">
               <Image
@@ -80,9 +136,9 @@ const Step = () => {
                 {_.details}
               </p>
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </section>
   );
 };
