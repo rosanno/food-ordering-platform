@@ -10,6 +10,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 const ManageRestaurantPage = async ({
   params,
@@ -47,11 +48,19 @@ const ManageRestaurantPage = async ({
   return (
     <>
       <Card>
-        <CardHeader>
-          <CardTitle>Menu List</CardTitle>
-          <CardDescription>
-            Manage your restaurant menu&apos;s
-          </CardDescription>
+        <CardHeader className="p-0">
+          <div className="pb-2 pt-8 px-6 flex justify-between items-center">
+            <div>
+              <CardTitle className="pb-1">
+                Menu List
+              </CardTitle>
+              <CardDescription>
+                Manage your restaurant menu&apos;s
+              </CardDescription>
+            </div>
+            <div></div>
+          </div>
+          <Separator />
         </CardHeader>
         <CardContent>
           <Client data={transformMenu} />
