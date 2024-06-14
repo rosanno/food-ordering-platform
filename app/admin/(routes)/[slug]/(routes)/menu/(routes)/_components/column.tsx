@@ -1,8 +1,10 @@
 "use client";
 
-import { ColumnDef } from "@tanstack/react-table";
 import Image from "next/image";
+import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
+
+import { formatCurrency } from "@/lib/utils";
 
 import CellAction from "./cell-actions";
 import { Button } from "@/components/ui/button";
@@ -12,6 +14,8 @@ export type Menu = {
   menuName: string;
   image: string;
   restaurant: string;
+  price: string;
+  discount: string;
   slug: string;
   createdAt: string;
   updatedAt: string;
@@ -38,14 +42,12 @@ export const columns: ColumnDef<Menu>[] = [
     cell: ({ row }) => {
       return (
         <div className="flex items-center gap-2">
-          <div className="bg-gray-100 p-1.5">
-            <Image
-              src={row.original.image}
-              alt="menu image"
-              height={40}
-              width={40}
-            />
-          </div>
+          <Image
+            src={row.original.image}
+            alt="menu image"
+            height={40}
+            width={40}
+          />
           <p>{row.original.menuName}</p>
         </div>
       );
@@ -60,6 +62,29 @@ export const columns: ColumnDef<Menu>[] = [
           {row.getValue("restaurant")}
         </p>
       );
+    },
+  },
+  {
+    accessorKey: "price",
+    header: "Price",
+    cell: ({ row }) => {
+      return (
+        <p>
+          {formatCurrency(
+            parseInt(row.original.price),
+            "PHP"
+          )}
+        </p>
+      );
+    },
+  },
+  {
+    accessorKey: "discount",
+    header: "Discount",
+    cell: ({ row }) => {
+      // const discount = parseInt(row.original.discount);
+
+      return <p>0%</p>;
     },
   },
   {

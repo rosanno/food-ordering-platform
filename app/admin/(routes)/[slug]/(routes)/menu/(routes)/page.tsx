@@ -36,6 +36,8 @@ const ManageRestaurantPage = async ({
     id: item.id,
     menuName: item.menuName,
     image: item.imageUrl as string,
+    price: item.price,
+    discount: item.discount!,
     restaurant: item.restaurant?.name as string,
     slug: item.slug,
     createdAt: format(item.createdAt, "d MMMM, yyyy"),
