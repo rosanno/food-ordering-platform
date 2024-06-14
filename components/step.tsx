@@ -3,6 +3,11 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 
+import {
+  staggerContainer,
+  staggerItem,
+} from "@/constants/variants";
+
 const data = [
   {
     label: "Choose Location",
@@ -24,25 +29,9 @@ const data = [
   },
 ];
 
-const staggerContainer = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.6,
-      delay: 0.9,
-    },
-  },
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 30 },
-  show: { opacity: 1, y: 0 },
-};
-
 const Step = () => {
   return (
-    <section className="mt-32 lg:mt-60">
+    <section className="mt-52 lg:mt-72">
       <div
         className="
           flex 

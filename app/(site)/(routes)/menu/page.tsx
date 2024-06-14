@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import prisma from "@/lib/prisma";
 
-import Item from "./_components/item";
+import MenuItem from "@/components/menu-item";
 import { Suspense } from "react";
 import Loading from "./loading";
 import Image from "next/image";
@@ -72,7 +72,7 @@ const MenuPage = async ({
         "
         >
           {menu.map((item) => (
-            <Item item={item} key={item.id} />
+            <MenuItem item={item} key={item.id} />
           ))}
         </div>
       </section>

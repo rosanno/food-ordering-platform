@@ -7,7 +7,7 @@ const Restaurants = async () => {
   const restaurants = await prisma.restaurant.findMany();
 
   return (
-    <section className="mt-32 lg:mt-60 lg:px-2">
+    <section className="mt-52 lg:mt-72 lg:px-2">
       <MotionDiv
         initial={{ opacity: 0, y: 20 }}
         whileInView={{

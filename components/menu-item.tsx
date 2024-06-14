@@ -30,7 +30,7 @@ interface ItemProps {
     | null;
 }
 
-const Item = ({ item }: ItemProps) => {
+const MenuItem = ({ item }: ItemProps) => {
   const { isSignedIn, userId } = useAuth();
   const [loading, setLoading] = useState(false);
 
@@ -115,4 +115,4 @@ const Item = ({ item }: ItemProps) => {
   );
 };
 
-export default Item;
+export default MenuItem;
