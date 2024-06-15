@@ -129,6 +129,12 @@ const BlogForm = ({
   ) => {
     try {
       if (initialData) {
+        const response = await axios.patch(
+          `/api/blog/${restaurantId}/${initialData.id}`,
+          values
+        );
+
+        console.log(response);
       } else {
         const response = await axios.post(
           `/api/blog/${restaurantId}`,

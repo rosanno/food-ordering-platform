@@ -1,12 +1,12 @@
-import slugify from "slugify";
 import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@clerk/nextjs/server";
+import slugify from "slugify";
 
 import prisma from "@/lib/prisma";
 
-export async function POST(
+export async function PATCH(
   request: NextRequest,
-  { params }: { params: { restaurantId: string } }
+  { params }: { params: { blogId: string } }
 ) {
   const {
     title,
@@ -22,7 +22,10 @@ export async function POST(
 
     const slug = slugify(title).toLowerCase();
 
-    const blog = await prisma.blog.create({
+    await prisma.blog.update({
+      where: {
+        id: params.blogId,
+      },
       data: {
         title,
         content,
@@ -30,9 +33,25 @@ export async function POST(
         blogSlug: slug,
         metaTitle,
         metaDescription,
-        restaurantId: params.restaurantId,
         categories: {
-          create: categories.map((categoryId: any) => ({
+          deleteMany: {},
+        },
+      },
+    });
+
+    await prisma.blog.update({
+      where: {
+        id: params.blogId,
+      },
+      data: {
+        title,
+        content,
+        cover,
+        blogSlug: slug,
+        metaTitle,
+        metaDescription,
+        categories: {
+          create: categories.map((categoryId: string) => ({
             blogCategory: {
               connect: {
                 id: categoryId,
@@ -43,9 +62,9 @@ export async function POST(
       },
     });
 
-    return NextResponse.json({ blog }, { status: 200 });
+    return NextResponse.json({ status: 200 });
   } catch (error) {
-    console.log("[BLOG_POST]", error);
+    console.log("[BLOG_PATCH]", error);
     return new NextResponse("Internal error", {
       status: 500,
     });
