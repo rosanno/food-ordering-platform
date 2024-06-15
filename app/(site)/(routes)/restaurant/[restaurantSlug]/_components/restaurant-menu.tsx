@@ -13,6 +13,11 @@ const RestaurantMenu = ({ menu }: RestaurantMenuProps) => {
   return (
     <section className="pt-72 md:pt-96 relative z-20">
       <Search placeholder="Search restaurant menu" />
+      {menu?.length === 0 && (
+        <div className="mt-4 text-muted-foreground flex items-center justify-center h-[25vh]">
+          No menu found
+        </div>
+      )}
       <div
         className="
            grid
