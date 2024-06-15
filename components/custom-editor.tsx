@@ -23,6 +23,7 @@ const CustomEditor = ({ field }: CustomEditorProps) => {
 
   return (
     <CKEditor
+      data={field.value}
       editor={ClassicEditor}
       {...field}
       onReady={(editor) => {

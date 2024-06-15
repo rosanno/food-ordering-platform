@@ -57,7 +57,13 @@ const CellAction = ({ data }: CellActionProps) => {
             <Eye className="mr-2 h-3 w-3" />
             <span className="text-[12px]">View</span>
           </DropdownMenuItem>
-          <DropdownMenuItem onClick={() => {}}>
+          <DropdownMenuItem
+            onClick={() =>
+              router.push(
+                `/admin/${params.slug}/blog/${decodedUrl}/edit`
+              )
+            }
+          >
             <Pencil className="mr-2 h-3 w-3" />
             <span className="text-[12px]">Edit</span>
           </DropdownMenuItem>

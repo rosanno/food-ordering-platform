@@ -4,7 +4,7 @@ import * as z from "zod";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   ControllerRenderProps,
@@ -12,7 +12,11 @@ import {
 } from "react-hook-form";
 import axios from "axios";
 
-import { BlogCategory } from "@prisma/client";
+import {
+  Blog,
+  BlogCategory,
+  CategoriesOnBlogs,
+} from "@prisma/client";
 import { UploadDropzone } from "@/lib/uploadthing";
 
 const CustomEditor = dynamic(
@@ -37,9 +41,18 @@ import DatePicker from "@/components/date-picker";
 import AddCategory from "@/components/add-category";
 import BlogImagePriview from "@/components/blog-image-priview";
 
+interface BlogWithCategories extends CategoriesOnBlogs {
+  blogCategory: BlogCategory;
+}
+
 interface BlogFormProps {
   blogCategories?: BlogCategory[];
   restaurantId?: string;
+  initialData?:
+    | (Blog & {
+        categories: BlogWithCategories[];
+      })
+    | null;
 }
 
 const formSchema = z.object({
@@ -73,36 +86,59 @@ const formSchema = z.object({
 const BlogForm = ({
   blogCategories,
   restaurantId,
+  initialData,
 }: BlogFormProps) => {
   const router = useRouter();
 
   const [key, setKey] = useState("");
   const [imageName, setImageName] = useState("");
 
+  const defaultValues = initialData
+    ? {
+        ...initialData,
+        isPublish: initialData.isPublish ?? false,
+        publishedDate: new Date() ?? undefined,
+        categories: initialData.categories.map(
+          (category) => category.blogCategory.id
+        ),
+      }
+    : {
+        title: "",
+        content: "",
+        cover: "",
+        metaTitle: "",
+        metaDescription: "",
+        publishedDate: new Date(),
+        categories: [],
+      };
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
-      title: "",
-      content: "",
-      cover: "",
-      metaTitle: "",
-      metaDescription: "",
-      publishedDate: new Date(),
-      categories: [],
-    },
+    defaultValues,
   });
+
+  useEffect(() => {
+    if (initialData?.content !== undefined) {
+      form.setValue("content", initialData.content);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [form.setValue]);
 
   const onSubmit = async (
     values: z.infer<typeof formSchema>
   ) => {
     try {
-      const response = await axios.post(
-        `/api/blog/${restaurantId}`,
-        values
+      if (initialData) {
+      } else {
+        const response = await axios.post(
+          `/api/blog/${restaurantId}`,
+          values
+        );
+        // router.push(`/blog/${response.data.blogSlug}`);
+      }
+      toast.success(
+        initialData ? "Blog updated" : "Blog created"
       );
-
-      // router.push(`/blog/${response.data.blogSlug}`);
-      toast.success("Blog post created");
     } catch (error) {
       toast.error("Something went wrong");
     }
@@ -127,7 +163,7 @@ const BlogForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex gap-5 mt-8"
+        className="flex gap-5 mt-5"
       >
         <div className="space-y-4 flex-1">
           <FormField
@@ -186,13 +222,6 @@ const BlogForm = ({
           />
         </div>
         <div className="w-[310px] space-y-4">
-          <Button
-            type="submit"
-            size="sm"
-            className="w-full"
-          >
-            Create post
-          </Button>
           <div className="border py-3 px-4 rounded-md">
             <FormField
               control={form.control}
@@ -219,35 +248,46 @@ const BlogForm = ({
                     <AddCategory />
                   </div>
                   {blogCategories?.map((item) => (
-                    <FormItem
+                    <FormField
                       key={item.id}
-                      className="px-4"
-                    >
-                      <FormControl>
-                        <Checkbox
-                          checked={
-                            field.value?.includes(
-                              item.id
-                            ) || false
-                          }
-                          onCheckedChange={(checked) => {
-                            const newValue = checked
-                              ? [
-                                  ...(field.value || []),
-                                  item.id,
-                                ]
-                              : field.value?.filter(
-                                  (value) =>
-                                    value !== item.id
-                                );
-                            field.onChange(newValue);
-                          }}
-                        />
-                      </FormControl>
-                      <FormLabel className="text-[13px] font-normal ml-2.5">
-                        {item.name}
-                      </FormLabel>
-                    </FormItem>
+                      control={form.control}
+                      name="categories"
+                      render={({ field }) => {
+                        return (
+                          <FormItem
+                            key={item.id}
+                            className="flex flex-row items-start space-x-3 space-y-0 px-4"
+                          >
+                            <FormControl>
+                              <Checkbox
+                                checked={field.value?.includes(
+                                  item.id
+                                )}
+                                onCheckedChange={(
+                                  checked
+                                ) => {
+                                  return checked
+                                    ? field.onChange([
+                                        ...field.value,
+                                        item.id,
+                                      ])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                          (value) =>
+                                            value !==
+                                            item.id
+                                        )
+                                      );
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="font-normal">
+                              {item.name}
+                            </FormLabel>
+                          </FormItem>
+                        );
+                      }}
+                    />
                   ))}
                 </FormItem>
               )}
@@ -290,6 +330,13 @@ const BlogForm = ({
               )}
             />
           </div>
+          <Button
+            type="submit"
+            size="sm"
+            className="w-full"
+          >
+            {!initialData ? "Create post" : "Update post"}
+          </Button>
         </div>
       </form>
     </Form>
