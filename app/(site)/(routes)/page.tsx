@@ -25,6 +25,8 @@ export default async function Home() {
     },
   });
 
+  const restaurants = await prisma.restaurant.findMany();
+
   return (
     <>
       <article
@@ -108,7 +110,7 @@ export default async function Home() {
         </MotionDiv>
       </section>
       <Step />
-      <Restaurants />
+      <Restaurants restaurant={restaurants} />
     </>
   );
 }
