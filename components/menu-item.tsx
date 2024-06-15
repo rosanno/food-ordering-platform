@@ -27,7 +27,8 @@ interface ItemProps {
     | (Menu & {
         favoriteItem: MenuWithFavoriteItem[];
       })
-    | null;
+    | null
+    | any;
 }
 
 const MenuItem = ({ item }: ItemProps) => {
@@ -50,7 +51,7 @@ const MenuItem = ({ item }: ItemProps) => {
   );
 
   const isFavoriteIndex = item?.favoriteItem.findIndex(
-    (favItem) =>
+    (favItem: any) =>
       favItem.favorite?.customerId === userId &&
       favItem.menuId === item.id
   );

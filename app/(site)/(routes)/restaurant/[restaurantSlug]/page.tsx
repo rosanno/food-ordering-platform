@@ -21,6 +21,13 @@ const RestaurantDetailsPage = async ({
     },
     include: {
       menu: {
+        include: {
+          favoriteItem: {
+            include: {
+              favorite: true,
+            },
+          },
+        },
         where: {
           OR: [
             {
