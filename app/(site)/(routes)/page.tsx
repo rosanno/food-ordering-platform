@@ -101,7 +101,7 @@ export default async function Home() {
         >
           <Link
             href="/menu"
-            className="bg-yellow-500 hover:bg-opacity-75 transition duration-300 py-1.5 px-5 text-sm text-white rounded-md"
+            className="bg-[#FFA71E] hover:bg-opacity-75 transition duration-300 py-1.5 px-5 text-sm text-white rounded-md"
           >
             View all
           </Link>
